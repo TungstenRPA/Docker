@@ -15,26 +15,56 @@
 2. Login to [https://aws.amazon.com/](Amazon%20Webservices)
 3. 
 
+# Phase 1 - POC
+* Image in AWS Repo
+* Postgres internal, MC & Roboserver
+* Admin password changed
+* Non Production cluster
+* Roboserver logging to Postgres
+
+# Phase 2 - Sharable with Community
+* Kapplets
+* import 
+  * sample kapplets
+  * user groups
+  * roboserver user & password
+* LDAP groups?
+* Docker secrets
+* external storage
+* scalable roboservers
+* optional log http traffic.
+* optional log user actions.
+* enable/disable documentation requests
+
+# Phase 3
+* Synch
+* RFS
+* Transformation
+
 # to do Kofax
 * how to get credentials for roboserver user. Add roboserver user to default cluster.
 * optionally join Production or Non Production.
 * Docker secrets for passwords?
 
 # Ask Benjamin
-* why PostGres in 11.2?
-* how to add groups and users and assign users to roles in projects. SWAGGER can't do it.
-* If i preconfigure everything manually - users/groups/. then i have to import them. and how do i then set admin password?
-* get database working for roboserver. The basic docker compose uses derby, but doesn't start it. Is it actually there?
-* How do I set the logging database settings?
-* how to upload robots and types. how to create projects.
-* where are all the roboserver environment variables?
+* why PostGres in 11.2?  We cannot redistribute the MySQL JDBC driver. more popular on cloud maybe.
 * install all JDBC drivers.
+* How do I set the logging database settings?
+* get database working for roboserver. The basic docker compose uses derby, but doesn't start it. Is it actually there?
+* where are all the roboserver environment variables? Readme.md
+  Docker Secret:  password_file
+
+* how to add groups and users and assign users to roles in projects. SWAGGER can't do it.
+* 
+* If i preconfigure everything manually - users/groups/. then i have to import them. and how do i then set admin password?
+* how to upload robots and types. how to create projects.
 
 # Ask AWS
+* Can we have AD or LDAP for users and groups. Open LDAP container.
 * how to shutdown modules for enduser - database, rfs, kapplets, synchronizer
 * persisting storage for postgres and rfs.
 * Is Aurora really so expensive?
-* Docker secrets for passwords?
+* Docker compatible secrets for passwords?
 * cheap https.
 * scale by CPU.
 * scale by webservice.
