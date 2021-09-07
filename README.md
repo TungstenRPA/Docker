@@ -22,7 +22,7 @@
 * Are we safe if we don't use SSL between our docker components?
 
 
-# Environment Parameters
+## Roboserver Environment Parameters
 Download http://java-decompiler.github.io/ and JDK to view roboserverConfigurator.jar. Read MANIFEST.MF to find the entry point. There you will find **configurationfilesRoboserver.XML**
 
 | property | default | Description |
