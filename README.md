@@ -24,7 +24,8 @@
 * why PostGres in 11.2?
 * how to add groups and users and assign users to roles in projects. SWAGGER can't do it.
 * If i preconfigure everything manually - users/groups/. then i have to import them. and how do i then set admin password?
-* get database working for roboserver.
+* get database working for roboserver. The basic docker compose uses derby, but doesn't start it. Is it actually there?
+* How do I set the logging database settings?
 * how to upload robots and types. how to create projects.
 * where are all the roboserver environment variables?
 * install all JDBC drivers.
@@ -64,3 +65,8 @@ enable_jms_service|false|enable JMS for communication with the Management Consol
 broker_url|false|The JMS broker URL
 disallow_documentation_requests|false|Blocks RoboServer from handling Documentation Requests.
 server_name||The server name used for statistics.
+
+## Robot File System
+
+| property | default | Description |
+| -------- | ------- | ----------- |
