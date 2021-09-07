@@ -1,16 +1,35 @@
 # Docker
 
+# Create Docker Image
+1. Download Docker Desktop.
+2. Download Linux for Windows inside Docker.
+3. Download Linux RPA.
+4. Unzip RPA linux with **tar -xf KofaxRPA-11.2.0.2.tar.gz**
+5. CD to unzip directory
+6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml**
+7. View Docker File in Visual Studio Code with **code docker\managementconsole\Dockerfile**
+8. Create Docker Image with **docker-compose -p RPA_Partner up -d**.   "up" means to start it, and "-d" means to detatch it from the console to get the cursor back.
+
+# Add Docker Image to Amazon Repository
+1. Download [https://aws.amazon.com/cli/](Amazon%20Web%20Services%20Command%20Line%20Interface)
+2. Login to [https://aws.amazon.com/](Amazon%20Webservices)
+3. 
+
 # to do Kofax
-* get database working for roboserver.
 * how to get credentials for roboserver user. Add roboserver user to default cluster.
-* how to add groups and users and assign users to roles in projects. SWAGGER?
-* how to upload robots and types. how to create projects.
-* where are all the roboserver environment variables?
-* why PostGres?
-* install all JDBC drivers.
 * optionally join Production or Non Production.
 * Docker secrets for passwords?
-# to do AWS
+
+# Ask Benjamin
+* why PostGres in 11.2?
+* how to add groups and users and assign users to roles in projects. SWAGGER can't do it.
+* If i preconfigure everything manually - users/groups/. then i have to import them. and how do i then set admin password?
+* get database working for roboserver.
+* how to upload robots and types. how to create projects.
+* where are all the roboserver environment variables?
+* install all JDBC drivers.
+
+# Ask AWS
 * how to shutdown modules for enduser - database, rfs, kapplets, synchronizer
 * persisting storage for postgres and rfs.
 * Is Aurora really so expensive?
@@ -20,7 +39,6 @@
 * scale by webservice.
 * can Amazon see inside my containers. where is su's password?
 * Are we safe if we don't use SSL between our docker components?
-
 
 ## Roboserver Environment Parameters
 Download http://java-decompiler.github.io/ and JDK to view roboserverConfigurator.jar. Read MANIFEST.MF to find the entry point. There you will find **configurationfilesRoboserver.XML**
