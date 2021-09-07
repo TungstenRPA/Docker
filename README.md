@@ -16,4 +16,5 @@
 * scale by CPU.
 * scale by webservice.
 * can Amazon see inside my containers. where is su's password?
+* Are we safe if we don't use SSL between our docker components?
 * 
