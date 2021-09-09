@@ -8,7 +8,7 @@
 5. CD to unzip directory
 6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml**
 7. View Docker File in Visual Studio Code with **code docker\managementconsole\Dockerfile**
-8. Create Docker Image with **docker compose -p RPA_Partner up -d**.   
+8. Create Docker Image with **docker compose -p rpa_11.2.0.2 up -d**.   
   * "-p" project name (default is directory name)
   * "up" create and dostart it
   * "-d" means to detatch it from the console to get the cursor back.
@@ -56,7 +56,7 @@
 # Notes
 * PostGres is in 11.2 because we cannot redistribute the MySQL JDBC driver. and Postgres more popular on cloud maybe.
 * where are all the roboserver environment variables? docker/Readme.md
-
+* Change Admin password PUT /api/mc/user/resetPassword {"newPassword":"admin","sendEmail":false,"username":"admin","oldPassword":"admin"}
 # to do Kofax
 * how to get credentials for roboserver user. Add roboserver user to default cluster.
 * optionally join Production or Non Production.
