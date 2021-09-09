@@ -30,10 +30,14 @@
 
 # Phase 1 - POC
 * Image in AWS Repo
-* Postgres internal, MC & Roboserver
+* Postgres internal, MC & Roboserver, Kapplets
 * Admin password changed
 * Non Production cluster
 * Roboserver logging to Postgres
+* Upload a sample robot to Kapplets 
+```
+curl -u ${USERNAME}:${PASSWORD} -X POST "http://${HOST}:/api/mc/robot/add" -F fileField=@${FILEPATH}${FILENAME} - F projectId="13" -F commitMessage="" -F folderName="" -F override="false"
+```
 
 # Phase 2 - Sharable with Community
 * Kapplets
