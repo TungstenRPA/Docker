@@ -8,7 +8,10 @@
 5. CD to unzip directory
 6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml**
 7. View Docker File in Visual Studio Code with **code docker\managementconsole\Dockerfile**
-8. Create Docker Image with **docker-compose -p RPA_Partner up -d**.   "up" means to start it, and "-d" means to detatch it from the console to get the cursor back.
+8. Create Docker Image with **docker compose -p RPA_Partner up -d**.   
+  * "-p" project name (default is directory name)
+  * "up" create and dostart it
+  * "-d" means to detatch it from the console to get the cursor back.
 
 # Add Docker Image to Amazon Repository
 1. Download [https://aws.amazon.com/cli/](Amazon%20Web%20Services%20Command%20Line%20Interface)
@@ -50,17 +53,17 @@
 * RFS
 * Transformation
 
+# Notes
+* PostGres is in 11.2 because we cannot redistribute the MySQL JDBC driver. and Postgres more popular on cloud maybe.
+* where are all the roboserver environment variables? docker/Readme.md
+
 # to do Kofax
 * how to get credentials for roboserver user. Add roboserver user to default cluster.
 * optionally join Production or Non Production.
 * Docker secrets for passwords?
 
 # Ask Benjamin
-* why PostGres in 11.2?  We cannot redistribute the MySQL JDBC driver. more popular on cloud maybe.
-* install all JDBC drivers.
-* How do I set the logging database settings?
 * get database working for roboserver. The basic docker compose uses derby, but doesn't start it. Is it actually there?
-* where are all the roboserver environment variables? Readme.md
   Docker Secret:  password_file
 
 * how to add groups and users and assign users to roles in projects. SWAGGER can't do it.
