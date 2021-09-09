@@ -25,13 +25,16 @@
    * login to aws with **aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 022336740566.dkr.ecr.eu-central-1.amazonaws.com**
    * tag the image as latest so Docker knows where to push it: **docker tag managementconsole:latest 022336740566.dkr.ecr.eu-central-1.amazonaws.com/console:latest**
    * push the image to the Repository in AWS. **docker push 022336740566.dkr.ecr.eu-central-1.amazonaws.com/kofaxrpa:latest**
-   * push the image also with the version tag. **docker push 022336740566.dkr.ecr.eu-central-1.amazonaws.com/kofaxrpa:11.2.0.2** and you will see both tags.
+   * push the image also with the version tag. **docker push 022336740566.dkr.ecr.eu-central-1.amazonaws.com/kofaxrpa:11.2.0.2** and you will see both tags.  
 ![image](https://user-images.githubusercontent.com/47416964/132709793-cd5edd48-ab6c-4397-9f84-3f8f5e85bb38.png)
 
 # Phase 1 - POC
 * Image in AWS Repo
 * Postgres internal, MC & Roboserver, Kapplets
 * Admin password changed
+```
+curl -u admin:admin -X PUT -H "Content-Type: text/plain" --data "{\"newPassword":\"${PASSWORD}\",\"sendEmail\":false,\"username\":\"admin\",\"oldPassword\":\"admin\"}" "http://${HOST}:/api/mc/user/resetPassword"
+```
 * Non Production cluster
 * Roboserver logging to Postgres
 * Upload a sample robot to Kapplets 
@@ -61,7 +64,7 @@ curl -u ${USERNAME}:${PASSWORD} -X POST "http://${HOST}:/api/mc/robot/add" -F fi
 # Notes
 * PostGres is in 11.2 because we cannot redistribute the MySQL JDBC driver. and Postgres more popular on cloud maybe.
 * where are all the roboserver environment variables? docker/Readme.md
-* Change Admin password PUT /api/mc/user/resetPassword {"newPassword":"admin","sendEmail":false,"username":"admin","oldPassword":"admin"}
+* Change Admin password 
 # to do Kofax
 * how to get credentials for roboserver user. Add roboserver user to default cluster.
 * optionally join Production or Non Production.
