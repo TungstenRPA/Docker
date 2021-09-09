@@ -55,8 +55,50 @@ curl -u admin:admin -X POST -H "Content-Type: text/plain" --data "{"emailAddress
 curl -u admin:admin -X POST -H "Content-Type: text/plain" --data "${JSON}" "http://${HOST}:/api/mc/project/add"
 ```
 ```JSON
-{"accessControl":"","authenticateRest":false,"description":"","forceServiceCluster":false,"mappings":[{"roleName":"Kapplet User","groupName":"Kapplet Users","id":-1,"projectId":null},{"roleName":"Kapplet Administrator","groupName":"Project Administrators","id":-1,"projectId":null},{"roleName":"Developer","groupName":"Developers","id":-1,"projectId":null},{"roleName":"RoboServer","groupName":"Roboservers","id":-1,"projectId":null}],"name":"projectname","serviceClusterName":"Production","vcsSettings":{"url":"","branch":"","readOnly":false,"enabled":false,"syncOAuth":false,"syncResources":false,"syncRobotsTypesSnippets":false,"syncSchedules":false}}
-```
+{
+  "accessControl": "",
+  "authenticateRest": false,
+  "description": "",
+  "forceServiceCluster": false,
+  "mappings": [
+    {
+      "roleName": "Kapplet User",
+      "groupName": "Kapplet Users",
+      "id": -1,
+      "projectId": null
+    },
+    {
+      "roleName": "Kapplet Administrator",
+      "groupName": "Project Administrators",
+      "id": -1,
+      "projectId": null
+    },
+    {
+      "roleName": "Developer",
+      "groupName": "Developers",
+      "id": -1,
+      "projectId": null
+    },
+    {
+      "roleName": "RoboServer",
+      "groupName": "Roboservers",
+      "id": -1,
+      "projectId": null
+    }
+  ],
+  "name": "projectname",
+  "serviceClusterName": "Production",
+  "vcsSettings": {
+    "url": "",
+    "branch": "",
+    "readOnly": false,
+    "enabled": false,
+    "syncOAuth": false,
+    "syncResources": false,
+    "syncRobotsTypesSnippets": false,
+    "syncSchedules": false
+  }
+}```
 
 # Phase 2 - Sharable with Community
 * Kapplets
