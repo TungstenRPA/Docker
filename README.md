@@ -28,6 +28,9 @@
    * push the image also with the version tag. **docker push 022336740566.dkr.ecr.eu-central-1.amazonaws.com/kofaxrpa:11.2.0.2** and you will see both tags.  
 ![image](https://user-images.githubusercontent.com/47416964/132709793-cd5edd48-ab6c-4397-9f84-3f8f5e85bb38.png)
 
+# Install AWS Copilot Command line Interface
+The [AWS Copilot CLI](https://github.com/aws/copilot-cli) is a tool for developers to build, release and operate production ready containerized applications on AWS App Runner, Amazon ECS, and AWS Fargate
+
 # Phase 1 - POC
 * Image in AWS Repo
 * Postgres internal, MC & Roboserver, Kapplets
