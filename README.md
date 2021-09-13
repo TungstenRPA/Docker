@@ -1,5 +1,5 @@
 # Docker
-How to get Kofax RPA running on Amazon Web Services
+How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while robots are running.
 # Create Docker Image
 1. Download Docker Desktop.
 2. Download Linux for Windows inside Docker.
@@ -16,7 +16,7 @@ How to get Kofax RPA running on Amazon Web Services
 # Add Docker Image to Amazon Repository
 1. Download [https://aws.amazon.com/cli/](Amazon%20Web%20Services%20Command%20Line%20Interface)
 2. Login to [https://aws.amazon.com/](Amazon%20Webservices)
-3. Select your region.
+3. Select your region. I chose **eu-central-1** in Frankfurt.
 4. [Push the Docker Image](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html)
    * [Create](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html) a [private repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) for **managementconsole**, **roboserver**, **kapplets**, etc..
    * click **View push commands** to get the command lines to upload the image.
@@ -28,11 +28,6 @@ How to get Kofax RPA running on Amazon Web Services
    * push the image also with the version tag. **docker push 022336740566.dkr.ecr.eu-central-1.amazonaws.com/kofaxrpa:11.2.0.2** and you will see both tags.  
 ![image](https://user-images.githubusercontent.com/47416964/132709793-cd5edd48-ab6c-4397-9f84-3f8f5e85bb38.png)
 
-# Build RPA on AWS
-* Install AWS Copilot Command line Interface
-*The [AWS Copilot CLI](https://github.com/aws/copilot-cli) is a tool for developers to build, release and operate production ready containerized applications on AWS App Runner, Amazon ECS, and AWS Fargate*
-* Deploy your application [https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-aws-copilot-cli.html]
-
 # Deploy containerized RPA on AWS Fargate using Docker & Docker Compose
 [https://www.docker.com/blog/docker-compose-from-local-to-amazon-ecs/]
 AWS supports ECS or Fargate for Docker Containers. ECS is for dedicated servers and Fargate is just about containers. For learning Kofax RPA and deploing robots Fargate is adquate. ECS charges for machines, and Fargate charges per usage. Fargate costs only 2-3$/month for running occasional robots.  
@@ -42,6 +37,23 @@ Docker Desktop has a **default** context on the local machine. See it by typing 
 * Create a new Docker Context on your computer for *ecs* by typing **docker context ecs myecscontext**
 * Make it the default context by typing **docker context use myecscontext**  
 After this Docker Desktop will be working with ECS on AWS and not Docker Desktop.  
+* Type **docker compose convert** to build Kofax RPA.
+* Type **docker compose up** to deploy Kofax RPA to AWS.
+* Type **docker compose down** to stop Kofax RPA on AWS.
+* Type **docker compose logs** to see Management Console and Roboserver Logs. MC take about 5 minutes to start up and then Roboserver a few minutes.
+* Got 
+
+# Tweaking, Config
+
+# Pricing Calculator
+https://aws.amazon.com/fargate/pricing/
+[Price Calculator](https://calculator.aws/#/createCalculator/Fargate)
+* Select region (I chose **Europe (Frankfurt)**
+* **3 tasks per month** (For Database, Management Console and Roboserver)
+* **duration = 730 hours**
+* **0.25** CPU and **1 GB** .See **Supported Configurations** at [Fargate Pricing](https://aws.amazon.com/fargate/pricing/)
+* **20 GB of ephemeral storage**  *The first 20GB are free**
+This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot running.
 
 
 # Phase 1 - POC
