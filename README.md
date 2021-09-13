@@ -1,12 +1,16 @@
 # Kofax RPA on Amazon Web Services with Docker
-How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while robots are running.
-# Create Docker Image
+How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while robots are running.  
+*The next two sections can be skipped by downloading the preconfigured Docker Compose files for Amazon Webservices from [Kofax RPA on GitHub](https://github.com/KofaxRPA/Docker/tree/RPA-11.2.0.2)  
+
+# Download and Install Softwar
 1. Download [Docker Desktop](https://www.docker.com/products/docker-desktop).
 2. Download the [Linux kernal update package](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package) from Microsoft.
 3. Download the [Linux version of Kofax RPA]([https://delivery.kofax.com]).
 4. Unzip RPA Linux with **tar -xf KofaxRPA-11.2.0.2.tar.gz**
 5. CD to unzip directory
-6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml**
+
+# Create Docker Image
+6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml** 
 7. View Docker File in Visual Studio Code with **code docker\managementconsole\Dockerfile**
 8. Create Docker Image with **docker compose -p rpa_11.2.0.2 up -d**.   
   * "-p" project name (default is directory name)
