@@ -1,13 +1,14 @@
 # Kofax RPA on Amazon Web Services with Docker
 How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while robots are running.  
-*The next two sections can be skipped by downloading the preconfigured Docker Compose files for Amazon Webservices from [Kofax RPA on GitHub](https://github.com/KofaxRPA/Docker/tree/RPA-11.2.0.2)  
 
-# Download and Install Softwar
+# Download and Install Software
 1. Download [Docker Desktop](https://www.docker.com/products/docker-desktop).
 2. Download the [Linux kernal update package](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package) from Microsoft.
 3. Download the [Linux version of Kofax RPA]([https://delivery.kofax.com]).
 4. Unzip RPA Linux with **tar -xf KofaxRPA-11.2.0.2.tar.gz**
 5. CD to unzip directory
+
+*The next two sections (creating and uploading) can be skipped by downloading the preconfigured Docker Compose files for Amazon Webservices from [Kofax RPA on GitHub](https://github.com/KofaxRPA/Docker/tree/RPA-11.2.0.2)*  
 
 # Create Docker Image
 6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml** 
@@ -17,7 +18,7 @@ How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while
   * "up" create and dostart it
   * "-d" means to detatch it from the console to get the cursor back.
 
-# Add Docker Image to Amazon Repository
+# Uploading Docker Image to Amazon Repository
 1. Download [https://aws.amazon.com/cli/](Amazon%20Web%20Services%20Command%20Line%20Interface)
 2. Login to [https://aws.amazon.com/](Amazon%20Webservices)
 3. Select your region. I chose **eu-central-1** in Frankfurt.
@@ -34,7 +35,7 @@ How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while
 
 # Deploy containerized RPA on AWS Fargate using Docker & Docker Compose
 [https://www.docker.com/blog/docker-compose-from-local-to-amazon-ecs/]
-With [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html), you don't have to manage servers or clusters to run containerized applicatoins. You don't care about server types - all you need to think about is CPU strength and RAM. For learning Kofax RPA and deploing robots Fargate is adquate. ECS charges for machines, and Fargate charges per usage. Fargate costs only 2-3$/month for running occasional robots.  
+With [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html), you don't have to manage servers or clusters to run containerized applications. You don't care about server types - all you need to think about is CPU strength and RAM. For learning Kofax RPA and deploing robots Fargate is adquate. ECS charges for machines, and Fargate charges per usage. Fargate costs only 2-3$/month for running occasional robots.  
 ## Create a Docker Context for AWS
 Docker Desktop has a **default** context on the local machine. See it by typing **docker context ls**.  
 ![image](https://user-images.githubusercontent.com/47416964/133095222-911b038f-1fc3-4c8a-8c6e-ccd3dc09fae8.png)
@@ -60,7 +61,6 @@ After this Docker Desktop will be working with ECS on AWS and not Docker Desktop
 * **0.25** CPU and **1 GB** .See **Supported Configurations** at [Fargate Pricing](https://aws.amazon.com/fargate/pricing/)
 * **20 GB of ephemeral storage**  *The first 20GB are free**
 This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot running.
-
 
 # Phase 1 - POC
 * Image in AWS Repo
