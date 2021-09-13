@@ -63,60 +63,50 @@ After this Docker Desktop will be working with ECS on AWS and not Docker Desktop
 This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot running.
 
 # Phase 1 - POC - done
-* Upload Management Console and roboserver to Amazon's container Repository
+* Upload Management Console and Roboserver to Amazon's container Repository
 * Postgres Database in an ephemeral container, MC & Roboserver
-# Phase 1 - todo
-* Non Production cluster
-* Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not evening running)
+* Default to **Non Production** Cluster
+* Deploy database + MC + Roboserver to Cloud.
 
-# Phase 2 - Sharable with Community
+# Phase 2 - todo
+* optimize CPU and RAM for MC & Roboserver
+* Add HTTPS
+* Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
+* create personal user and add to the Kapplet Users, developers and Admin groups. 
+* Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not evening running)
+* Change Admin password 
+* Deploy with Wizard from Amazon Marketplace.
+* Scale roboservers by CPU %.
+
+# Phase 3 - Sharable with Community
 * Kapplets
 * import 
   * sample kapplets
   * user groups
   * roboserver user & password
-* LDAP groups?
-* Docker secrets
-* external storage
 * scalable roboservers
 * optional log http traffic.
 * optional log user actions.
 * enable/disable documentation requests
 
-# Phase 3
-* Synch
+# Phase 4
+* Git Synchronizer
+* Amazon Aurora database support for persistence.
+* Support external storage for database .
 * RFS
-* Transformation
+* Kofax Transformation
+* Docker secrets
+* Kubernetes
+* Make rfs, kapplets, synchronizer optional
+* AD or LDAP for users and groups. Maybe with an Open LDAP container.
+* VPN/tunnel for backoffice DTS.
 
 # Notes
 * PostGres is in 11.2 because we cannot redistribute the MySQL JDBC driver. and Postgres more popular on cloud maybe.
 * where are all the roboserver environment variables? docker/Readme.md
-* Change Admin password 
-# to do Kofax
-* how to get credentials for roboserver user. Add roboserver user to default cluster.
-* optionally join Production or Non Production.
-* Docker secrets for passwords?
-
-# Ask Benjamin
-* get database working for roboserver. The basic docker compose uses derby, but doesn't start it. Is it actually there?
-  Docker Secret:  password_file
-
-* how to add groups and users and assign users to roles in projects. SWAGGER can't do it.
-* 
-* If i preconfigure everything manually - users/groups/. then i have to import them. and how do i then set admin password?
-* how to upload robots and types. how to create projects.
 
 # Ask AWS
-* Can we have AD or LDAP for users and groups. Open LDAP container.
 * how to shutdown modules for enduser - database, rfs, kapplets, synchronizer
-* persisting storage for postgres and rfs.
-* Is Aurora really so expensive?
-* Docker compatible secrets for passwords?
-* cheap https.
-* scale by CPU.
-* scale by webservice.
-* can Amazon see inside my containers. where is su's password?
-* Are we safe if we don't use SSL between our docker components?
 
 ## Roboserver Environment Parameters
 Download http://java-decompiler.github.io/ and JDK to view roboserverConfigurator.jar. Read MANIFEST.MF to find the entry point. There you will find **configurationfilesRoboserver.XML**
