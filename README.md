@@ -1,10 +1,10 @@
-# Docker
+# Kofax RPA on Amazon Web Services with Docker
 How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while robots are running.
 # Create Docker Image
-1. Download Docker Desktop.
-2. Download Linux for Windows inside Docker.
-3. Download Linux RPA.
-4. Unzip RPA linux with **tar -xf KofaxRPA-11.2.0.2.tar.gz**
+1. Download [Docker Desktop](https://www.docker.com/products/docker-desktop).
+2. Download the [Linux kernal update package](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package) from Microsoft.
+3. Download the [Linux version of Kofax RPA]([https://delivery.kofax.com]).
+4. Unzip RPA Linux with **tar -xf KofaxRPA-11.2.0.2.tar.gz**
 5. CD to unzip directory
 6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml**
 7. View Docker File in Visual Studio Code with **code docker\managementconsole\Dockerfile**
@@ -30,7 +30,7 @@ How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while
 
 # Deploy containerized RPA on AWS Fargate using Docker & Docker Compose
 [https://www.docker.com/blog/docker-compose-from-local-to-amazon-ecs/]
-AWS supports ECS or Fargate for Docker Containers. ECS is for dedicated servers and Fargate is just about containers. For learning Kofax RPA and deploing robots Fargate is adquate. ECS charges for machines, and Fargate charges per usage. Fargate costs only 2-3$/month for running occasional robots.  
+With [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html), you don't have to manage servers or clusters to run containerized applicatoins. You don't care about server types - all you need to think about is CPU strength and RAM. For learning Kofax RPA and deploing robots Fargate is adquate. ECS charges for machines, and Fargate charges per usage. Fargate costs only 2-3$/month for running occasional robots.  
 ## Create a Docker Context for AWS
 Docker Desktop has a **default** context on the local machine. See it by typing **docker context ls**.  
 ![image](https://user-images.githubusercontent.com/47416964/133095222-911b038f-1fc3-4c8a-8c6e-ccd3dc09fae8.png)
@@ -44,9 +44,11 @@ After this Docker Desktop will be working with ECS on AWS and not Docker Desktop
 * Got 
 
 # Tweaking, Config
+[Add HTTPS to Load Balancer](https://docs.docker.com/cloud/ecs-integration/#setting-ssl-termination-by-load-balancer)  *currently not working...*  
+[Service Discovery](https://docs.docker.com/cloud/ecs-integration/#service-discovery) configures how machines inside the cluster see each other. This is not needed as the Roboserver is able to find the Management Console using http://managementconsole-service:8080/ within the Cluster.
 
 # Pricing Calculator
-https://aws.amazon.com/fargate/pricing/
+[Cost Explorer](https://console.aws.amazon.com/cost-management) [Fargate Pricing](https://aws.amazon.com/fargate/pricing/)  
 [Price Calculator](https://calculator.aws/#/createCalculator/Fargate)
 * Select region (I chose **Europe (Frankfurt)**
 * **3 tasks per month** (For Database, Management Console and Roboserver)
