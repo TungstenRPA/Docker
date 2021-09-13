@@ -62,77 +62,12 @@ After this Docker Desktop will be working with ECS on AWS and not Docker Desktop
 * **20 GB of ephemeral storage**  *The first 20GB are free**
 This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot running.
 
-# Phase 1 - POC
-* Image in AWS Repo
-* Postgres internal, MC & Roboserver, Kapplets
-* Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
-* create personal user and add to the 3 groups.
-* Admin password changed
-```
-curl -u admin:admin -X PUT -H "Content-Type: text/plain" --data "{\"newPassword":\"${PASSWORD}\",\"sendEmail\":false,\"username\":\"admin\",\"oldPassword\":\"admin\"}" "http://${HOST}:/api/mc/user/resetPassword"
-```
+# Phase 1 - POC - done
+* Upload Management Console and roboserver to Amazon's container Repository
+* Postgres Database in an ephemeral container, MC & Roboserver
+# Phase 1 - todo
 * Non Production cluster
-* Roboserver logging to Postgres
-* Upload a sample robot to Kapplets 
-```
-curl -u ${USERNAME}:${PASSWORD} -X POST "http://${HOST}:/api/mc/robot/add" -F fileField=@${FILEPATH}${FILENAME} - F projectId="13" -F commitMessage="" -F folderName="" -F override="false"
-```
-* create user
-```
-curl -u admin:admin -X POST -H "Content-Type: text/plain" --data "{"emailAddress":"david.wright@kofax.com","fullName":"david wright","password":"erikl","userName":"david","groupNames":["Developers"]}" "http://${HOST}:/api/mc/user/add"
-```
-
-* create group and add user
-
-* create project
-```
-curl -u admin:admin -X POST -H "Content-Type: text/plain" --data "${JSON}" "http://${HOST}:/api/mc/project/add"
-```
-```JSON
-{
-  "accessControl": "",
-  "authenticateRest": false,
-  "description": "",
-  "forceServiceCluster": false,
-  "mappings": [
-    {
-      "roleName": "Kapplet User",
-      "groupName": "Kapplet Users",
-      "id": -1,
-      "projectId": null
-    },
-    {
-      "roleName": "Kapplet Administrator",
-      "groupName": "Project Administrators",
-      "id": -1,
-      "projectId": null
-    },
-    {
-      "roleName": "Developer",
-      "groupName": "Developers",
-      "id": -1,
-      "projectId": null
-    },
-    {
-      "roleName": "RoboServer",
-      "groupName": "Roboservers",
-      "id": -1,
-      "projectId": null
-    }
-  ],
-  "name": "projectname",
-  "serviceClusterName": "Production",
-  "vcsSettings": {
-    "url": "",
-    "branch": "",
-    "readOnly": false,
-    "enabled": false,
-    "syncOAuth": false,
-    "syncResources": false,
-    "syncRobotsTypesSnippets": false,
-    "syncSchedules": false
-  }
-}```
+* Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not evening running)
 
 # Phase 2 - Sharable with Community
 * Kapplets
@@ -207,8 +142,3 @@ enable_jms_service|false|enable JMS for communication with the Management Consol
 broker_url|false|The JMS broker URL
 disallow_documentation_requests|false|Blocks RoboServer from handling Documentation Requests.
 server_name||The server name used for statistics.
-
-## Robot File System
-
-| property | default | Description |
-| -------- | ------- | ----------- |
