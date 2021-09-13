@@ -1,5 +1,5 @@
 # Docker
-
+How to get Kofax RPA running on Amazon Web Services
 # Create Docker Image
 1. Download Docker Desktop.
 2. Download Linux for Windows inside Docker.
@@ -32,6 +32,17 @@
 * Install AWS Copilot Command line Interface
 *The [AWS Copilot CLI](https://github.com/aws/copilot-cli) is a tool for developers to build, release and operate production ready containerized applications on AWS App Runner, Amazon ECS, and AWS Fargate*
 * Deploy your application [https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-aws-copilot-cli.html]
+
+# Deploy containerized RPA on AWS Fargate using Docker & Docker Compose
+[https://www.docker.com/blog/docker-compose-from-local-to-amazon-ecs/]
+AWS supports ECS or Fargate for Docker Containers. ECS is for dedicated servers and Fargate is just about containers. For learning Kofax RPA and deploing robots Fargate is adquate. ECS charges for machines, and Fargate charges per usage. Fargate costs only 2-3$/month for running occasional robots.  
+## Create a Docker Context for AWS
+Docker Desktop has a **default** context on the local machine. See it by typing **docker context ls**.  
+![image](https://user-images.githubusercontent.com/47416964/133095222-911b038f-1fc3-4c8a-8c6e-ccd3dc09fae8.png)
+* Create a new Docker Context on your computer for *ecs* by typing **docker context ecs myecscontext**
+* Make it the default context by typing **docker context use myecscontext**  
+After this Docker Desktop will be working with ECS on AWS and not Docker Desktop.  
+
 
 # Phase 1 - POC
 * Image in AWS Repo
