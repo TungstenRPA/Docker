@@ -46,16 +46,24 @@ After this Docker Desktop will be working with ECS on AWS and not Docker Desktop
 * Type **docker compose up** to deploy Kofax RPA to AWS.
 * Type **docker compose down** to stop Kofax RPA on AWS.
 * Type **docker compose logs** to see Management Console and Roboserver Logs. MC take about 5 minutes to start up and then Roboserver a few minutes.
-* Got 
+* Type **docker compose ps** to find the URL of the Management Console.  
+![image](https://user-images.githubusercontent.com/47416964/133255630-5a93c43b-bbf2-4795-8049-30ab0f1eefb8.png)
+
+## Viewing your Cluster in Amazon Elastic Container Service (ECS)
+ECS is Amazon's container orchestration system, like Kubernetes.  
+* Open https://console.aws.amazon.com/ecs and make sure your region is selected.
+* Click **Clusters** to see your cluster. There are 3 services and 3 tasks corresponding to the 3 Containers: Postgres Database, Management Console and Roboserver).
+* Click on the **Task Definition** of the Management Console and scroll down and you will see how much RAM and CPU has been allocated to it.  
+![image](https://user-images.githubusercontent.com/47416964/133256234-ea3bc6cf-4362-4321-926e-af64fc20c9e4.png)
 
 # Tweaking, Config
 [Add HTTPS to Load Balancer](https://docs.docker.com/cloud/ecs-integration/#setting-ssl-termination-by-load-balancer)  *currently not working...*  
 [Service Discovery](https://docs.docker.com/cloud/ecs-integration/#service-discovery) configures how machines inside the cluster see each other. This is not needed as the Roboserver is able to find the Management Console using http://managementconsole-service:8080/ within the Cluster.
 
 # Pricing Calculator
-[Cost Explorer](https://console.aws.amazon.com/cost-management) [Fargate Pricing](https://aws.amazon.com/fargate/pricing/)  
+[Cost Explorer](https://console.aws.amazon.com/cost-management) - [Fargate Pricing](https://aws.amazon.com/fargate/pricing/) -
 [Price Calculator](https://calculator.aws/#/createCalculator/Fargate)
-* Select region (I chose **Europe (Frankfurt)**
+* Select region (I chose **Europe (Frankfurt)**)
 * **3 tasks per month** (For Database, Management Console and Roboserver)
 * **duration = 730 hours**
 * **0.25** CPU and **1 GB** .See **Supported Configurations** at [Fargate Pricing](https://aws.amazon.com/fargate/pricing/)
