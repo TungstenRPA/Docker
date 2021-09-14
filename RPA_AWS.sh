@@ -6,7 +6,7 @@ set RPA_version = 11.2.0.2
 tar -xf KofaxRPA-%RPA_version%.tar.gz
 # copy the docker-compose you require
 copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml
-docker compose -p rpa_11.2.0.2 up -d
+docker compose -p rpa_%rpa_version% up -d
 # login to Amazon Web Services
 aws ecr get-login-password --region %region% | docker login --username AWS --password-stdin %amazon%
 docker tag managementconsole:latest %amazon%/console:latest
