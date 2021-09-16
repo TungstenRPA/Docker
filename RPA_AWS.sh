@@ -20,7 +20,7 @@ docker push %registry%/kofaxrpa:%RPA_version%
 
 # Configure Docker to communicate directly with Amazon ECS
 docker context ls
-docker context ecs Amazon_ECS
+docker context create ecs Amazon_ECS
 # switch docker to Amazon ECS
 docker context use Amazon_ECS
 # convert docker compose file to Amazon format
