@@ -25,8 +25,10 @@ docker context create ecs Amazon_ECS
 docker context use Amazon_ECS
 # convert docker compose file to Amazon format
 docker compose convert
-# Start Kofax RPA on Amazon
+# Start Kofax RPA on Amazon. this costs about $1.50 per day while idle.
 docker compose up
+# Stop Kofax RPA on Amazon (with loss of ephemeral data)
+docker compose down
 # View MC and roboserver logs.
 docker compose logs
 # See Public IP address of Management Console
