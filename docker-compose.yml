@@ -39,6 +39,7 @@ services:
       - CONFIG_LICENSE_NONPRODUCTIONKEY=
     networks:
       - net
+  roboserver-service:
     build:
       context: .
       dockerfile: docker/roboserver/Dockerfile
