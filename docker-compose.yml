@@ -20,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: docker/managementconsole/Dockerfile
-    image: 022336740566.dkr.ecr.eu-central-1.amazonaws.com/managementconsole:11.2.0.2
+    image: managementconsole:11.2.0.2
     depends_on:
       - postgres-service
     ports:
@@ -39,20 +39,10 @@ services:
       - CONFIG_LICENSE_NONPRODUCTIONKEY=
     networks:
       - net
-#AWS Container resources
-# https://docs.docker.com/cloud/ecs-compose-features/#container-resources
-# https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
-
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpu: 0.25
-  #         memory: 2Gb
-  # roboserver-service:
     build:
       context: .
       dockerfile: docker/roboserver/Dockerfile
-    image: 022336740566.dkr.ecr.eu-central-1.amazonaws.com/roboserver:11.2.0.2
+    image: roboserver:11.2.0.2
     depends_on:
       - managementconsole-service
       - postgres-service
@@ -67,18 +57,3 @@ services:
       - ROBOSERVER_ENABLE_SOCKET_SERVICE=true
       - ROBOSERVER_SERVER_NAME=roboserver
       - WRAPPER_MAX_MEMORY=2048
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpu: 0.25
-    #       memory: 2Gb
-
-# This is to add https to the load balancer on AWS
-# https://docs.docker.com/cloud/ecs-integration/#setting-ssl-termination-by-load-balancer
-#x-aws-cloudformation:
-#  Resources:
-#    WebappTCP80Listener:
-#      Properties:
-#        Certificates:
-#          - CertificateArn: "arn:aws:acm:certificate/123abc"
-#        Protocol: HTTPS
