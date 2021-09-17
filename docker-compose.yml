@@ -52,7 +52,7 @@ services:
     environment:
       - ROBOSERVER_ENABLE_MC_REGISTRATION=true
       - ROBOSERVER_MC_URL=http://managementconsole-service:8080/
-      - ROBOSERVER_MC_CLUSTER=Non Production
+      - ROBOSERVER_MC_CLUSTER=Production
       - ROBOSERVER_MC_USERNAME=admin
       - ROBOSERVER_MC_PASSWORD=admin
       - ROBOSERVER_ENABLE_SOCKET_SERVICE=true
