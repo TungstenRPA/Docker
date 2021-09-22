@@ -14,34 +14,32 @@ MC_REST()
     type=$1; path=$2; shift; shift ; data=$@ 
     curl -u ${USERNAME}:${PASSWORD} ${data} -X ${type} "${MC}${path}" 1>/dev/null 2>&1
     rc=$?
-    echo rc=$rc
+    if test -f rm .json ; then
+        rm .json
+    fi
     if [ $rc != 0 ]; then
         echo "${path} failed with code: ${rc}"
         return 1
-    else
-        echo success
     fi
 }
 MC_Change_Password()
 {
     un=$1; oldPassword=$2; newPassword=$3
-    echo \{\"newPassword\":\"${newPassword}\",\"sendEmail\":false,\"username\":\"${un}\",\"oldPassword\":\"${oldPassword}\"\} > password.json
-    MC_REST PUT "/api/mc/user/resetPassword" "-H Content-Type:application/json" "--data @password.json"
+    echo \{\"newPassword\":\"${newPassword}\",\"sendEmail\":false,\"username\":\"${un}\",\"oldPassword\":\"${oldPassword}\"\} > .json
+    MC_REST PUT "/api/mc/user/resetPassword" "-H Content-Type:application/json" "--data @.json"
 }
 MC_Add_User()
 {
     un=$1; pw=$2; fullName=$3; email=$4; groupNames=$5
-    echo \{\"emailAddress\":\"${email}\",\"fullName\":\"${fullName}\",\"password\":\"${pw}\",\"userName\":\"${un}\",\"groupNames\":\[${groupNames}\]\} > user.json
-    cat user.json
-    MC_REST POST "/api/mc/user/add" "-H Content-Type:application/json" "--data @user.json" 
+    echo \{\"emailAddress\":\"${email}\",\"fullName\":\"${fullName}\",\"password\":\"${pw}\",\"userName\":\"${un}\",\"groupNames\":\[${groupNames}\]\} > .json
+    MC_REST POST "/api/mc/user/add" "-H Content-Type:application/json" "--data @.json" 
 }
 MC_Add_Group()
 {
     # {"id":null,"name":"Roboservers","description":"Roboservers","userNames":["david"]}
     group=$1; description=$2; users=$3
-    echo \{\"id\":null,\"name\":\"${group}\",\"description\":\"${description}\",\"userNames\":\[${users}\]\} > group.json
-    cat group.json
-    MC_REST POST "/api/mc/user/group/add" "-H Content-Type:application/json" "--data @group.json" 
+    echo \{\"id\":null,\"name\":\"${group}\",\"description\":\"${description}\",\"userNames\":\[${users}\]\} > .json
+    MC_REST POST "/api/mc/user/group/add" "-H Content-Type:application/json" "--data @.json" 
 }
 
 # MC_Add_Project()
