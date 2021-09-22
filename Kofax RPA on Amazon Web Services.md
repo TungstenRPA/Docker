@@ -81,11 +81,11 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not evening running)
 * [x] Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
 * [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
+* [x] run configure script in second thread from managementconsole.sh
+* [ ] Change Admin password 
+* [ ] ensure roboserver runs with new password
+* [ ] test roboserver actually logs..
 * [ ] set default data database to postgres and not objectdb. (maybe stick logs there as well)
-* run configure script in second thread from managementconsole.sh
-* ensure roboserver runs with new password
-* test roboserver actually logs..
-* Change Admin password 
 * Add to Amazon Market Place
 * Add HTTPS
 * Scale roboservers by CPU %.
