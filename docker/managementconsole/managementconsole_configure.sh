@@ -1,60 +1,92 @@
 #!/usr/bin/env bash
 # Add users, groups to MC. Change admin password, configure default project roles and upload robots.
+MC=http://localhost:8080
+USERNAME=admin
+PASSWORD=admin
+# See if Management Console is alive
+MC_Ping()
+{
+    curl --fail ${MC}/Ping | grep "<string>application<\/string>" || return 1
+}
+# Call a POST/GET/PUT REST Webservice on Management Console
 MC_REST()
 {
-    type=$1; url=$2;shift ;shift
-    data=$@ 
-    curl -u ${USERNAME}:${PASSWORD} ${data} -X ${type} "${url}" 1>/dev/null 2>&1
+    type=$1; path=$2; shift; shift ; data=$@ 
+    curl -u ${USERNAME}:${PASSWORD} ${data} -X ${type} "${MC}${path}" 1>/dev/null 2>&1
     rc=$?
-    if [[ $rc != 0 ]]; then
-        echo "${url} failed with code: ${rc}"
-        exit 1
+    echo rc=$rc
+    if [ $rc != 0 ]; then
+        echo "${path} failed with code: ${rc}"
+        return 1
+    else
+        echo success
     fi
 }
 MC_Change_Password()
 {
-    username=$1; oldPassword=$2; newPassword=$3
-    data="--data {\"newPassword\":\"${newPassword}\",\"sendEmail\":false,\"username\":\"${username}\",\"oldPassword\":\"${oldPassword}\"}"
-    MC_REST PUT "/api/mc/user/resetPassword" "-H \"Content-Type: text/plain\"" ${data} 
+    un=$1; oldPassword=$2; newPassword=$3
+    echo \{\"newPassword\":\"${newPassword}\",\"sendEmail\":false,\"username\":\"${un}\",\"oldPassword\":\"${oldPassword}\"\} > password.json
+    MC_REST PUT "/api/mc/user/resetPassword" "-H Content-Type:application/json" "--data @password.json"
 }
-MC_Create_User()
+MC_Add_User()
 {
-    userName=$1; password=$2; fullname=$3; email=$4, groupNames=$5
-    #jsonify group names
-    groupNames=${groupNames/,/],[/}
-    data="--data {\"emailAddress\":\"${email}\",\"fullName\":\"${fullName}\",\"password\":\"${password}\",\"userName\":\"${userName}}\",\"groupNames\":${[groupNames]}}"
-    echo ${data}
-    MC_REST POST "/api/mc/user/add" "Content-Type: text/plain" ${data} 
+    un=$1; pw=$2; fullName=$3; email=$4; groupNames=$5
+    echo \{\"emailAddress\":\"${email}\",\"fullName\":\"${fullName}\",\"password\":\"${pw}\",\"userName\":\"${un}\",\"groupNames\":\[${groupNames}\]\} > user.json
+    cat user.json
+    MC_REST POST "/api/mc/user/add" "-H Content-Type:application/json" "--data @user.json" 
 }
-
 MC_Add_Group()
 {
-    MC_REST developers
+    # {"id":null,"name":"Roboservers","description":"Roboservers","userNames":["david"]}
+    group=$1; description=$2; users=$3
+    echo \{\"id\":null,\"name\":\"${group}\",\"description\":\"${description}\",\"userNames\":\[${users}\]\} > group.json
+    cat group.json
+    MC_REST POST "/api/mc/user/group/add" "-H Content-Type:application/json" "--data @group.json" 
 }
 
-MC_Add_Project()
-{
+# MC_Add_Project()
+# {
 
-}
+# }
 
 MC_Add_Robot()
 {
     projectID=$1;FILEPATH=$2; FILENAME=$3; folderName=$4
     MC_REST POST "/api/mc/robot/add" -F fileField=@${FILEPATH}${FILENAME} - F projectId="13" -F commitMessage="" -F folderName="${folderName}" -F override="false"
 }
-
-MC_Change_Password ${USERNAME} admin ${PASSWORD}
-MC_Add_Group Developers
-MC_Add_Group Roboservers
-MC_Add_Group Synchronizers
-MC_Add_Group KappletAdmins
-MC_Add_Group KappletUsers
-MC_Add_User david £$%(*)$£% "David Wright" david.wright@kofax.com "Developers,RPA Administrators,KappletAdmins,KappletUsers"
-MC_Add_User roboserver 4£^6£y Roboserver roboserver@kofax.com Roboservers
-MC_Add_User synch £tU%_£3% Synch synch@kofax.com "Synchronizers"
+# check that we have not run before
+echo Configuring users, groups and roles in Management Console...
+if test -f /usr/local/tomcat/bin/configured ; then 
+    echo Management Console already configured
+    exit 0
+fi
+#Wait for Management Console to load
+while :
+do
+    echo Ping Management Console...
+    MC_Ping
+    if test $? = 0 ; then
+        break
+    fi
+    echo sleeping...
+    sleep 2
+done
+# MC_Change_Password ${USERNAME} admin ${PASSWORD}
+echo Add Groups
+MC_Add_Group Developers "build robots" ""
+MC_Add_Group Roboservers "run the robots" ""
+MC_Add_Group Synchronizers "upload and download robots to a Git Repository" ""
+MC_Add_Group KappletAdmins "create and edit Kapplets" ""
+MC_Add_Group KappletUsers "run Kapplets" ""
+echo Add Users
+MC_Add_User david abc123 "David Wright" "david.wright@kofax.com" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
+MC_Add_User roboserver 4£m6Yy Roboserver roboserver@kofax.com '"Roboservers"'
+MC_Add_User synch £tUw_T3 Synch synch@kofax.com '"Synchronizers"'
 
 #13 is the id of the "Default Project"
-MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""
-MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""
+# MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""
+# MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""
+# MC_Add_Project ...
 
-MC_Add_Project ...
+touch /usr/local/tomcat/bin/configured
+echo Management Console configured with users, groups and roles
