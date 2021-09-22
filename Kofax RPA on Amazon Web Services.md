@@ -70,23 +70,28 @@ ECS is Amazon's container orchestration system, like Kubernetes.
 * **20 GB of ephemeral storage**  *The first 20GB are free**
 This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot running.
 
-# Phase 1 - POC - done
+# POC - done
 * Upload Management Console and Roboserver to Amazon's container Repository
 * Postgres Database in an ephemeral container, MC & Roboserver
 * Default to **Non Production** Cluster
 * Deploy database + MC + Roboserver to Cloud.
 
-# Phase 2 - todo
-* optimize CPU and RAM for MC & Roboserver
-* Add HTTPS
-* Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
-* create personal user and add to the Kapplet Users, developers and Admin groups. 
-* Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not evening running)
+# Phase 1 - Internal
+* :heavy_check_mark: Add to Amazon Repository
+* :heavy_check_mark: Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not evening running)
+* :heavy_check_mark: Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
+* :heavy_check_mark: create personal user and add to the Kapplet Users, developers and Admin groups. 
+* run configure script in second thread from managementconsole.sh
+* ensure roboserver runs with new password
+* test roboserver actually logs..
 * Change Admin password 
-* Deploy with Wizard from Amazon Marketplace.
+* Add to Amazon Market Place
+* Add HTTPS
 * Scale roboservers by CPU %.
+* Deploy with Wizard from Amazon Marketplace.
 
-# Phase 3 - Sharable with Community
+# Phase 2 - Sharable with Community
+* optimize CPU and RAM for MC & Roboserver
 * Kapplets
 * import 
   * sample kapplets
@@ -97,15 +102,17 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * optional log user actions.
 * enable/disable documentation requests
 
-# Phase 4
+# Phase 3
 * Git Synchronizer
 * Amazon Aurora database support for persistence.
 * Support external storage for database .
 * RFS
-* Kofax Transformation
-* Docker secrets
-* Kubernetes
+* Kofax Transformation (not compatible with FarSight. Need ECS)
 * Make rfs, kapplets, synchronizer optional
+
+# Phase 4
+* Kubernetes
+* Docker secrets
 * AD or LDAP for users and groups. Maybe with an Open LDAP container.
 * VPN/tunnel for backoffice DTS.
 
