@@ -1,1 +1,15 @@
-abc.net 
+/*
+!.gitignore
+!docker-compose.yml
+!*.md
+!rpa_aws.cmd
+!*.env
+
+!docker/
+
+docker/*
+!docker/managementconsole
+
+docker/managementconsole/*
+!docker/managementconsole/managementconsole.sh
+!docker/managementconsole/managementconsole_configure.sh
