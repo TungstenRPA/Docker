@@ -1,10 +1,13 @@
+/*
+!.gitignore
+!docker-compose.yml
+!*.md
+
 !docker/
 
 docker/*
-!/docker/managementconsole/
+!docker/managementconsole
 
-/docker/managementconsole/*
-!/docker/managementconsole/managementconsole.sh
-!/docker/managementconsole/managementconsole_configure.sh
-
-*/
+docker/managementconsole/*
+!docker/managementconsole/managementconsole.sh
+!docker/managementconsole/managementconsole_configure.sh
