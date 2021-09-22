@@ -37,6 +37,24 @@ services:
       - CONFIG_LICENSE_COMPANY=
       - CONFIG_LICENSE_PRODUCTIONKEY=
       - CONFIG_LICENSE_NONPRODUCTIONKEY=
+      # Use Postgres as the log database
+      - SETTINGS_ENTRY_COUNT=7
+      - SETTINGS_ENTRY_KEY_1=USE_LOGDB
+      - SETTINGS_ENTRY_VALUE_1=true
+      - SETTINGS_ENTRY_KEY_2=LOGDB_SCHEMA
+      - SETTINGS_ENTRY_VALUE_2=scheduler
+      - SETTINGS_ENTRY_KEY_3=LOGDB_HOST
+      - SETTINGS_ENTRY_VALUE_3=postgres-service:5432
+      - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
+      - SETTINGS_ENTRY_VALUE_4=PostgreSQL
+      - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
+      # if you want to log to a separate database than MC's database 'scheduler' you'll need a second container.
+      - SETTINGS_ENTRY_VALUE_5=scheduler
+      - SETTINGS_ENTRY_KEY_6=LOGDB_PASSWORD
+      - SETTINGS_ENTRY_VALUE_6=schedulerpassword
+      # base url - this is how a user would find the Management Console
+      - SETTINGS_ENTRY_KEY_7=BASE_URL
+      - SETTINGS_ENTRY_VALUE_7=http://PF1XACSPdavid:8080
     networks:
       - net
 #AWS Container resources
