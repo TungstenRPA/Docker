@@ -71,10 +71,10 @@ ECS is Amazon's container orchestration system, like Kubernetes.
 This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot running.
 
 # POC - done
-* Upload Management Console and Roboserver to Amazon's container Repository
-* Postgres Database in an ephemeral container, MC & Roboserver
-* Default to **Non Production** Cluster
-* Deploy database + MC + Roboserver to Cloud.
+* [x] Upload Management Console and Roboserver to Amazon's container Repository
+* [x] Postgres Database in an ephemeral container, MC & Roboserver
+* [x] Default to **Non Production** Cluster
+* [x] Deploy database + MC + Roboserver to Cloud.
 
 # Phase 1 - Internal
 * [x] Add to Amazon Repository
