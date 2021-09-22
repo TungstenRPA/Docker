@@ -34,9 +34,12 @@ services:
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
-      - CONFIG_LICENSE_COMPANY=
-      - CONFIG_LICENSE_PRODUCTIONKEY=
-      - CONFIG_LICENSE_NONPRODUCTIONKEY=
+      - CONFIG_LICENSE_COMPANY=${LICENSE_COMPANY}
+      - CONFIG_LICENSE_PRODUCTIONKEY=${LICENSE_PRODUCTIONKEY}
+      - CONFIG_LICENSE_NONPRODUCTIONKEY=${LICENSE_NONPRODUCTIONKEY}
+      # - SETTINGS_CLUSTER_COUNT=1
+      # - SETTINGS_CLUSTER_NAME_1=Non Production
+      # - SETTINGS_CLUSTER_PRODUCTION_1=false 
     networks:
       - net
   roboserver-service:
