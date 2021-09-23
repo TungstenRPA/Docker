@@ -21,6 +21,7 @@ RUN echo "common.loader=\"$\{catalina.base\}/lib\",\"$\{catalina.base\}/lib/*.ja
         \"$\{catalina.home\}/lib/*.jar\", \"$\{catalina.home\}/lib/jdbc/*.jar\"" >> /usr/local/tomcat/conf/catalina.properties
 
 COPY docker/managementconsole/*.sh /usr/local/tomcat/bin/
+COPY docker/managementconsole/*.zip /usr/local/tomcat/bin/
 
 RUN dos2unix /usr/local/tomcat/bin/*.sh \
  && chmod +x /usr/local/tomcat/bin/*.sh
