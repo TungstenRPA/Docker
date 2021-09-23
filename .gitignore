@@ -14,3 +14,4 @@ docker/*
 docker/managementconsole/*
 !docker/managementconsole/managementconsole.sh
 !docker/managementconsole/managementconsole_configure.sh
+!docker/managementconsole/*.zip
