@@ -67,7 +67,8 @@ MC_Add_Robot()
     projectID=$1;FILEPATH=$2; FILENAME=$3; folderName=$4
     MC_REST POST "/api/mc/robot/add" -F fileField=@${FILEPATH}${FILENAME} - F projectId="13" -F commitMessage="" -F folderName="${folderName}" -F override="false"
 }
-Password_Create(){ < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo;}
+# Generate a random password from the current nanosecond
+Password_Create(){ < date +%s%N | sha256sum | base64 | head -c${1:-16};echo;}
 
 # check that we have not run before
 echo Configuring users, groups and roles in Management Console...
