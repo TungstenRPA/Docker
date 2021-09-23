@@ -28,9 +28,7 @@ MC_REST()
     type=$1; path=$2; shift; shift ; data=$@ 
     curl -u ${USERNAME}:${PASSWORD} ${data} -X ${type} "${MC}${path}" 1>/dev/null 2>&1
     rc=$?
-    if test -f rm .json ; then
-        rm .json
-    fi
+    rm -rf .json || true
     if [ $rc != 0 ]; then
         echo "${path} failed with code: ${rc}"
         return 1
