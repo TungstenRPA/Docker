@@ -3,6 +3,8 @@
 MC=http://localhost:8080
 USERNAME=admin
 PASSWORD=admin
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+echo SCRIPT_DIR=${SCRIPT_DIR}
 #Wait for Management Console to load
 MC_Wait()
 {
@@ -16,11 +18,12 @@ MC_Wait()
         echo sleeping...
         sleep 2
     done
+    echo Management Console is ready.
 }
 # See if Management Console is alive
 MC_Ping()
 {
-    curl --fail ${MC}/Ping | grep "<string>application<\/string>" || return 1
+    curl -s --fail ${MC}/Ping | grep "<string>application<\/string>" || return 1
 }
 # Call a POST/GET/PUT REST Webservice on Management Console
 MC_REST()
@@ -57,6 +60,7 @@ MC_Restore()
 {
     #curl -u ${USERNAME}:${PASSWORD} -F fileField=@${FILEPATH}${FILENAME} -F restoreMode=Reset
     Backupfile=$1;
+    echo MC Restore from Backupfile=${Backupfile}
     MC_REST POST "/secure/Restore" "-F fileField=@${Backupfile} -F restoreMode=Reset"
 }
 
@@ -86,7 +90,7 @@ echo Add Users
 MC_Add_User david abc123 "David Wright" "david.wright@kofax.com" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
 #MC_Add_User roboserver 4£m6Yy Roboserver roboserver@kofax.com '"Roboservers"'
 #MC_Add_User synch £tUw_T3 Synch synch@kofax.com '"Synchronizers"'
-MC_Restore MC_backup_Postgres.zip
+MC_Restore /usr/local/tomcat/bin/MC_backup_Postgres.zip
 
 #13 is the id of the "Default Project"
 # MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""
