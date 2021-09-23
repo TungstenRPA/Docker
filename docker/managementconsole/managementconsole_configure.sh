@@ -63,7 +63,30 @@ MC_Restore()
     echo MC Restore from Backupfile=${Backupfile}
     MC_REST POST "/secure/Restore" "-F fileField=@${Backupfile} -F restoreMode=Reset"
 }
-
+MC_Cluster_GetId()
+{
+    clusterName=$1
+    clusters=$(curl -u ${USERNAME}:${PASSWORD} ${MC}//api/mc/cluster/clusters)
+    reg='"id":([0-9]+).*?"name":"(.*?)",'
+    [[ ${clusters} =~ $reg ]]
+    clusterid= ${BASH_REMATCH[1]}
+    echo clusterid
+    #"id":35,"uniqueKey":"C35","reportedLicense":"Non Production","runningRobots":0,"queuedRobots":0,"maxQueue":null,"runRobotAmount":0,"name":"Non Production"
+    #regex=\"id\":\"(\\d+)\"^}+\"name\":\"(^\"+)\"
+}
+MC_Roboserver_Add()
+{
+    #{"hostName":"roboserver-service","portNumber":"5000","clusterId":35}
+    clusterId=$1;server=$2; port=$3
+    echo {"hostName":"roboserver-service","portNumber":"5000","clusterId":35} > .json
+    MC_REST POST "/api/mc/cluster/addServer" "-H Content-Type:application/json" "--data @.json"
+}
+MC_Roboserver_Delete()
+{
+    #{"hostName":"roboserver-service","portNumber":"5000","clusterId":35}
+    server=$1; # 125
+    MC_REST PUT "/api/mc/cluster/deleteServer/${server}" ""
+}
 MC_Add_Robot()
 {
     projectID=$1;FILEPATH=$2; FILENAME=$3; folderName=$4
@@ -81,16 +104,19 @@ fi
 MC_Wait
 # MC_Change_Password ${USERNAME} admin ${PASSWORD}
 echo Add Groups
-#MC_Add_Group Developers "build robots" ""
-#MC_Add_Group Roboservers "run the robots" ""
-#MC_Add_Group Synchronizers "upload and download robots to a Git Repository" ""
-#MC_Add_Group KappletAdmins "create and edit Kapplets" ""
-#MC_Add_Group KappletUsers "run Kapplets" ""
+MC_Add_Group Developers "build robots" ""
+MC_Add_Group Roboservers "run the robots" ""
+MC_Add_Group Synchronizers "upload and download robots to a Git Repository" ""
+MC_Add_Group KappletAdmins "create and edit Kapplets" ""
+MC_Add_Group KappletUsers "run Kapplets" ""
 echo Add Users
 MC_Add_User david abc123 "David Wright" "david.wright@kofax.com" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
-#MC_Add_User roboserver 4£m6Yy Roboserver roboserver@kofax.com '"Roboservers"'
-#MC_Add_User synch £tUw_T3 Synch synch@kofax.com '"Synchronizers"'
-MC_Restore /usr/local/tomcat/bin/MC_backup_Postgres.zip
+MC_Add_User roboserver 4£m6Yy Roboserver roboserver@kofax.com '"Roboservers"'
+MC_Add_User synch £tUw_T3 Synch synch@kofax.com '"Synchronizers"'
+
+#clusterid=$(MC_Cluster_GetId "Non Production" )
+#MC_Roboserver_Add ${clusterid}  "roboserver-service" "50000"
+#MC_Restore /usr/local/tomcat/bin/MC_backup_Postgres.zip
 
 #13 is the id of the "Default Project"
 # MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""
