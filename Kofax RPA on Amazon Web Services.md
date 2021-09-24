@@ -82,6 +82,8 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
 * [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
 * [x] run configure script in second thread from managementconsole.sh
+* [x] restore MC from backup for users, groups, project roles, cluster database 
+* [ ] make sure roboserver waits until MC restore is finished before connecting to cluster.
 * [ ] Change Admin password 
 * [ ] ensure roboserver runs with new password
 * [ ] test roboserver actually logs..
