@@ -40,6 +40,9 @@ services:
       - SETTINGS_CLUSTER_COUNT=1
       - SETTINGS_CLUSTER_NAME_1=Non Production
       - SETTINGS_CLUSTER_PRODUCTION_1=false 
+      - MC_ADMIN_NAME=admin
+      - MC_ADMIN_PASSWORD=admin
+      - MC_ADMIN_NEWPASSWORD=abc123
       # Use Postgres as the log database
       - SETTINGS_ENTRY_COUNT=7
       - SETTINGS_ENTRY_KEY_1=USE_LOGDB
