@@ -47,7 +47,10 @@ services:
       - DEV_NAME=${DEV_NAME}
       - DEV_PASSWORD=${DEV_PASSWORD}
       - DEV_FULLNAME=${DEV_FULLNAME}
-      - DEV_EMAIL={DEV_EMAIL}
+      - DEV_EMAIL=${DEV_EMAIL}
+      # MC needs to create the Roboserver user account
+      - ROBOSERVER_MC_USERNAME=${ROBOSERVER_MC_USERNAME}
+      - ROBOSERVER_MC_PASSWORD=${ROBOSERVER_MC_PASSWORD}      
       # Use Postgres as the log database
       - SETTINGS_ENTRY_COUNT=7
       - SETTINGS_ENTRY_KEY_1=USE_LOGDB

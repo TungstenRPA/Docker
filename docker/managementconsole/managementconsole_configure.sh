@@ -45,8 +45,10 @@ MC_Change_Password()
 }
 MC_Add_User()
 {
-    un=$1; pw=$2; fullName=$3; email=$4; groupNames=$5
+    echo Adding user $@
+    eval un="$1"; eval pw="$2"; eval fullName="$3"; eval email="$4"; eval groupNames="$5"
     echo \{\"emailAddress\":\"${email}\",\"fullName\":\"${fullName}\",\"password\":\"${pw}\",\"userName\":\"${un}\",\"groupNames\":\[${groupNames}\]\} > .json
+    cat .json
     MC_REST POST "/api/mc/user/add" "-H Content-Type:application/json" "--data @.json" 
 }
 MC_Add_Group()
@@ -105,18 +107,23 @@ MC_Wait
 # MC_Change_Password ${USERNAME} admin ${PASSWORD}
 echo Add Groups
 MC_Add_Group Developers "build robots" ""
+echo add developers
 MC_Add_Group Roboservers "run the robots" ""
 MC_Add_Group Synchronizers "upload and download robots to a Git Repository" ""
 MC_Add_Group KappletAdmins "create and edit Kapplets" ""
+echo add kappletusers
 MC_Add_Group KappletUsers "run Kapplets" ""
-echo Add Users
-MC_Add_User david abc123 "David Wright" "david.wright@kofax.com" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
-MC_Add_User roboserver 4£m6Yy Roboserver roboserver@kofax.com '"Roboservers"'
-MC_Add_User synch £tUw_T3 Synch synch@kofax.com '"Synchronizers"'
+echo Add Users ---
+#MC_Add_User synch £tUw_T3 Synch synch@kofax.com '"Synchronizers"'
 
 #clusterid=$(MC_Cluster_GetId "Non Production" )
 #MC_Roboserver_Add ${clusterid}  "roboserver-service" "50000"
 #MC_Restore /usr/local/tomcat/bin/MC_backup_Postgres.zip
+
+#Create the roboserver user account so that the roboserver can actually get in and auto-register after the MC restore has completed
+
+MC_Add_User "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"${DEV_FULLNAME}\"" "\"${DEV_EMAIL}"\" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
+MC_Add_User "\"${ROBOSERVER_MC_USERNAME}\"" "\"${ROBOSERVER_MC_PASSWORD}\"" "'Roboserver'" "roboserver@kofax.com" '"Roboservers"'
 
 #13 is the id of the "Default Project"
 # MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""

@@ -15,3 +15,7 @@ docker/managementconsole/*
 !docker/managementconsole/managementconsole.sh
 !docker/managementconsole/managementconsole_configure.sh
 !docker/managementconsole/*.zip
+
+!docker/roboserver/*
+!docker/roboserver/roboserver.sh
+!docker/roboserver/Dockerfile

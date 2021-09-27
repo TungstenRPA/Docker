@@ -1,10 +1,10 @@
 FROM debian:stretch-slim
 
-# preparing base environment
+# preparing base environment 
 ENV KAPOW_HOME=/kapow LANG=en_US.UTF-8 TERM=xterm
 
 RUN apt-get update \
- && apt-get --assume-yes install --no-install-recommends libx11-6 libxext6 libx11-6 ttf-dejavu-core gettext libc-bin libssl1.0.2 \
+ && apt-get --assume-yes install --no-install-recommends curl libx11-6 libxext6 libx11-6 ttf-dejavu-core gettext libc-bin libssl1.0.2 \
                                                          login procps gconf-service libasound2 libatk1.0-0 libc6 libcairo2 locales\
                                                          libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 \
                                                          libgdk-pixbuf2.0-0 libglib2.0-0 libgtk2.0-0 libnspr4 libnss3 libpango-1.0-0 \
