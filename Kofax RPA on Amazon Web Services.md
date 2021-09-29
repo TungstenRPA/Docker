@@ -85,6 +85,8 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] restore MC from backup for users, groups, project roles, cluster database
 * [x] Make roboserver wait until it can log in before starting the roboserver. 
 * [x] Get Test robot logging to MC log database.
+* [ ] Make sure that Design Studio can download Postgres JDBC driver from MC.  
+![](img/2021-09-29-15-25-02.png)
 * [ ] Changes to Backup
   * [ ] Non-Production cluster uses **scheduler** database for data.
   * [ ] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=true
