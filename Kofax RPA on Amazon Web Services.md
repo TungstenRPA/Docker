@@ -85,7 +85,11 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] restore MC from backup for users, groups, project roles, cluster database
 * [x] Make roboserver wait until it can log in before starting the roboserver. 
 * [x] Get Test robot logging to MC log database.
-* [ ] Get Test robot writing to MC data database.
+* [ ] Changes to Backup
+  * [ ] Non-Production cluster uses **scheduler** database for data.
+  * [ ] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=true
+  * [ ] no robot dev (all added later)
+  * [ ] Load **NewsMagazine.robot**, which writes to MC data database and usable in Kapplets
 * [ ] remove  david from backup. Add test robot
 * [ ] make sure roboserver waits until MC restore is finished before connecting to cluster.
 * [ ] Change Admin password 
