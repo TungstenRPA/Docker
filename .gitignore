@@ -5,8 +5,10 @@
 !rpa_aws.cmd
 !*.env
 
-!docker/
 
+!img/
+!img/*
+!docker/
 docker/*
 !docker/managementconsole
 
