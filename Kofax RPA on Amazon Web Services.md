@@ -84,13 +84,12 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] run configure script in second thread from managementconsole.sh
 * [x] restore MC from backup for users, groups, project roles, cluster database
 * [x] Make roboserver wait until it can log in before starting the roboserver. 
-* [ ] Get Test robot logging to MC log database.
+* [x] Get Test robot logging to MC log database.
 * [ ] Get Test robot writing to MC data database.
 * [ ] remove  david from backup. Add test robot
 * [ ] make sure roboserver waits until MC restore is finished before connecting to cluster.
 * [ ] Change Admin password 
 * [ ] ensure roboserver runs with new password
-* [ ] test roboserver actually logs..
 * [ ] set default data database to postgres and not objectdb. (maybe stick logs there as well)
 * Add to Amazon Market Place
 * Add HTTPS
