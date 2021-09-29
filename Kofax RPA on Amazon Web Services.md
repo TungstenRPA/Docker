@@ -85,6 +85,7 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] restore MC from backup for users, groups, project roles, cluster database
 * [x] Make roboserver wait until it can log in before starting the roboserver. 
 * [x] Get Test robot logging to MC log database.
+* [ ] Check the [Amazon Aurora Postgres](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraPostgreSQL.html) is actually compatible with Kofax RPA. (i created a Free Tier, lowest level 20GB which is 0.019c/hour in Frankfurt. Serverless seems to be in beta...)
 * [ ] Make sure that Design Studio can download Postgres JDBC driver from MC.  
 ![](img/2021-09-29-15-25-02.png)
 * [ ] Changes to Backup
