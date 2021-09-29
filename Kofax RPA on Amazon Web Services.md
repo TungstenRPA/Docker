@@ -82,9 +82,10 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
 * [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
 * [x] run configure script in second thread from managementconsole.sh
-* [x] restore MC from backup for users, groups, project roles, cluster database 
+* [x] restore MC from backup for users, groups, project roles, cluster database
+* [x] Make roboserver wait until it can log in before starting the roboserver. 
+* [ ] Get Test robot logging to MC log database.
 * [ ] Get Test robot writing to MC data database.
-* [ ] Get Text robot logging to MC log database.
 * [ ] remove  david from backup. Add test robot
 * [ ] make sure roboserver waits until MC restore is finished before connecting to cluster.
 * [ ] Change Admin password 
@@ -94,7 +95,10 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * Add to Amazon Market Place
 * Add HTTPS
 * Scale roboservers by CPU %.
-* Deploy with Wizard from Amazon Marketplace.
+* Deploy with Wizard from Amazon Marketplace.  
+## BLOCKING
+* Roboserver won't connect if failed to login twice. with Benjamin
+
 
 # Phase 2 - Sharable with Community
 * optimize CPU and RAM for MC & Roboserver
