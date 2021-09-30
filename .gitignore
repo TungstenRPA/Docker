@@ -5,7 +5,8 @@
 !rpa_aws.cmd
 !*.env
 
-
+!robots/
+!robots/*
 !img/
 !img/*
 !docker/
