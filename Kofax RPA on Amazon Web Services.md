@@ -86,7 +86,6 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] Get **NewsMagazine.robot** log to MC log database.
 * [x] Get **NewsMagazine.robot** to  write data to MC's postgres database.
 * [x] make **NewsMagazine.robot** create object table in Postgres.
-* [ ] Check the [Amazon Aurora Postgres](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraPostgreSQL.html) is actually compatible with Kofax RPA. (i created a Free Tier, lowest level 20GB which is 0.019c/hour in Frankfurt. Serverless seems to be in beta...)
 * [ ] Changes to Backup
   * [ ] Non-Production cluster uses **scheduler** database for data.
   * [ ] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=false
@@ -110,10 +109,11 @@ Content-Type: application/octet-stream
 * [ ] Make sure that Design Studio can download Postgres JDBC driver from MC.  
 ![](img/2021-09-29-15-25-02.png)
 ## BLOCKING
-* Roboserver won't connect if failed to login twice. with Benjamin
-
+* Roboserver won't connect if failed to login twice. with Benjamin  
+*workaround: wait for MC to restore backup before launching roboserver, by curling if roboserver user can log in*
 
 # Phase 2 - Sharable with Community
+* [ ] Check the [Amazon Aurora Postgres](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraPostgreSQL.html) is actually compatible with Kofax RPA. (i created a Free Tier, lowest level 20GB which is 0.019c/hour in Frankfurt. Serverless seems to be in beta...)
 * optimize CPU and RAM for MC & Roboserver
 * Kapplets
 * import 
