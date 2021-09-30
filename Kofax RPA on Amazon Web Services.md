@@ -78,15 +78,30 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 
 # Phase 1 - Internal
 * [x] Add to Amazon Repository
-* [x] Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not evening running)
+* [x] Roboserver logging to Postgres database. (by default it logs to "Development Database" which is not even running)
 * [x] Create groups **Developers**, **Roboservers**, **Kapplet Users**, **Project Admininstrators**, **Kapplet Administrators**
-* [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
 * [x] run configure script in second thread from managementconsole.sh
 * [x] restore MC from backup for users, groups, project roles, cluster database
 * [x] Make roboserver wait until it can log in before starting the roboserver. 
-* [x] Get Test robot logging to MC log database.
+* [x] Get **NewsMagazine.robot** log to MC log database.
+* [x] Get **NewsMagazine.robot** to  write data to MC's postgres database.
+* [ ] make **NewsMagazine.robot** create object table in Postgres.
 * [ ] Check the [Amazon Aurora Postgres](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraPostgreSQL.html) is actually compatible with Kofax RPA. (i created a Free Tier, lowest level 20GB which is 0.019c/hour in Frankfurt. Serverless seems to be in beta...)
-* [ ] Upload postgres driver to MC (it goes to Postgres table mc_jar_file) http://localhost:8080/api/mc/setting/Database/Drivers/add  
+* [ ] Changes to Backup
+  * [ ] Non-Production cluster uses **scheduler** database for data.
+  * [ ] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=false
+  * [ ] no robot dev nor roboserver user (both added later)
+  * [ ] Load **NewsMagazine.robot**, which writes to MC data database and usable in Kapplets
+* [ ] make sure roboserver waits until MC restore is finished before connecting to cluster. beware roboserver fails to connect to MC after 3rd attempt, so use curl to see that MC is ready.
+* [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
+* [ ] Change Admin password 
+* [ ] ensure roboserver runs with new password
+* [ ] set default data database to postgres and not objectdb. (maybe stick logs there as well)
+* [ ] Add to Amazon Market Place
+* [ ] Add HTTPS
+* [ ] Scale roboservers by CPU %.
+* [ ] Deploy with Wizard from Amazon Marketplace.  
+* [ ] Upload postgres driver to MC (it goes to Postgres table mc_jar_file) http://localhost:8080/api/mc/setting/Database/Drivers/add  Do i really need this?  
 Accept-Encoding: gzip, deflate 
 ```
 Content-Disposition: form-data; name="file"; filename="postgresql-42.2.19.jar"
@@ -94,20 +109,6 @@ Content-Type: application/octet-stream
 ```
 * [ ] Make sure that Design Studio can download Postgres JDBC driver from MC.  
 ![](img/2021-09-29-15-25-02.png)
-* [ ] Changes to Backup
-  * [ ] Non-Production cluster uses **scheduler** database for data.
-  * [ ] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=true
-  * [ ] no robot dev (all added later)
-  * [ ] Load **NewsMagazine.robot**, which writes to MC data database and usable in Kapplets
-* [ ] remove  david from backup. Add test robot
-* [ ] make sure roboserver waits until MC restore is finished before connecting to cluster.
-* [ ] Change Admin password 
-* [ ] ensure roboserver runs with new password
-* [ ] set default data database to postgres and not objectdb. (maybe stick logs there as well)
-* Add to Amazon Market Place
-* Add HTTPS
-* Scale roboservers by CPU %.
-* Deploy with Wizard from Amazon Marketplace.  
 ## BLOCKING
 * Roboserver won't connect if failed to login twice. with Benjamin
 
