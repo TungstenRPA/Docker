@@ -61,12 +61,12 @@ services:
 # https://docs.docker.com/cloud/ecs-compose-features/#container-resources
 # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpu: 0.25
-  #         memory: 2Gb
-  # roboserver-service:
+    deploy:
+      resources:
+        limits:
+          cpu: 0.25
+          memory: 2Gb
+  roboserver-service:
     build:
       context: .
       dockerfile: docker/roboserver/Dockerfile
@@ -85,11 +85,11 @@ services:
       - ROBOSERVER_ENABLE_SOCKET_SERVICE=true
       - ROBOSERVER_SERVER_NAME=roboserver
       - WRAPPER_MAX_MEMORY=2048
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpu: 0.25
-    #       memory: 2Gb
+    deploy:
+      resources:
+        limits:
+          cpu: 0.25
+          memory: 2Gb
 
 # This is to add https to the load balancer on AWS
 # https://docs.docker.com/cloud/ecs-integration/#setting-ssl-termination-by-load-balancer
