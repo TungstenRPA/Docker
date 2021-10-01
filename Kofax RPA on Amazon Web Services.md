@@ -86,6 +86,8 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] Get **NewsMagazine.robot** log to MC log database.
 * [x] Get **NewsMagazine.robot** to  write data to MC's postgres database.
 * [x] make **NewsMagazine.robot** create object table in Postgres.
+* [ ] Add to Amazon Market Place
+* [ ] Add HTTPS
 * [ ] Changes to Backup
   * [ ] Non-Production cluster uses **scheduler** database for data.
   * [ ] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=false
@@ -95,9 +97,6 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
 * [ ] Change Admin password 
 * [ ] ensure roboserver runs with new password
-* [ ] set default data database to postgres and not objectdb. (maybe stick logs there as well)
-* [ ] Add to Amazon Market Place
-* [ ] Add HTTPS
 * [ ] Scale roboservers by CPU %.
 * [ ] Deploy with Wizard from Amazon Marketplace.  
 * [ ] Upload postgres driver to MC (it goes to Postgres table mc_jar_file) http://localhost:8080/api/mc/setting/Database/Drivers/add  Do i really need this?  
@@ -114,6 +113,7 @@ Content-Type: application/octet-stream
 
 # Phase 2 - Sharable with Community
 * [ ] Check the [Amazon Aurora Postgres](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraPostgreSQL.html) is actually compatible with Kofax RPA. (i created a Free Tier, lowest level 20GB which is 0.019c/hour in Frankfurt. Serverless seems to be in beta...)
+* [ ] Add logs and data databases into postgres. [Postgres envars](https://www.postgresql.org/docs/current/libpq-envars.html) [Adding users/databases](https://hub.docker.com/_/postgres)
 * optimize CPU and RAM for MC & Roboserver
 * Kapplets
 * import 
