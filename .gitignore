@@ -4,6 +4,7 @@
 !*.md
 !rpa_aws.cmd
 !*.env
+.env
 
 !robots/
 !robots/*
