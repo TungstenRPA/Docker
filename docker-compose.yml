@@ -16,6 +16,8 @@ services:
       - POSTGRES_DB=scheduler
     networks:
       - net
+    ports:
+      - 5432:5432
   managementconsole-service:
     build:
       context: .
@@ -62,6 +64,7 @@ services:
       - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
       - SETTINGS_ENTRY_VALUE_4=PostgreSQL
       - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
+      - CONFIG_SECURITY_JDBCDRIVERUPLOAD=ANY_HOST
       # if you want to log to a separate database than MC's database 'scheduler' you'll need a second container.
       - SETTINGS_ENTRY_VALUE_5=scheduler
       - SETTINGS_ENTRY_KEY_6=LOGDB_PASSWORD
