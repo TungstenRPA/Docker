@@ -42,6 +42,7 @@ Docker Desktop has a **default** context on the local machine. See it by typing 
 * Create a new Docker Context on your computer for *ecs* by typing **docker context ecs myecscontext**
 * Make it the default context by typing **docker context use myecscontext**  
 After this Docker Desktop will be working with ECS on AWS and not Docker Desktop.  
+* login to ECR (Elastic Container Registry) so that you can get the images from Amazon
 * Type **docker compose convert** to build Kofax RPA.
 * Type **docker compose up** to deploy Kofax RPA to AWS.
 * Type **docker compose down** to stop Kofax RPA on AWS.
