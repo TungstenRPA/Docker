@@ -57,6 +57,44 @@ ECS is Amazon's container orchestration system, like Kubernetes.
 * Click on the **Task Definition** of the Management Console and scroll down and you will see how much RAM and CPU has been allocated to it.  
 ![image](https://user-images.githubusercontent.com/47416964/133256234-ea3bc6cf-4362-4321-926e-af64fc20c9e4.png)
 
+# Configuring HTTPS
+## Create Load Balancer
+https://techsparx.com/software-development/docker/docker-ecs/load-balancer/https.html  
+* Open Amazon Virtual Private Cloud [VPC](https://eu-central-1.console.aws.amazon.com/vpc/home?region=eu-central-1#subnets:)
+* Click on **Subnets** and copy your subnets
+* Click on **Security/Security Groups** and copy the Security Group ID for **default VPC security group**
+* run commandline to create a load balancer.
+```
+aws elbv2 create-load-balancer --name kofaxrpa --scheme internet-facing --type application --security-groups sg-08ede23deaa1efbfb --subnets subnet-5d96ee76 subnet-34e32369 subnet-8a4dbbf2 subnet-6afbe821
+```
+## Set up a Domain Name
+* Go to  https://my.freenom.com which can provide a free domain name.
+* choose a domain name.
+* go to checkout and verify your email address.
+* continue on to the next step on Amazon. We need to tell Amazon the address first, and then get the address from Amazon to give the the domain name registrar
+## Configure AWS to use your Domain Name
+* Go to Amazon's [Route 53 Dashboard](https://console.aws.amazon.com/route53/v2/home#Dashboard) and create a **Public Hosted Zone**
+* Click on [Hosted zones](https://console.aws.amazon.com/route53/v2/hostedzones#) and **Create hosted zone**
+* Select **public hosted zones** and **create hosted zone**
+* go back to [Hosted zones](https://console.aws.amazon.com/route53/v2/hostedzones#) and click on your new domain name to enter its dashboard.
+** Create a **new record**. Set the Record name to **mc**. Enable **Alias** and route to **Alias to Application and Classic Load Balancer**/AmazonSubregion/yourloadbalancer
+![image](https://user-images.githubusercontent.com/47416964/135839958-e41743c9-7cf7-48b6-a03c-b52042ab9568.png)
+* Back in the Records view copy the route URL
+![image](https://user-images.githubusercontent.com/47416964/135840512-c3c0a725-fb35-46a1-89d0-59e4c3425c23.png)
+* Go back to freenom's [Client Area](https://my.freenom.com/clientarea.php) and manage your domain.
+* under *management tools* selecte URL forwarding and add your Amazon URL to the URL forwarding
+* Select **Redirect (HTTP 301 forwarding)** as the Forward mode.
+## Set up an SSL certificate
+* Go to AWS [Certificate Manager](https://eu-central-1.console.aws.amazon.com/acm)
+* Click on **Provision certificate**
+* Request a **public certificate**
+* add your domain name from 
+* **Export DNS configuration to a file**
+* go to freenom and DNS management. 
+* Add all the CNAME entries from the exported DNS config file.
+
+
+
 # Tweaking, Config
 [Add HTTPS to Load Balancer](https://docs.docker.com/cloud/ecs-integration/#setting-ssl-termination-by-load-balancer)  *currently not working...*  
 [Service Discovery](https://docs.docker.com/cloud/ecs-integration/#service-discovery) configures how machines inside the cluster see each other. This is not needed as the Roboserver is able to find the Management Console using http://managementconsole-service:8080/ within the Cluster.
