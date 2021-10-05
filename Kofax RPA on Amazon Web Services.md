@@ -92,6 +92,8 @@ aws elbv2 create-load-balancer --name kofaxrpa --scheme internet-facing --type a
 * **Export DNS configuration to a file**
 * go to freenom and DNS management. 
 * Add all the CNAME entries from the exported DNS config file.
+![image](https://user-images.githubusercontent.com/47416964/135901703-c53c6bb4-dc3f-46fe-aae2-23d115343c40.png)
+
 
 
 
