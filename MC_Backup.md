@@ -2,8 +2,8 @@
 The MC Docker instance will restore a backup to configure the MC to be ready for use. It does the following.  
 ## Create Users and Groups
 * Create Groups "Roboservers", "KappletAdmins", "KappletUsers", "Synchronizers", "Developers"
-* Create user "Synchronizer" in group "Synchronizers"
 ## Configure Non Production Cluster
+* Remove any Roboservers from cluster (as ip address invalid)
 * Add postgres Database with name **postgres** **(currently pointing at scheduler)**
 ## Configure Databases
 * Disable sending databases to Design Studio  
@@ -15,8 +15,10 @@ The MC Docker instance will restore a backup to configure the MC to be ready for
 ## Configure Kapplets
 * ??
 ## What is not included
-* A human developer account is not included. that is added to MC after the restore
-* the roboserver user is added after the restore.
+* Users are added after restore to set names & passwords
+  * A human developer account.
+  * the roboserver user. roboserver won't start up until this account exists as roboserver gives up after logging in fails twice
+  *  user "Synchronizer" in group "Synchronizers"
 
 ## To do later
 * have more databases in postgres container: **scheduler**, **robot_data**, **logs**, **kapplets**, **audit**
