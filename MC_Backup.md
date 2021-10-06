@@ -4,12 +4,15 @@ The MC Docker instance will restore a backup to configure the MC to be ready for
 * Create Groups "Roboservers", "KappletAdmins", "KappletUsers", "Synchronizers", "Developers"
 ## Configure Non Production Cluster
 * Remove any Roboservers from cluster (as ip address invalid)
-* Add postgres Database with name **postgres** **(currently pointing at scheduler)**
+* Add postgres Database with name **PostgreSQL** **(currently pointing at scheduler)**
 ## Configure Databases
-* Disable sending databases to Design Studio  
-*for this release, the user will use development database in Design Studio, and the robot will use a database mapping to use postgres. Design Studio CANNOT see the postgres CONTAINER and MC & Roboserver CANNOT see development database*
+* Add database mapping so that demo robot can log to database.
+  * **objectdb**, **Default Project**, **Non Production**, **PostgreSQL**
+* Disable sending databases to Design Studio in **Settings/DesignStudio**  
+*for this release, the user will use development database in Design Studio, and the robot will use a database mapping to use postgres. Design Studio CANNOT see the postgres CONTAINER and MC & Roboserver CANNOT see development database, so it makes no sense for MC to send database drivers to Design Studio.*
 ## Configure Default Project
 * Create Role-Group matchings for "Roboservers", "KappletAdmins", "KappletUsers", "Synchronizers", "Developers"
+* Make sure is using **Non Production** cluster.
 ## Configure Robots
 * upload robot "NewsMagazine.robot" and type "Post.type"
 ## Configure Kapplets
