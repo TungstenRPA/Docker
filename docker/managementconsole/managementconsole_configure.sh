@@ -123,8 +123,9 @@ MC_Wait
 #Create the roboserver user account so that the roboserver can actually get in and auto-register after the MC restore has completed
 
 # MC_Add_User "\"${DEV_NAME}\"" "abc123" "\"${DEV_FULLNAME}\"" "\"${DEV_EMAIL}"\" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
-# MC_Add_User "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"${DEV_FULLNAME}\"" "\"${DEV_EMAIL}"\" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
-# MC_Add_User "\"${ROBOSERVER_MC_USERNAME}\"" "\"${ROBOSERVER_MC_PASSWORD}\"" "'Roboserver'" "roboserver@kofax.com" '"Roboservers"'
+MC_Add_User "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"${DEV_FULLNAME}\"" "\"${DEV_EMAIL}"\" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
+MC_Add_User "\"${ROBOSERVER_MC_USERNAME}\"" "\"${ROBOSERVER_MC_PASSWORD}\"" "'Roboserver'" "roboserver@rpa.com" '"Roboservers"'
+MC_Add_User "\"${SYNCH_MC_USERNAME}\"" "\"${SYNCH_MC_PASSWORD}\"" "'Synchronizer'" "synch@rpa.com" '"Synchronizers"'
 
 # MC_Change_Password "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"abc\""
 # MC_Change_Password "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"abc\""
