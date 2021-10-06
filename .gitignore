@@ -1,10 +1,9 @@
 /*
 !.gitignore
+.env
 !docker-compose.yml
 !*.md
 !rpa_aws.cmd
-!*.env
-!.env
 
 !docker/
 
