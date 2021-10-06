@@ -67,6 +67,7 @@ https://techsparx.com/software-development/docker/docker-ecs/load-balancer/https
 ```
 aws elbv2 create-load-balancer --name kofaxrpa --scheme internet-facing --type application --security-groups sg-08ede23deaa1efbfb --subnets subnet-5d96ee76 subnet-34e32369 subnet-8a4dbbf2 subnet-6afbe821
 ```
+* You can see your load balancer under [LoadBalancer](https://eu-central-1.console.aws.amazon.com/ec2/v2/home?region=#LoadBalancers:sort=loadBalancerName) on the [ec2 dashboard](https://eu-central-1.console.aws.amazon.com/ec2/v2/home)
 ## Set up a Domain Name
 * Go to  https://my.freenom.com which can provide a free domain name.
 * choose a domain name.
@@ -93,6 +94,9 @@ aws elbv2 create-load-balancer --name kofaxrpa --scheme internet-facing --type a
 * go to freenom and DNS management. 
 * Add all the CNAME entries from the exported DNS config file.
 ![image](https://user-images.githubusercontent.com/47416964/135901703-c53c6bb4-dc3f-46fe-aae2-23d115343c40.png)
+* Wait until your hosting site has published the DNS entries. You will eventually see success in the certificate manager.
+![image](https://user-images.githubusercontent.com/47416964/136004663-f6b9f24a-54c8-4fef-b7f2-44a2e64fe9f3.png)
+
 
 
 
