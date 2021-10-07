@@ -120,7 +120,10 @@ MC_Wait
 #MC_Roboserver_Add ${clusterid}  "roboserver-service" "50000"
 
 #Create the roboserver user account so that the roboserver can actually get in and auto-register after the MC restore has completed
-MC_Restore /usr/local/tomcat/bin/MC_backup_Postgres.zip
+
+cd ${KAPOW_HOME}/backup
+zip -r backup.zip *
+MC_Restore ${KAPOW_HOME}/backup/backup.zip
 
 # MC_Add_User "\"${DEV_NAME}\"" "abc123" "\"${DEV_FULLNAME}\"" "\"${DEV_EMAIL}"\" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
 MC_Add_User "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"${DEV_FULLNAME}\"" "\"${DEV_EMAIL}"\" '"RPA Administrators","Developers","RPA Administrators","KappletAdmins","KappletUsers"'
