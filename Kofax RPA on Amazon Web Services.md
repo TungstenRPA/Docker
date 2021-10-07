@@ -87,15 +87,16 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
 * [x] Get **NewsMagazine.robot** log to MC log database.
 * [x] Get **NewsMagazine.robot** to  write data to MC's postgres database.
 * [x] make **NewsMagazine.robot** create object table in Postgres.
+* [ ] make sure roboserver waits until MC restore is finished before connecting to cluster. beware roboserver fails to connect to MC after 3rd attempt, so use curl to see that MC is ready.
+* [x] Changes to Backup
+  * [x] Non-Production cluster uses **scheduler** database for data.
+  * [x] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=false
+  * [x] no robot dev nor roboserver user (both added later)
+  * [x] Load **NewsMagazine.robot**, which writes to MC data database and usable in Kapplets
+  * [x] Build Backup.zip from source robot files. *This makes us future safe when editing the backup package. We can now add robots and configs in a trackable way*
+* [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
 * [ ] Add to Amazon Market Place
 * [ ] Add HTTPS
-* [ ] Changes to Backup
-  * [ ] Non-Production cluster uses **scheduler** database for data.
-  * [ ] MC/Settings/DesignStudio/DatabasesToSendToDesignStudio=false
-  * [ ] no robot dev nor roboserver user (both added later)
-  * [ ] Load **NewsMagazine.robot**, which writes to MC data database and usable in Kapplets
-* [ ] make sure roboserver waits until MC restore is finished before connecting to cluster. beware roboserver fails to connect to MC after 3rd attempt, so use curl to see that MC is ready.
-* [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
 * [ ] Change Admin password 
 * [ ] ensure roboserver runs with new password
 * [ ] Scale roboservers by CPU %.
