@@ -4,7 +4,7 @@ FROM tomcat:8.5.66-jdk11-adoptopenjdk-hotspot
 ENV KAPOW_HOME=/kapow LANG=en_US.UTF-8 TERM=xterm
 
 RUN apt-get update \
- && apt-get --assume-yes install --no-install-recommends dos2unix locales \
+ && apt-get --assume-yes install --no-install-recommends dos2unix locales zip \
  && rm -rf /var/lib/apt/lists/* \
  && locale-gen en_US.UTF-8 \
  && localedef en_US.UTF-8 -i en_US -f UTF-8
@@ -21,7 +21,7 @@ RUN echo "common.loader=\"$\{catalina.base\}/lib\",\"$\{catalina.base\}/lib/*.ja
         \"$\{catalina.home\}/lib/*.jar\", \"$\{catalina.home\}/lib/jdbc/*.jar\"" >> /usr/local/tomcat/conf/catalina.properties
 
 COPY docker/managementconsole/*.sh /usr/local/tomcat/bin/
-COPY docker/managementconsole/*.zip /usr/local/tomcat/bin/
+COPY docker/managementconsole/backup/ ${KAPOW_HOME}/backup/
 
 RUN dos2unix /usr/local/tomcat/bin/*.sh \
  && chmod +x /usr/local/tomcat/bin/*.sh
