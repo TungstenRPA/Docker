@@ -16,6 +16,8 @@ services:
       - POSTGRES_DB=scheduler
     networks:
       - net
+    ports:
+      - 5432:5432
   managementconsole-service:
     build:
       context: .
@@ -34,9 +36,44 @@ services:
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
-      - CONFIG_LICENSE_COMPANY=
-      - CONFIG_LICENSE_PRODUCTIONKEY=
-      - CONFIG_LICENSE_NONPRODUCTIONKEY=
+      - CONFIG_LICENSE_COMPANY=${LICENSE_COMPANY}
+      - CONFIG_LICENSE_PRODUCTIONKEY=${LICENSE_PRODUCTIONKEY}
+      - CONFIG_LICENSE_NONPRODUCTIONKEY=${LICENSE_NONPRODUCTIONKEY}
+      - SETTINGS_CLUSTER_COUNT=1
+      - SETTINGS_CLUSTER_NAME_1=Non Production
+      - SETTINGS_CLUSTER_PRODUCTION_1=false 
+      - MC_ADMIN_NAME=admin
+      - MC_ADMIN_PASSWORD=admin
+      - MC_ADMIN_NEWPASSWORD=abc123
+      # 1st Robot developer details
+      - DEV_NAME=${DEV_NAME}
+      - DEV_PASSWORD=${DEV_PASSWORD}
+      - DEV_FULLNAME=${DEV_FULLNAME}
+      - DEV_EMAIL=${DEV_EMAIL}
+      # MC needs to create the Roboserver and Synchronizer user accounts
+      - ROBOSERVER_MC_USERNAME=${ROBOSERVER_MC_USERNAME}
+      - ROBOSERVER_MC_PASSWORD=${ROBOSERVER_MC_PASSWORD}   
+      - SYNCH_MC_USERNAME=${SYNCH_MC_USERNAME}
+      - SYNCH_MC_PASSWORD=${SYNCH_MC_PASSWORD}
+      # Use Postgres as the log database
+      - SETTINGS_ENTRY_COUNT=7
+      - SETTINGS_ENTRY_KEY_1=USE_LOGDB
+      - SETTINGS_ENTRY_VALUE_1=true
+      - SETTINGS_ENTRY_KEY_2=LOGDB_SCHEMA
+      - SETTINGS_ENTRY_VALUE_2=scheduler
+      - SETTINGS_ENTRY_KEY_3=LOGDB_HOST
+      - SETTINGS_ENTRY_VALUE_3=postgres-service:5432
+      - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
+      - SETTINGS_ENTRY_VALUE_4=PostgreSQL
+      - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
+      - CONFIG_SECURITY_JDBCDRIVERUPLOAD=ANY_HOST
+      # if you want to log to a separate database than MC's database 'scheduler' you'll need a second container.
+      - SETTINGS_ENTRY_VALUE_5=scheduler
+      - SETTINGS_ENTRY_KEY_6=LOGDB_PASSWORD
+      - SETTINGS_ENTRY_VALUE_6=schedulerpassword
+      # base url - this is how a user would find the Management Console
+      - SETTINGS_ENTRY_KEY_7=BASE_URL
+      - SETTINGS_ENTRY_VALUE_7=http://PF1XACSPdavid:8080
     networks:
       - net
   roboserver-service:
@@ -52,9 +89,9 @@ services:
     environment:
       - ROBOSERVER_ENABLE_MC_REGISTRATION=true
       - ROBOSERVER_MC_URL=http://managementconsole-service:8080/
-      - ROBOSERVER_MC_CLUSTER=Production
-      - ROBOSERVER_MC_USERNAME=admin
-      - ROBOSERVER_MC_PASSWORD=admin
+      - ROBOSERVER_MC_CLUSTER=Non Production
+      - ROBOSERVER_MC_USERNAME=${ROBOSERVER_MC_USERNAME}
+      - ROBOSERVER_MC_PASSWORD=${ROBOSERVER_MC_PASSWORD}
       - ROBOSERVER_ENABLE_SOCKET_SERVICE=true
-      - ROBOSERVER_SERVER_NAME=roboserver
+      - ROBOSERVER_SERVER_NAME=Roboserver
       - WRAPPER_MAX_MEMORY=2048

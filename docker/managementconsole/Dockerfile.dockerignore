@@ -1,0 +1,12 @@
+# Ignore files not needed for the docker build context to speed up build times
+#
+# To use as is you need to use the buildkit:
+# For docker set:
+#    DOCKER_BUILDKIT=1
+# For docker-compose also set:
+#    COMPOSE_DOCKER_CLI_BUILD=1
+#
+*
+!docker/managementconsole
+!WebApps/Configurator.jar
+!WebApps/ManagementConsole.war
