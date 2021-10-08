@@ -24,4 +24,7 @@ if [ ! -f /usr/local/tomcat/conf/configured.lck ]; then
    fi
 fi
 
+echo Spawning MC config to create users and groups
+managementconsole_configure.sh &
+
 catalina.sh $@
