@@ -1,19 +1,20 @@
 /*
 !.gitignore
+.env
 !docker-compose.yml
 !*.md
 !rpa_aws.cmd
-!*.env
-.env
 
-!robots/
-!robots/*
-!img/
-!img/*
 !docker/
+
 docker/*
 !docker/managementconsole
 
 docker/managementconsole/*
 !docker/managementconsole/managementconsole.sh
 !docker/managementconsole/managementconsole_configure.sh
+!docker/managementconsole/backup/
+
+!docker/roboserver/*
+!docker/roboserver/roboserver.sh
+!docker/roboserver/Dockerfile
