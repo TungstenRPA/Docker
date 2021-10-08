@@ -9,7 +9,7 @@ networks:
 
 services:
   postgres-service:
-    image: ${REGISTRY}postgres:10
+    image: postgres:10
     environment:
       - POSTGRES_USER=scheduler
       - POSTGRES_PASSWORD=schedulerpassword
