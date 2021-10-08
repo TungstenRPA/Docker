@@ -9,7 +9,7 @@ networks:
 
 services:
   postgres-service:
-    image: 022336740566.dkr.ecr.eu-central-1.amazonaws.com/postgres:10
+    image: ${REGISTRY}postgres:10
     environment:
       - POSTGRES_USER=scheduler
       - POSTGRES_PASSWORD=schedulerpassword
@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: docker/managementconsole/Dockerfile
-    image: managementconsole:11.2.0.2
+    image: ${REGISTRY}managementconsole:${RPA_VERSION}
     depends_on:
       - postgres-service
     ports:
@@ -35,17 +35,16 @@ services:
       - CONTEXT_RESOURCE_DRIVERCLASSNAME=org.postgresql.Driver
       - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-service:5432/scheduler
       # enter your license here, or type it through the GUI in first login
-      - CONFIG_LICENSE_NAME=
-      - CONFIG_LICENSE_EMAIL=
+      - CONFIG_LICENSE_NAME=${LICENSE_NAME}
+      - CONFIG_LICENSE_EMAIL=${LICENSE_EMAIL}
       - CONFIG_LICENSE_COMPANY=${LICENSE_COMPANY}
       - CONFIG_LICENSE_PRODUCTIONKEY=${LICENSE_PRODUCTIONKEY}
       - CONFIG_LICENSE_NONPRODUCTIONKEY=${LICENSE_NONPRODUCTIONKEY}
       - SETTINGS_CLUSTER_COUNT=1
       - SETTINGS_CLUSTER_NAME_1=Non Production
       - SETTINGS_CLUSTER_PRODUCTION_1=false 
-      - MC_ADMIN_NAME=admin
-      - MC_ADMIN_PASSWORD=admin
-      - MC_ADMIN_NEWPASSWORD=abc123
+      - MC_ADMIN_NAME=${MC_ADMIN_NAME}
+      - MC_ADMIN_PASSWORD=${MC_ADMIN_PASSWORD}
       # 1st Robot developer details
       - DEV_NAME=${DEV_NAME}
       - DEV_PASSWORD=${DEV_PASSWORD}
@@ -66,16 +65,16 @@ services:
       - SETTINGS_ENTRY_VALUE_3=postgres-service:5432
       - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
       - SETTINGS_ENTRY_VALUE_4=PostgreSQL
-      - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
-      # - CONFIG_SECURITY_JDBCDRIVERUPLOAD=ANY_HOST
-
       # if you want to log to a separate database than MC's database 'scheduler' you'll need a second container.
+      - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
       - SETTINGS_ENTRY_VALUE_5=scheduler
       - SETTINGS_ENTRY_KEY_6=LOGDB_PASSWORD
       - SETTINGS_ENTRY_VALUE_6=schedulerpassword
+      # Allow Design Studio to download JDBC driver's from MC.
+      # - CONFIG_SECURITY_JDBCDRIVERUPLOAD=ANY_HOST
       # base url - this is how a user would find the Management Console
       - SETTINGS_ENTRY_KEY_7=BASE_URL
-      - SETTINGS_ENTRY_VALUE_7=http://PF1XACSPdavid:8080
+      - SETTINGS_ENTRY_VALUE_7=http://yourwebsite.com:8080
     networks:
       - net
 #AWS Container resources
@@ -92,7 +91,7 @@ services:
     build:
       context: .
       dockerfile: docker/roboserver/Dockerfile
-    image: roboserver:11.2.0.2
+    image: ${REGISTRY}roboserver:${RPA_VERSION}
     depends_on:
       - managementconsole-service
       - postgres-service
