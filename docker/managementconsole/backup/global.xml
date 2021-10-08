@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<globalConfiguration id="1">
+  <clusters class="vector" id="2">
+    <cluster id="3">
+      <name>Non Production</name>
+      <settings id="4">
+        <clusterSettingsId>318b52c4-4f39-4498-8c84-e30de00c568c</clusterSettingsId>
+        <cluster reference="3"/>
+        <logToDb>true</logToDb>
+        <logRobotInputToDb>false</logRobotInputToDb>
+        <logToLog4j>false</logToLog4j>
+        <logRobotInputToLog4j>false</logRobotInputToLog4j>
+        <logToEmail>false</logToEmail>
+        <toAddress/>
+        <fromAddress/>
+        <profilingEnabled>false</profilingEnabled>
+        <profilingOutputType>Detailed</profilingOutputType>
+        <profilingOutputTarget>Log</profilingOutputTarget>
+        <profilingFileOutputFile/>
+        <profilingFileOutputAppend>true</profilingFileOutputAppend>
+        <profilingThreshold>0</profilingThreshold>
+        <profilingLogPageURL>true</profilingLogPageURL>
+        <maxConcurrentRobots>20</maxConcurrentRobots>
+        <maxQueuedRobots>50</maxQueuedRobots>
+        <database id="5">
+          <name>PostgreSQL</name>
+          <schema>scheduler</schema>
+          <host>postgres-service:5432</host>
+          <type>PostgreSQL</type>
+          <username>scheduler</username>
+          <password>Er4SFm8frVrNs8BiSrWNqaRqaABcO8FKhrS6y17FBYSlr3tdP4uw0CPGE+BA5opU5IqOVEDmIsknYbzA//vToDnfF9k9G8QpDC01MxL5XBbSX6CgAQ25E/bcKY+gdLehNTrgulb/Fjn3BKhM6ZSY6OOXDX/57/pHt4A8lAVHmaw=:kRQehLIhpn5O0QJq:G4G9Fh0fxLp8aTnWb+LYfUMwIHvzFI4Psi4HiM6eASw2</password>
+          <maxActiveConnections>20</maxActiveConnections>
+          <maxIdleConnections>10</maxIdleConnections>
+          <settings reference="4"/>
+        </database>
+      </settings>
+      <useSSL>false</useSSL>
+      <production>false</production>
+      <licenseUnits>1</licenseUnits>
+      <thresholdRSVersion>latest</thresholdRSVersion>
+      <licenseDistribution>false</licenseDistribution>
+    </cluster>
+  </clusters>
+  <options id="6">
+    <option id="7">
+      <name>USE_LOGDB</name>
+      <value>true</value>
+    </option>
+    <option id="8">
+      <name>RFS_URL</name>
+      <value/>
+    </option>
+    <option id="9">
+      <name>DOCUMENTATION_BASE_URL</name>
+      <value>https://docshield.kofax.com/RPA/</value>
+    </option>
+    <option id="10">
+      <name>MAX_MSGS_ROBOTRUN_THRESHOLD</name>
+      <value>500</value>
+    </option>
+    <option id="11">
+      <name>ROBOSERVER_USERNAME</name>
+      <value/>
+    </option>
+    <option id="12">
+      <name>LOGDB_TYPE</name>
+      <value>PostgreSQL</value>
+    </option>
+    <option id="13">
+      <name>ROBOSERVER_PASSWORD</name>
+      <value/>
+    </option>
+    <option id="14">
+      <name>ROBO_SERVER_ANALYTICS_DAYS_COUNT</name>
+      <value>10</value>
+    </option>
+    <option id="15">
+      <name>EMAIL_SMTP_PORT</name>
+      <value>25</value>
+    </option>
+    <option id="16">
+      <name>EMAIL_SMTP_SERVER</name>
+      <value/>
+    </option>
+    <option id="17">
+      <name>ANALYTICS_DATABASE_SCHEMA</name>
+      <value>Analytics</value>
+    </option>
+    <option id="18">
+      <name>USE_LOCAL_DOCUMENTATION</name>
+      <value>false</value>
+    </option>
+    <option id="19">
+      <name>EMAIL_SMTP_ENCRYPTION</name>
+      <value>None</value>
+    </option>
+    <option id="20">
+      <name>EMAIL_SMTP_USER</name>
+      <value/>
+    </option>
+    <option id="21">
+      <name>ANALYTICS_DATABASE_USERNAME</name>
+      <value>kapow</value>
+    </option>
+    <option id="22">
+      <name>EMAIL_SMTP_PASSWORD</name>
+      <value/>
+    </option>
+    <option id="23">
+      <name>LOGDB_HOST</name>
+      <value>postgres-service:5432</value>
+    </option>
+    <option id="24">
+      <name>PURGE_OFFLINE_RS</name>
+      <value>false</value>
+    </option>
+    <option id="25">
+      <name>EMAIL_SMTP_ID</name>
+      <value>cbc7521b-d7ba-4327-a050-118b6a7fa014</value>
+    </option>
+    <option id="26">
+      <name>LOG_RECORD_DAYS_OF_KEEP_COUNT</name>
+      <value>10</value>
+    </option>
+    <option id="27">
+      <name>ANALYTICS_DATABASE_TYPE</name>
+      <value>Development Database</value>
+    </option>
+    <option id="28">
+      <name>NOTIFICATION_FROM</name>
+      <value/>
+    </option>
+    <option id="29">
+      <name>LOGDB_SCHEMA</name>
+      <value>scheduler</value>
+    </option>
+    <option id="30">
+      <name>USE_ANALYTICS_DATABASE</name>
+      <value>false</value>
+    </option>
+    <option id="31">
+      <name>USE_ROBOSERVER_CREDENTIALS</name>
+      <value>false</value>
+    </option>
+    <option id="32">
+      <name>LOGDB_ID</name>
+      <value>3a4b3bc3-f764-421c-9821-0d27f007c527</value>
+    </option>
+    <option id="33">
+      <name>DAS_PING_INTERVAL</name>
+      <value>8000</value>
+    </option>
+    <option id="34">
+      <name>RFS_USE</name>
+      <value>false</value>
+    </option>
+    <option id="35">
+      <name>ANALYTICS_DATABASE_PASSWORD</name>
+      <value>ehORqJn7vSClhKh630uOCf02jwfb98hQ0EDE8xmxBaJbSgYIYGJ745L0Tf99iYqLBZHZKbA4SIoUvYos5y7pLSm2zlP+KNluoPdfgQCp8+X429JR7ffWCzAzTM6++Dgh/PmSyXWvPDSTwWlTNlrTuMS50dFAvxniw2aNvoag/d8=:cYBqY3IMbkwSKLzJ:8S7+6w6Lgs2ZF3IxvMCrbgm92gmQ</value>
+    </option>
+    <option id="36">
+      <name>LOGDB_USERNAME</name>
+      <value>scheduler</value>
+    </option>
+    <option id="37">
+      <name>ANALYTICS_DATABASE_HOST</name>
+      <value>127.0.0.1</value>
+    </option>
+    <option id="38">
+      <name>LOGDB_PASSWORD</name>
+      <value>axFidAZahi+G2zBppaN72iDrdANnDMMKwMwYLTjdHS7tvRsW/RGu8zPtlt1UkSqZlJI9hkEW1zkmnUEZC7D76SxYX1BtMa58Kxw7U54WXL49oqR0+1uZUhCUPTmJGUgbLpI3stpC1+CjIJ9DHj/D4sOumDr1sab8OGqCVR/rR+E=:LkieZKcnqHNg4rxY:yXxv8SVOflLcFFlWiXGV/0JBiz5sZbvs6IOxfONM3Vpg</value>
+    </option>
+    <option id="39">
+      <name>ENCRYPTER_CHECKSUM</name>
+      <value>aQ0g/4SZDbhPk4KwBFA0fCTYehQe9dzOxXb3rQItU6wWW5rdkAOXTyLFO6tZhT+K0gMN6hcmP5/1ijccC2lpkAxYrEpnMOeFnLXkyiZigKWQqSQOKKkP949fw71GNtcF0V3ecc+c9evcSJPMhX1j7PbvvyZKsXio/SrNF3wN9V0=:0PXACXsd9bJ92HhG:/mg97X1L+r+s0TiSUHNI6XGUujx2b9nqD7FdxqREgfmKfI+H4mGkZtwUf1ns0Q==</value>
+    </option>
+    <option id="40">
+      <name>DOCUMENTATION_RANDOM_STRING</name>
+      <value>ea1ydbmwk9</value>
+    </option>
+  </options>
+  <databaseTypes class="vector" id="41">
+    <databaseType id="42">
+      <name>Oracle Database</name>
+      <driverClass>oracle.jdbc.OracleDriver</driverClass>
+      <urlTemplate>jdbc:oracle:thin:@${ServerName}:${Schema}</urlTemplate>
+      <sqlFlavor>ORACLE_DATABASE</sqlFlavor>
+    </databaseType>
+    <databaseType id="43">
+      <name>Microsoft SQL Server</name>
+      <driverClass>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverClass>
+      <urlTemplate>jdbc:sqlserver://${ServerName};databaseName=${Schema}</urlTemplate>
+      <sqlFlavor>MSSQL</sqlFlavor>
+    </databaseType>
+    <databaseType id="44">
+      <name>MySQL Database</name>
+      <driverClass>com.mysql.jdbc.Driver</driverClass>
+      <urlTemplate>jdbc:mysql://${ServerName}/${Schema}?useUnicode=yes&amp;characterEncoding=UTF-8</urlTemplate>
+      <sqlFlavor>MYSQL</sqlFlavor>
+    </databaseType>
+    <databaseType id="45">
+      <name>IBM DB2 Database</name>
+      <driverClass>com.ibm.db2.jcc.DB2Driver</driverClass>
+      <urlTemplate>jdbc:db2://${ServerName}/${Schema}</urlTemplate>
+      <sqlFlavor>IBM_DB2_DATABASE</sqlFlavor>
+    </databaseType>
+    <databaseType id="46">
+      <name>Development Database</name>
+      <driverClass>org.apache.derby.jdbc.ClientDriver</driverClass>
+      <urlTemplate>jdbc:derby://${ServerName}/${Schema};create=true</urlTemplate>
+      <sqlFlavor>DERBY</sqlFlavor>
+    </databaseType>
+    <databaseType id="47">
+      <name>PostgreSQL</name>
+      <driverClass>org.postgresql.Driver</driverClass>
+      <urlTemplate>jdbc:postgresql://${ServerName}/${Schema}</urlTemplate>
+      <sqlFlavor>POSTGRES</sqlFlavor>
+    </databaseType>
+  </databaseTypes>
+  <users class="vector" id="48">
+    <user id="49">
+      <userName>admin</userName>
+      <lastLogin id="50">2021-10-06 12:39:17.677 UTC</lastLogin>
+      <lastIpAddress>172.20.0.1</lastIpAddress>
+      <loginCount>12</loginCount>
+      <creationDate id="51">2021-09-22 16:14:33.152 UTC</creationDate>
+      <passwordHash>{bcrypt}$2a$10$JqgR5A3lXXxYsB9.t2wyc.KzGL8h2HzKSbz1O9PqZRHrPYmPPxlkq</passwordHash>
+      <adminUser>true</adminUser>
+      <userProperty id="52">
+        <key>nmc.ui.page-table-groups</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_selection","visible":true,"width":50},{"id":"_action2","visible":true,"width":50},{"id":"name","visible":true,"width":372},{"id":"description","visible":true,"width":312},{"id":"numberOfUsers","visible":true,"width":312},{"id":"usedInProjects","visible":true,"width":312}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="53">
+        <key>nmc.ui.page-table-email-accounts</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_selection","visible":true,"width":50},{"id":"_action","visible":true,"width":50},{"id":"name","visible":true,"width":503.33333333333337},{"id":"description","visible":true,"width":443.33333333333337},{"id":"projectId","visible":true,"width":443.33333333333337}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="54">
+        <key>nmc.ui.page-table-databases</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_selection","visible":true,"width":100},{"id":"_action","visible":true,"width":100},{"id":"name","visible":true,"width":160},{"id":"projectName","visible":true,"width":160},{"id":"databaseName","visible":true,"width":100},{"id":"clusterName","visible":true,"width":100}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="55">
+        <key>nmc.ui.page-table-projects</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_selection","visible":true,"width":50},{"id":"_action","visible":true,"width":50},{"id":"name","visible":true,"width":348},{"id":"description","visible":true,"width":288},{"id":"authenticateRest","visible":true,"width":288},{"id":"importedBy","visible":false,"width":100},{"id":"importedAt","visible":false,"width":100},{"id":"roleMappings","visible":true,"width":288},{"id":"serviceClusterName","visible":false,"width":100}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="56">
+        <key>nmc.ui.page-table-RoboRuntimePage</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_action","visible":true,"width":100},{"id":"robotName","visible":true,"width":150},{"id":"server","visible":true,"width":150},{"id":"project","visible":true,"width":150},{"id":"robotUrl","visible":true,"width":150},{"id":"robotLibrary","visible":false,"width":100},{"id":"startTimeClient","visible":true,"width":180},{"id":"executionId","visible":true,"width":150},{"id":"executionStep","visible":true,"width":100},{"id":"executionPath","visible":false,"width":100},{"id":"locationCode","visible":false,"width":100},{"id":"stepExecutionTime","visible":false,"width":100},{"id":"maxExecutedSteps","visible":false,"width":100},{"id":"running","visible":true,"width":100},{"id":"kcuPointCost","visible":false,"width":100},{"id":"kcuWaitNanos","visible":false,"width":100},{"id":"loadedBytes","visible":false,"width":100},{"id":"maxObjectsReturned","visible":false,"width":100},{"id":"maxRuntime","visible":false,"width":100},{"id":"timeOfLastExtractedValue","visible":false,"width":100},{"id":"emailsSent","visible":false,"width":100},{"id":"stopping","visible":false,"width":100},{"id":"outputCount","visible":false,"width":100},{"id":"executedSteps","visible":false,"width":100},{"id":"stopIfConnectionLost","visible":false,"width":100},{"id":"stopOnAPIException","visible":false,"width":100}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="57">
+        <key>nmc.ui.user-settings-language</key>
+        <value>"en"</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="58">
+        <key>nmc.ui.page-table-robotMessages</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":false,"orderBy":"time"},"columns":[{"id":"_action","visible":true,"width":100},{"id":"time","visible":true,"width":180},{"id":"severity","visible":true,"width":160},{"id":"message","visible":true,"width":179},{"id":"messageDetails","visible":true,"width":100},{"id":"location","visible":true,"width":100},{"id":"stepName","visible":true,"width":100},{"id":"locationCode","visible":true,"width":100},{"id":"executionId","visible":true,"width":250},{"id":"robotName","visible":true,"width":250}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="59">
+        <key>nmc.ui.page-table-users</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_selection","visible":true,"width":50},{"id":"_action","visible":true,"width":50},{"id":"userName","visible":true,"width":161.42857142857144},{"id":"fullName","visible":true,"width":161.42857142857144},{"id":"emailAddress","visible":true,"width":161.42857142857144},{"id":"loginCount","visible":true,"width":161.42857142857144},{"id":"lastLogin","visible":true,"width":161.42857142857144},{"id":"lastIpAddress","visible":true,"width":161.42857142857144},{"id":"groupNames","visible":true,"width":161.42857142857144}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="60">
+        <key>nmc.ui.page-table-robots</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_selection","visible":true,"width":100},{"id":"_action","visible":true,"width":100},{"id":"id","visible":false,"width":100},{"id":"folder","visible":true,"width":100},{"id":"name","visible":true,"width":160},{"id":"type","visible":true,"width":100},{"id":"projectName","visible":true,"width":160},{"id":"tags","visible":true,"width":100},{"id":"version","visible":true,"width":100},{"id":"byteSize","visible":true,"width":100},{"id":"scheduleNames","visible":true,"width":100},{"id":"inputTypes","visible":true,"width":100},{"id":"returnedTypes","visible":true,"width":100},{"id":"storedTypes","visible":true,"width":100},{"id":"triggers","visible":true,"width":100},{"id":"labels","visible":true,"width":100},{"id":"snippetsUsed","visible":true,"width":100},{"id":"mappings","visible":true,"width":100},{"id":"createdBy","visible":false,"width":100},{"id":"modifiedBy","visible":false,"width":100},{"id":"commitMessage","visible":false,"width":100},{"id":"revisionNumber","visible":false,"width":100},{"id":"lastModified","visible":true,"width":100},{"id":"importedBy","visible":true,"width":100},{"id":"importedAt","visible":true,"width":100},{"id":"rl2robotsReferenced","visible":true,"width":100}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+      <userProperty id="61">
+        <key>nmc.ui.page-table-robotMessages</key>
+        <value>{"page":{"page":0,"pageSize":10,"asc":true,"orderBy":null},"columns":[{"id":"_action","visible":true,"width":100},{"id":"time","visible":true,"width":180},{"id":"severity","visible":true,"width":160},{"id":"message","visible":true,"width":179},{"id":"messageDetails","visible":true,"width":100},{"id":"location","visible":true,"width":100},{"id":"stepName","visible":true,"width":100},{"id":"locationCode","visible":true,"width":100},{"id":"executionId","visible":true,"width":250},{"id":"robotName","visible":true,"width":250}]}</value>
+        <isNull>false</isNull>
+        <user reference="49"/>
+      </userProperty>
+    </user>
+  </users>
+  <groups class="vector" id="62">
+    <group id="63">
+      <name>KappletAdmins</name>
+      <description>create and edit Kapplets</description>
+    </group>
+    <group id="64">
+      <name>Developers</name>
+      <description>build robots</description>
+    </group>
+    <group id="65">
+      <name>Synchronizers</name>
+      <description>upload and download robots to a Git Repository</description>
+    </group>
+    <group id="66">
+      <name>KappletUsers</name>
+      <description>run Kapplets</description>
+    </group>
+    <group id="67">
+      <name>Roboservers</name>
+      <description>run the robots</description>
+    </group>
+    <group id="68">
+      <name>RPA Administrators</name>
+      <description>Users in this group have administrator rights for all projects</description>
+    </group>
+  </groups>
+  <globalKappletProperties class="vector" id="69"/>
+  <jars class="vector" id="70"/>
+  <ideClusterSpecId>-1</ideClusterSpecId>
+  <ideDasClusterSpecId>-1</ideDasClusterSpecId>
+  <remoteHubMappings class="vector" id="71"/>
+  <processDiscoveryAnalyzer id="72">
+    <analyzerDatabaseSettings id="73">
+      <dbConnectionTimeoutSeconds>60</dbConnectionTimeoutSeconds>
+      <dbType>MySQL Database</dbType>
+      <dbAddress>localhost</dbAddress>
+      <dbPort>3306</dbPort>
+      <dbSchema>analytics_data</dbSchema>
+      <dbUserName>analyzer</dbUserName>
+      <dbUserPassword/>
+      <dbAdminName>root</dbAdminName>
+      <dbAdminPassword/>
+    </analyzerDatabaseSettings>
+    <readBatchSize>1000</readBatchSize>
+    <writeBatchSize>100</writeBatchSize>
+    <scheduleMode>specific_times</scheduleMode>
+    <executeAtSpecificTimes>1:00</executeAtSpecificTimes>
+    <executionPeriodHours>1</executionPeriodHours>
+    <clusterMasterAddress>localhost</clusterMasterAddress>
+    <clusterNetworkPattern/>
+    <clusterMasterPort>7077</clusterMasterPort>
+    <clusterMasterWebUiPort>9100</clusterMasterWebUiPort>
+    <clusterWorkerWebUiPort>9101</clusterWorkerWebUiPort>
+    <clusterMasterMemory>4.0</clusterMasterMemory>
+    <clusterWorkerMemory>4.0</clusterWorkerMemory>
+  </processDiscoveryAnalyzer>
+  <processDiscoveryGroups class="vector" id="74"/>
+  <ktaConfigurations class="vector" id="75"/>
+  <cyberArkKeyStores class="vector" id="76"/>
+  <cyberArkConfiguration id="77">
+    <host/>
+    <port>1</port>
+    <certificateName/>
+    <iisApplicationName>AIMWebService</iisApplicationName>
+  </cyberArkConfiguration>
+  <mailServerConfigurations class="vector" id="78"/>
+  <mailServerAttributes class="vector" id="79"/>
+</globalConfiguration>
