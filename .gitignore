@@ -5,6 +5,8 @@
 !*.md
 !rpa_aws.cmd
 
+!AWS/
+
 !docker/
 
 docker/*
