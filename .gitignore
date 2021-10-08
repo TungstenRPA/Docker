@@ -6,6 +6,7 @@
 !rpa_aws.cmd
 
 !AWS/
+AWS/aws.env
 
 !docker/
 
