@@ -9,15 +9,16 @@ networks:
 
 services:
   postgres-service:
-    image: postgres:10
+    image: 022336740566.dkr.ecr.eu-central-1.amazonaws.com/postgres:10
     environment:
       - POSTGRES_USER=scheduler
       - POSTGRES_PASSWORD=schedulerpassword
       - POSTGRES_DB=scheduler
     networks:
       - net
-    ports:
-      - 5432:5432
+    # Open this port to inspect the Postgres database.  
+    # ports:
+    #   - 5432:5432
   managementconsole-service:
     build:
       context: .
@@ -66,7 +67,8 @@ services:
       - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
       - SETTINGS_ENTRY_VALUE_4=PostgreSQL
       - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
-      - CONFIG_SECURITY_JDBCDRIVERUPLOAD=ANY_HOST
+      # - CONFIG_SECURITY_JDBCDRIVERUPLOAD=ANY_HOST
+
       # if you want to log to a separate database than MC's database 'scheduler' you'll need a second container.
       - SETTINGS_ENTRY_VALUE_5=scheduler
       - SETTINGS_ENTRY_KEY_6=LOGDB_PASSWORD
@@ -76,6 +78,16 @@ services:
       - SETTINGS_ENTRY_VALUE_7=http://PF1XACSPdavid:8080
     networks:
       - net
+#AWS Container resources
+# https://docs.docker.com/cloud/ecs-compose-features/#container-resources
+# https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpu: 0.25
+    #       memory: 2Gb
+
   roboserver-service:
     build:
       context: .
@@ -95,3 +107,19 @@ services:
       - ROBOSERVER_ENABLE_SOCKET_SERVICE=true
       - ROBOSERVER_SERVER_NAME=Roboserver
       - WRAPPER_MAX_MEMORY=2048
+
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpu: 0.25
+    #       memory: 2Gb
+
+# This is to add https to the load balancer on AWS
+# https://docs.docker.com/cloud/ecs-integration/#setting-ssl-termination-by-load-balancer
+#x-aws-cloudformation:
+#  Resources:
+#    WebappTCP80Listener:
+#      Properties:
+#        Certificates:
+#          - CertificateArn: "arn:aws:acm:certificate/123abc"
+#        Protocol: HTTPS
