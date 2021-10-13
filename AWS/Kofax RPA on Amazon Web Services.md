@@ -57,6 +57,16 @@ ECS is Amazon's container orchestration system, like Kubernetes.
 * Click on the **Task Definition** of the Management Console and scroll down and you will see how much RAM and CPU has been allocated to it.  
 ![image](https://user-images.githubusercontent.com/47416964/133256234-ea3bc6cf-4362-4321-926e-af64fc20c9e4.png)
 
+## Connecting to a shell on a Docker instance in ECS
+
+* [Install](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) **Session Manager Plugin** for AWS CLI
+* download AWS Copilot in an elevated PowerShell session
+```powershell
+ 	Invoke-WebRequest -OutFile 'C:\Program Files\copilot.exe' https://github.com/aws/copilot-cli/releases/latest/download/copilot-windows.exe
+```
+* set path=%path%;%PROGRAMFILES%\Amazon\SessionManagerPlugin\bin\
+* copilot app init
+
 # Configuring HTTPS
 ## Create Load Balancer
 https://techsparx.com/software-development/docker/docker-ecs/load-balancer/https.html  
@@ -99,7 +109,14 @@ aws elbv2 create-load-balancer --name kofaxrpa --scheme internet-facing --type a
 
 
 
+# Cloud Formation Template
+needed to put on Amazon Store.
 
+# AWS Cloud Development Kit
+https://aws.amazon.com/cdk
+Cloud Front distribution network.
+
+VPC= Virtual Private Cloud  - Isolation in AWS Cloud. Up to 5 per region.
 
 # Tweaking, Config
 [Add HTTPS to Load Balancer](https://docs.docker.com/cloud/ecs-integration/#setting-ssl-termination-by-load-balancer)  *currently not working...*  
@@ -139,11 +156,13 @@ This gives about 0.05 USD / hour, which is about 37$/Month for 24/7 robot runnin
   * [x] Load **NewsMagazine.robot**, which writes to MC data database and usable in Kapplets
   * [x] Build Backup.zip from source robot files. *This makes us future safe when editing the backup package. We can now add robots and configs in a trackable way*
 * [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
+* [ ] Create Cloud Formation Template  (CFT) for Kofax RPA using typescript
+  * [ ] Add HTTPS
+* [ ] View CFT in CF Designer online
+* [ ] Add roboserver scaling to CFT
 * [ ] Add to Amazon Market Place
-* [ ] Add HTTPS
 * [ ] Change Admin password 
 * [ ] ensure roboserver runs with new password
-* [ ] Scale roboservers by CPU %.
 * [ ] Deploy with Wizard from Amazon Marketplace.  
 * [ ] Upload postgres driver to MC (it goes to Postgres table mc_jar_file) http://localhost:8080/api/mc/setting/Database/Drivers/add  Do i really need this?  
 Accept-Encoding: gzip, deflate 
@@ -152,7 +171,7 @@ Content-Disposition: form-data; name="file"; filename="postgresql-42.2.19.jar"
 Content-Type: application/octet-stream
 ```
 * [ ] Make sure that Design Studio can download Postgres JDBC driver from MC.  
-![](img/2021-09-29-15-25-02.png)
+![](../img/2021-09-29-15-25-02.png)
 ## BLOCKING
 * Roboserver won't connect if failed to login twice. with Benjamin  
 *workaround: wait for MC to restore backup before launching roboserver, by curling if roboserver user can log in*
@@ -190,29 +209,11 @@ Content-Type: application/octet-stream
 * where are all the roboserver environment variables? docker/Readme.md
 
 # Ask AWS
+* put on amazon store - another specialist will show me how to put cloud formation template onto Amazon Store.
+* adding database
+* https xyz. - CloudFront. workaround. Load Balancer certificate for Cloud Front. 
+* scaling roboserver.
+
+
 * how to shutdown modules for enduser - database, rfs, kapplets, synchronizer
 
-## Roboserver Environment Parameters
-Download http://java-decompiler.github.io/ and JDK to view roboserverConfigurator.jar. Read MANIFEST.MF to find the entry point. There you will find **configurationfilesRoboserver.XML**
-
-| property | default | Description |
-| -------- | ------- | ----------- |
-sec_allow_file_system_access|false|Allow file system access.
-sec_allow_connectors|false|Allow connectors to run.
-sec_accept_jdbc_drivers|false|Access JDBC drivers sent as part of requests.
-sec_log_http_traffic|false|Activate an (audit) log for all HTTP traffic.
-enable_socket_service|false|Enable the socket service.
-port|50000|Port for the socket service.
-enable_ssl_socket_service|false|Enable the SSL socket service.
-ssl_port|50001|Port for the SSL socket service.
-enable_mc_registration|false|Register with a Management Console.
-mc_URL||The URL for the Management Console to register with.
-cluster||The cluster to join, when registering with the Management Console.
-mc_username||Username to use, when registering with the Management Console.
-mc_password||Password to use, when registering with the Management Console.
-external_host||The external host name at which the Management Console can reach this server.
-external_port|0|The external port at which the Management Console can reach this server.
-enable_jms_service|false|enable JMS for communication with the Management Console
-broker_url|false|The JMS broker URL
-disallow_documentation_requests|false|Blocks RoboServer from handling Documentation Requests.
-server_name||The server name used for statistics.
