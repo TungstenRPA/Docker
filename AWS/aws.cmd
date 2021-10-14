@@ -15,15 +15,25 @@ docker tag roboserver:%RPA_VERSION% %registry%/roboserver:%RPA_VERSION%
 @REM Docker logs into AWS
 aws ecr get-login-password --region %AWS_Region% | docker login --username AWS --password-stdin %registry%
 
+@REM  is this needed????
+aws ecr configure --cluster test --default-launch-type FARGATE --config-name test --region eu-west-1
+
+@REM Create private Repositories in AWS ECR (Elastic Container Registry)
+@REM https://docs.aws.amazon.com/cli/latest/reference/ecr/create-repository.html
+aws ecr create-repository --repository-name rpa/managementconsole
+aws ecr create-repository --repository-name rpa/roboserver
+
 @REM Upload Docker images to Amazon Elastic Container Repository
 docker push %registry%/managementconsole:latest
 docker push %registry%/roboserver:latest
 
+docker context create ecs myecscontext
 docker context use aws
 
-docker compose --env-file .env --env-file aws\aws.env convert
+docker compose --env-file aws\aws.env convert
 @REM Deploy Kofax RPA to AWS and start it
-docker compose .env --env-file aws\aws.env up 
+docker compose  --env-file aws\aws.env build
+docker compose  --env-file aws\aws.env up 
 @REM docker compose down
 @REM docker compose logs
 @REM this gives the MC URL
