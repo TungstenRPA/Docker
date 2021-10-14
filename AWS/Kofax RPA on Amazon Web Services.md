@@ -39,7 +39,7 @@ With [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/A
 ## Create a Docker Context for AWS
 Docker Desktop has a **default** context on the local machine. See it by typing **docker context ls**.  
 ![image](https://user-images.githubusercontent.com/47416964/133095222-911b038f-1fc3-4c8a-8c6e-ccd3dc09fae8.png)
-* Create a new Docker Context on your computer for *ecs* by typing **docker context ecs myecscontext**
+* Create a new Docker Context on your computer for *ecs* by typing **docker context create ecs myecscontext**
 * Make it the default context by typing **docker context use myecscontext**  
 After this Docker Desktop will be working with ECS on AWS and not Docker Desktop.  
 * login to ECR (Elastic Container Registry) so that you can get the images from Amazon

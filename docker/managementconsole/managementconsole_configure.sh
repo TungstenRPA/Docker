@@ -64,6 +64,7 @@ MC_Restore()
     Backupfile=$1;
     echo MC Restore from Backupfile=${Backupfile}
     MC_REST POST "/secure/Restore" "-F fileField=@${Backupfile} -F restoreMode=Reset"
+    echo MC Restore complete
 }
 MC_Cluster_GetId()
 {
