@@ -6,6 +6,7 @@ set registry=%AWS_Account%.dkr.ecr.%AWS_Region%.amazonaws.com
 docker context use default
 
 @REM Docker compose build
+docker compose  --env-file aws\aws.env build
 
 docker tag managementconsole:%RPA_VERSION% %registry%/managementconsole:latest
 docker tag managementconsole:%RPA_VERSION% %registry%/managementconsole:%RPA_VERSION%
@@ -32,9 +33,9 @@ docker context use aws
 
 docker compose --env-file aws\aws.env convert
 @REM Deploy Kofax RPA to AWS and start it
-docker compose  --env-file aws\aws.env build
-docker compose  --env-file aws\aws.env up 
-@REM docker compose down
-@REM docker compose logs
+docker compose  --env-file aws\aws.env up
+@REM bring down container
+docker compose down
 @REM this gives the MC URL
 docker compose ps
+docker compose logs
