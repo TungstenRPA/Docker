@@ -72,6 +72,8 @@ MC_Add_User "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"${DEV_FULLNAME}\"" "\"${D
 MC_Add_User "\"${ROBOSERVER_MC_USERNAME}\"" "\"${ROBOSERVER_MC_PASSWORD}\"" "'Roboserver'" "roboserver@rpa.com" '"Roboservers"'
 MC_Add_User "\"${SYNCH_MC_USERNAME}\"" "\"${SYNCH_MC_PASSWORD}\"" "'Synchronizer'" "synch@rpa.com" '"Synchronizers"'
 
+#Queue test robot to run it
+curl =u -u ${USERNAME}:${PASSWORD} -X POST "${MC}/api/mc/tasks/queueRobot" -H  "accept: */*" -H  "Accept-Language: en" -H  "Content-Type: application/json" -d "{  \"priority\": \"MEDIUM\",  \"robotInfo\": {    \"projectName\": \"Default project\",    \"robotName\": \"Tutorials/NewsMagazine.robot\"  },  \"robotInputConfig\":{  \"inputObjects\": []},  \"stopOnError\": true,  \"timeout\": 600}"
 
 touch /usr/local/tomcat/bin/configured
 echo Management Console configured with users, groups and roles
