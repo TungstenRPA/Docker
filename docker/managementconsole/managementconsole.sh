@@ -27,4 +27,8 @@ fi
 echo Spawning MC config to create users and groups
 managementconsole_configure.sh &
 
-catalina.sh $@
+exec catalina.sh $@
+
+
+# the next command makes the container easier to kill because it will respond to SIGTERM https://aws.amazon.com/blogs/containers/graceful-shutdowns-with-ecs/
+exec "$@"
