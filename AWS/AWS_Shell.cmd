@@ -1,4 +1,6 @@
+@rem https://aws.amazon.com/blogs/containers/new-using-amazon-ecs-exec-access-your-containers-fargate-ec2/
 @REM download https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe
+
 set DEMO_NAME=ecs-exec-demo
 set CLUSTER_NAME=%DEMO_NAME%-cluster
 
