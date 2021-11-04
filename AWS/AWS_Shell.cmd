@@ -1,8 +1,10 @@
 @rem https://aws.amazon.com/blogs/containers/new-using-amazon-ecs-exec-access-your-containers-fargate-ec2/
 @REM download https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe
-
-set DEMO_NAME=ecs-exec-demo
-set CLUSTER_NAME=%DEMO_NAME%-cluster
+@rem set CONTAINER_NAME=nginc
+set DEMO_NAME=RPA
+aws ecs list-clusters
+@set CLUSTER_NAME=%DEMO_NAME%-cluster
+set cluster_name=docker
 
 
 
@@ -60,16 +62,15 @@ aws ecs run-task ^
 @REM Get the TaskID from the JSON output
 set TASK_ID=
 
-@REM Check that it is running
-aws ecs describe-tasks ^
-    --cluster %CLUSTER_NAME% ^
-    --region %AWS_REGION% ^
-    --tasks %TASK_ID%
+aws ecs list-tasks --cluster %CLUSTER_NAME%
 
-aws ecs execute-command  ^
-    --region %AWS_REGION% ^
-    --cluster %CLUSTER_NAME% ^
-    --task %TASK_ID% ^
-    --container nginx ^
-    --command "/bin/bash" ^
-    --interactive
+@REM Check that it is running
+aws ecs describe-tasks --cluster %CLUSTER_NAME% --region %AWS_REGION% --tasks %TASK_ID%
+
+set CONTAINER-NAME=managementconsole-service
+aws ecs execute-command --region %AWS_REGION% --cluster %CLUSTER_NAME% --task %TASK_ID% --container %CONTAINER-NAME% --command "/bin/bash" --interactive
+
+@REM list all services on a cluster (docker instances)
+aws ecs list-services --region %AWS_region% --cluster docker
+@REM describe a service on a cluster
+aws ecs describe-services --region %AWS_region% --cluster %CLUSTER_NAME% --services docker-ManagementconsoleserviceService-84aGt9ik6776
