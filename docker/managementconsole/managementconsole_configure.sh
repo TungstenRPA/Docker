@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Add users, groups to MC. Change admin password, configure default project roles and upload robots.
 MC=http://localhost:8080
-USERNAME=admin
-PASSWORD=admin
+USERNAME=${MC_ADMIN_NAME}
+PASSWORD=${MC_ADMIN_PASSWORD}
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 echo SCRIPT_DIR=${SCRIPT_DIR}
 #Wait for Management Console to load
