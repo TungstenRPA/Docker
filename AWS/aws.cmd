@@ -41,3 +41,7 @@ docker compose down
 @REM this gives the MC URL
 docker compose ps
 docker compose logs
+
+
+@REM rebuild only MC, not roboserver nor postgress
+docker compose --env-file aws\aws.env down && docker compose --env-file aws\aws.env build managementconsole-service && docker compose --env-file aws\aws.env up
