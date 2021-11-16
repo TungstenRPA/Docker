@@ -5,8 +5,6 @@ USERNAME=${MC_ADMIN_NAME}
 PASSWORD=${MC_ADMIN_PASSWORD}
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 echo SCRIPT_DIR=${SCRIPT_DIR}
-echo pwd
-pwd
 #Wait for Management Console to load
 MC_Wait()
 {
