@@ -209,6 +209,14 @@ MC_Add_User "\"${SYNCH_MC_USERNAME}\"" "\"${SYNCH_MC_PASSWORD}\"" "'Synchronizer
 # MC_Add_Robot 13 "/samplerobots/" "abc.robot" ""
 # MC_Add_Project ...
 
+# Queue the demo robot so that it runs and populates the object database with data and also show robot run messages
+
+
+echo "{\"priority\":\"MEDIUM\",\"robotInfo\":{\"projectName\":\"Default project\",\"robotName\":\"Tutorials/NewsMagazine.robot\"},\"robotInputConfig\":{\"inputObjects\":[]},\"stopOnError\":true,\"timeout\":600}" >.json
+curl -u ${USERNAME}:${PASSWORD} -X POST "${MC}/api/mc/tasks/queueRobot" -H  "Content-Type: application/json" -d @.json
+rm .json || true
+echo Queued robot Tutorials/NewsMagazine.robot
+
 touch /usr/local/tomcat/bin/configured
 echo Management Console configured with users, groups and roles
 
