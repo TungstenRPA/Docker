@@ -22,4 +22,9 @@ if [ ! -f "${KAPOW_HOME}/data/Configuration/roboserver.settings" ]; then
    ${KAPOW_HOME}/jre/bin/java -jar /roboServerConfigurator.jar
 fi
 
-${KAPOW_HOME}/bin/RoboServer $@
+exec ${KAPOW_HOME}/bin/RoboServer $@
+
+# potential solution to allow fast killing of roboserver on ecs
+#exec ${KAPOW_HOME}/bin/RoboServer $@
+# the next command makes the container easier to kill because it will respond to SIGTERM https://aws.amazon.com/blogs/containers/graceful-shutdowns-with-ecs/
+#exec "$@"

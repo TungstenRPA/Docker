@@ -29,6 +29,20 @@ docker tag managementconsole:%RPA_VERSION% %registry%/managementconsole:%RPA_VER
 docker tag roboserver:%RPA_VERSION% %registry%/roboserver:latest
 docker tag roboserver:%RPA_VERSION% %registry%/roboserver:%RPA_VERSION%
 docker images
+=======
+@REM docker list tagged images
+docker images --filter "dangling=false"
+
+
+@REM  is this needed????
+aws ecr configure --cluster test --default-launch-type FARGATE --config-name test --region eu-west-1
+
+@REM Create private Repositories in AWS ECR (Elastic Container Registry)
+@REM https://docs.aws.amazon.com/cli/latest/reference/ecr/create-repository.html
+aws ecr create-repository --repository-name rpa/managementconsole
+aws ecr create-repository --repository-name rpa/roboserver
+
+@REM Upload Docker images to Amazon Elastic Container Repository
 docker push %registry%/managementconsole:latest
 docker push %registry%/roboserver:latest
 docker push %registry%/managementconsole:%RPA_VERSION%
@@ -43,3 +57,7 @@ docker compose down
 @REM this gives the MC URL
 docker compose ps
 docker compose logs
+
+
+@REM rebuild only MC, not roboserver nor postgress
+docker compose --env-file aws\aws.env down && docker compose --env-file aws\aws.env build managementconsole-service && docker compose --env-file aws\aws.env up

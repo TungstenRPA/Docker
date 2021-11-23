@@ -21,6 +21,24 @@ MC_REST()
         return 1
     fi
 }
+MC_Change_Password()
+{
+    echo Change password $@
+    un=$1; oldPassword=$2; newPassword=$3
+    echo \{\"newPassword\":\"${newPassword}\",\"sendEmail\":false,\"username\":\"${un}\",\"oldPassword\":\"${oldPassword}\"\} > .json
+    MC_REST PUT "/api/mc/user/resetPassword" "-H Content-Type:application/json" "--data @.json"
+}
+MC_User_Exists()
+{
+    echo Check User ${USERNAME} exists 
+    curl -s -u ${USERNAME}:${PASSWORD} "${MC}/api/mc/user/page" | grep '"${USERNAME}"' || return 1
+}
+
+MC_Group_Exists()
+{
+    echo Check User ${GROUPNAME} exists 
+    curl -s -u ${GROUPNAME}:${PASSWORD} "${MC}/api/mc/user/page" | grep '"${GROUPNAME}"' || return 1
+}
 MC_Add_User()
 {
     eval un="$1"; eval pw="$2"; eval fullName="$3"; eval email="$4"; groupNames="$5"
