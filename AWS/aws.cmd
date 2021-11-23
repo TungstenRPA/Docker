@@ -1,7 +1,8 @@
-set RPA_VERSION=11.2.0.2
+set RPA_VERSION=11.2.0.4
 
 set AWS_Region=eu-central-1
 set AWS_Account=022336740566
+@REM Find my Enterprise Container Registry for Docker on Amazon
 set registry=%AWS_Account%.dkr.ecr.%AWS_Region%.amazonaws.com
 @REM Docker logs into AWS
 aws ecr get-login-password --region %AWS_Region% | docker login --username AWS --password-stdin %registry%
@@ -16,7 +17,7 @@ docker tag managementconsole:%RPA_VERSION% %registry%/managementconsole:latest
 docker tag managementconsole:%RPA_VERSION% %registry%/managementconsole:%RPA_VERSION%
 docker tag roboserver:%RPA_VERSION% %registry%/roboserver:latest
 docker tag roboserver:%RPA_VERSION% %registry%/roboserver:%RPA_VERSION%
-
+docker images
 
 @REM  is this needed????
 aws ecr configure --cluster test --default-launch-type FARGATE --config-name test --region eu-west-1

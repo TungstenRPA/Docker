@@ -56,8 +56,9 @@ while :
 
 echo Zipping Backup package
 
-cd ${KAPOW_HOME}/backup
+pushd ${KAPOW_HOME}/backup
 zip -r backup.zip *
+popd
 echo Backup package zipped
 while :
     do
@@ -67,13 +68,34 @@ while :
     done
 echo Backup restored to MC
 
+# Wait until there is only 1 user - the admin user.
+while :
+    do
+        curl -s -u ${USERNAME}:${PASSWORD} "${MC}/api/mc/user/page" | grep -c '"count":1,"page"' && break
+        echo not 1 users
+        sleep 1
+    done
+echo all users deleted
+
+#Wait until all 6 groups are created
+while :
+    do
+        curl -s -u ${USERNAME}:${PASSWORD} "${MC}/api/mc/user/group/page" | grep '"count":6,"page"' && break
+        echo not 6 groups
+        sleep 1
+    done
+echo 6 groups created
 echo Adding Users
+echo Adding user ${DEV_NAME}
 MC_Add_User "\"${DEV_NAME}\"" "\"${DEV_PASSWORD}\"" "\"${DEV_FULLNAME}\"" "\"${DEV_EMAIL}"\" '"RPA Administrators","Developers","KappletAdmins","KappletUsers"'
+echo Adding user roboserver
 MC_Add_User "\"${ROBOSERVER_MC_USERNAME}\"" "\"${ROBOSERVER_MC_PASSWORD}\"" "'Roboserver'" "roboserver@rpa.com" '"Roboservers"'
+echo Adding user synch
 MC_Add_User "\"${SYNCH_MC_USERNAME}\"" "\"${SYNCH_MC_PASSWORD}\"" "'Synchronizer'" "synch@rpa.com" '"Synchronizers"'
 
 #Queue test robot to run it
 curl =u -u ${USERNAME}:${PASSWORD} -X POST "${MC}/api/mc/tasks/queueRobot" -H  "accept: */*" -H  "Accept-Language: en" -H  "Content-Type: application/json" -d "{  \"priority\": \"MEDIUM\",  \"robotInfo\": {    \"projectName\": \"Default project\",    \"robotName\": \"Tutorials/NewsMagazine.robot\"  },  \"robotInputConfig\":{  \"inputObjects\": []},  \"stopOnError\": true,  \"timeout\": 600}"
-
+rm .json || true
+echo Queued robot Tutorials/NewsMagazine.robot
 touch /usr/local/tomcat/bin/configured
 echo Management Console configured with users, groups and roles
