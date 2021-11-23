@@ -46,13 +46,6 @@ MC_Add_User()
     echo \{\"emailAddress\":\"${email}\",\"fullName\":\"${fullName}\",\"password\":\"${pw}\",\"userName\":\"${un}\",\"groupNames\":\[${groupNames}\]\} > .json
     MC_REST POST "/api/mc/user/add" "-H Content-Type:application/json" "--data @.json"
 }
-MC_Add_Group()
-{
-    # {"id":null,"name":"Roboservers","description":"Roboservers","userNames":["david"]}
-    group=$1; description=$2; users=$3
-    echo \{\"id\":null,\"name\":\"${group}\",\"description\":\"${description}\",\"userNames\":\[${users}\]\} > .json
-    MC_REST POST "/api/mc/user/group/add" "-H Content-Type:application/json" "--data @.json" 
-}
 MC_Restore()
 {
     #curl -u ${USERNAME}:${PASSWORD} -F fileField=@${FILEPATH}${FILENAME} -F restoreMode=Reset
