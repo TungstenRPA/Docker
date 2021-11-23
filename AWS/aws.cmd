@@ -16,6 +16,8 @@ docker tag managementconsole:%RPA_VERSION% %registry%/managementconsole:latest
 docker tag managementconsole:%RPA_VERSION% %registry%/managementconsole:%RPA_VERSION%
 docker tag roboserver:%RPA_VERSION% %registry%/roboserver:latest
 docker tag roboserver:%RPA_VERSION% %registry%/roboserver:%RPA_VERSION%
+@REM list tagged images
+docker images --filter "dangling=false"
 
 
 @REM  is this needed????
