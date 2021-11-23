@@ -8,7 +8,7 @@ set cluster_name=docker
 
 
 
-@REM get the vpc
+@REM get the vpc=Virtual Private Cloud
 FOR /F "tokens=*" %%g IN ('aws ec2 describe-vpcs --query Vpcs[].VpcId --output text') do (SET VPC_ID=%%g)
 aws ec2 describe-subnets --filters "Name=vpc-id,Values=%VPC_ID%
 @REM vpc-05c65294412c0a29f
@@ -16,6 +16,7 @@ aws ec2 describe-subnets --filters "Name=vpc-id,Values=%VPC_ID%
 @REM subnet-08950d7e44aca34e5,
 @REM subnet-0ddc59f3538e272ff
 
+@REM KMS=Key Management System
 set PUBLIC_SUBNET1=subnet-0618b69e1e72ba159
 set PUBLIC_SUBNET2=subnet-08950d7e44aca34e5
 set PUBLIC_SUBNET3=subnet-0ddc59f3538e272ff
@@ -60,17 +61,51 @@ aws ecs run-task ^
     --tags key=environment,value=production ^
     --region %AWS_REGION%
 @REM Get the TaskID from the JSON output
-set TASK_ID=
+set TASK_ARN=
 
 aws ecs list-tasks --cluster %CLUSTER_NAME%
 
 @REM Check that it is running
-aws ecs describe-tasks --cluster %CLUSTER_NAME% --region %AWS_REGION% --tasks %TASK_ID%
+aws ecs describe-tasks --cluster %CLUSTER_NAME% --region %AWS_REGION% --tasks %TASK_ARN%
+
+
+@REM update the task definition to include the ARN of the IAM role you just created in the "taskRoleArn" field. 
+
+
+set TASK_DEFINITION_ARN=arn:aws:ecs:eu-central-1:022336740566:task-definition/docker-managementconsole-service:15
+aws ecs update-service --service %SERVICE_NAME% --task-definition %TASKDEFINITION_ARN% --cluster %CLUSTER_NAME%
 
 set CONTAINER-NAME=managementconsole-service
-aws ecs execute-command --region %AWS_REGION% --cluster %CLUSTER_NAME% --task %TASK_ID% --container %CONTAINER-NAME% --command "/bin/bash" --interactive
+aws ecs execute-command --region %AWS_REGION% --cluster %CLUSTER_NAME% --task %TASK_ARN% --container %CONTAINER-NAME% --command "/bin/bash" --interactive
 
+
+
+set SERVICE_NAME=docker-ManagementconsoleserviceService-84aGt9ik6776
 @REM list all services on a cluster (docker instances)
 aws ecs list-services --region %AWS_region% --cluster docker
 @REM describe a service on a cluster
-aws ecs describe-services --region %AWS_region% --cluster %CLUSTER_NAME% --services docker-ManagementconsoleserviceService-84aGt9ik6776
+aws ecs describe-services --region %AWS_region% --cluster %CLUSTER_NAME% --services %SERVICE_NAME%
+
+@REM Allow MC to have SSN access
+
+@REM IAM=Identity and Access Management
+set ROLE_NAME=AllowAssumeRole
+set POLICY_NAME=AllowChannelAccess
+
+echo { "Version": "2012-10-17", "Statement": [ { "Sid": "", "Effect": "Allow", "Principal": { "Service": "ecs-tasks.amazonaws.com" }, "Action": "sts:AssumeRole" } ] } > assumerole.json
+aws iam create-role --role-name %ROLE_NAME% --assume-role-policy-document file://assumerole.json
+set ROLE_ARN=arn:aws:iam::022336740566:role/AllowAssumeRole
+echo { "Version": "2012-10-17", "Statement": [ { "Effect": "Allow", "Action": [ "ssmmessages:CreateControlChannel", "ssmmessages:CreateDataChannel", "ssmmessages:OpenControlChannel", "ssmmessages:OpenDataChannel" ], "Resource": "*" } ] } >> policy.json
+aws iam create-policy --policy-name %POLICY_NAME% --policy-document file://policy.json 
+set POLICY_ARN=arn:aws:iam::022336740566:policy/AllowChannelAccess
+aws iam attach-role-policy --policy-arn %POLICY_ARN% --role-name %ROLE_NAME%
+
+@REM Andrew will send me how to create a new task definition with the policy_arn.
+@REM https://docs.aws.amazon.com/cli/latest/reference/ecs/register-task-definition.html
+
+
+aws ecs update-service --service %SERVICE_NAME% --enable-execute-command --cluster %CLUSTER_NAME%
+
+@REM stop and restart a task
+aws ecs stop-task  --cluster %CLUSTER_NAME% --region %AWS_REGION%  --task %TASK_ARN%
+aws ecs start-task  --cluster %CLUSTER_NAME% --region %AWS_REGION%  --task %TASK_ARN%
