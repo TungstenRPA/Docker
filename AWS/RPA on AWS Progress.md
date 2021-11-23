@@ -22,7 +22,7 @@
   * [x] Load **NewsMagazine.robot**, which writes to MC data database and usable in Kapplets
   * [x] Build Backup.zip from source robot files. *This makes us future safe when editing the backup package. We can now add robots and configs in a trackable way*
 * [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
-* [ ] Get MC+roboserverwait+restore running on AWS
+* [x] Get MC+roboserverwait+restore running on AWS
 * [ ] Create Cloud Formation Template  (CFT) for Kofax RPA using typescript
   * [ ] Add HTTPS
 * [ ] View CFT in CF Designer online
