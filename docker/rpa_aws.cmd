@@ -4,12 +4,16 @@ set region=eu-central-1
 set registry=%asw_account_id%.dkr.ecr.%region%.amazonaws.com
 
 # Download Kofax RPA Linux and go to the folder on the command line
-set RPA_version=11.2.0.2
+set RPA_version=11.2.0.4
 # Unzip the installer
-tar -xf KofaxRPA-%RPA_version%.tar.gz
+tar -xf d:\iso\rpa\KofaxRPA-%RPA_version%.tar.gz
+move KofaxRPA-%RPA_version%\* .
+cd Docker
+git pull
+
 # copy the docker-compose you require
 copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml
-docker compose -p rpa_%rpa_version% up -d
+docker compose --env-file aws\aws.env -p rpa_%rpa_version% up
 # login to Amazon Web Services
 aws ecr get-login-password --region %region% | docker login --username AWS --password-stdin %registry%
 docker tag managementconsole:latest %registry%/console:latest
