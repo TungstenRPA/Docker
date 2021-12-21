@@ -3,13 +3,17 @@ set asw_account_id=022336740566
 set region=eu-central-1
 set registry=%asw_account_id%.dkr.ecr.%region%.amazonaws.com
 
+
 # Download Kofax RPA Linux and go to the folder on the command line
-set RPA_version=11.2.0.4
-# Unzip the installer
+set RPA_version=11.2.0.4.376
 tar -xf d:\iso\rpa\KofaxRPA-%RPA_version%.tar.gz
-move KofaxRPA-%RPA_version%\* .
+robocopy /move /e KofaxRPA-%RPA_version%\* .
+git init
+git remote add origin [my-repo]
+git fetch
+git checkout origin/master -ft
 cd Docker
-git pull
+
 
 # copy the docker-compose you require
 copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml
