@@ -10,6 +10,7 @@ AWS/aws.env
 
 !docker/
 
+docker/README.md
 docker/*
 !docker/managementconsole
 
@@ -22,4 +23,3 @@ docker/managementconsole/*
 !docker/roboserver/*
 !docker/roboserver/roboserver.sh
 !docker/roboserver/Dockerfile
-docker/README.md
