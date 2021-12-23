@@ -12,12 +12,11 @@ git init
 git remote add origin [my-repo]
 git fetch
 git checkout origin/master -ft
-cd Docker
 
 
 # copy the docker-compose you require
-copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml
-docker compose --env-file aws\aws.env -p rpa_%rpa_version% up
+# copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml
+docker compose --env-file docker\aws\aws.env -p rpa_%rpa_version% up
 # login to Amazon Web Services
 aws ecr get-login-password --region %region% | docker login --username AWS --password-stdin %registry%
 docker tag managementconsole:latest %registry%/console:latest
