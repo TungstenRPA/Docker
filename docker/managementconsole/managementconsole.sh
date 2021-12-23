@@ -24,10 +24,21 @@ if [ ! -f /usr/local/tomcat/conf/configured.lck ]; then
    fi
 fi
 
+
 echo Spawning MC config to create users and groups
 managementconsole_configure.sh &
 
-exec catalina.sh
-#exec catalina.sh $@
+echo starting catalina
+# hand off to catalina
+catalina.sh $@
+echo started catalina
+
+while :
+    do
+      echo infinite loop...
+      sleep 2
+    done
+
+
 # the next command makes the container easier to kill because it will respond to SIGTERM https://aws.amazon.com/blogs/containers/graceful-shutdowns-with-ecs/
 #exec "$@"
