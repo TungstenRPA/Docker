@@ -5,11 +5,13 @@ set registry=%asw_account_id%.dkr.ecr.%region%.amazonaws.com
 
 
 # Download Kofax RPA Linux and go to the folder on the command line
-set RPA_version=11.2.0.4.376
+set RPA_version=11.2.0.5
 tar -xf d:\iso\rpa\KofaxRPA-%RPA_version%.tar.gz
-robocopy /move /e KofaxRPA-%RPA_version%\* .
+cd %RPA_version%
+del *.rpm
+del *.deb
 git init
-git remote add origin [my-repo]
+git remote add origin git@github.com:KofaxRPA/Docker.git
 git fetch
 git checkout origin/master -ft
 
