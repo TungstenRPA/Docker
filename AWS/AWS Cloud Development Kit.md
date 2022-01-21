@@ -188,14 +188,70 @@ https://console.aws.amazon.com/support/home?#/case/?displayId=9424605201&languag
 * add docker environment variables  
 * postgres does not exit
 * roboserver has no logger.
-* I can SSH to all 3 servers with  command line interface
-``aws ecs execute-command --cluster %cluster% --task %task% --container rs/mc/postgres --interactive --command "/bin/sh"``
+* SSH to all 3 servers **rs**, **mc** and **postgres** with command line interface at Windows command prompt
+```cmd
+set cluster=
+set task=
+aws ecs execute-command --cluster %cluster% --task %task% --container mc --interactive --command "/bin/sh"
+```
 
-## To Do
+* DNS created for name resolution. Roboserver can see **postgres-service.dnsnamespaceRPA** in the DNS table  
+```bash
+apt update
+apt-get install -y host
+# Check that roboserver/mc can find postgres in DNS
+host postgres-service.dnsnamespaceRPA
+```
+* examining Network on Ubuntu
+```bash
+# Find DNS Server
+cat /etc/resolv.conf
+# Find IP address
+host postgres-service.dnsnamespaceRPA
+```
+
 * MC cannot see postgres (add containerName to container)
   * the container name is not important. the service name is passed to the DNS.
   * I need to create a DNS that is seem by all of the containers.
-  * the 3 services need to be added to the DNS
+  * servicegroup_pg needs an inbound rule on port 5432 for service group rs.
+* Test connectivity to Postgres via port 5432 with commandline client from MC and Roboserver
+```bash
+apt update
+apt-get install -y postgresql-client
+# List databases in Postgres
+PGPASSWORD='schedulerpassword'  psql -U scheduler -h postgres-service.dnsnamespaceRPA -d scheduler -c \\l
+```
+* PSQL commands
+```psql
+\l # list databases
+\q # quit
+```
+## To Do
+* prevent MC from exiting
+```
+ Stopped reason
+Task failed ELB health checks in (target-group arn:aws:elasticloadbalancing:eu-central-1:022336740566:targetgroup/RPA-2-LBLis-9V2AWS7MGK53/606b7a34b4101bbc)
+```
+I fixed this by correcting the TargetGroup in the Load Balancer that was talking to MC
+It defaulted to port 80 and path /.
+I corrected this to port 8080 and path **/Ping**.  I got this from the HEALTHCHECK in the MC's docker file. This will be tricker for Roboserver as it's healthcheck is a java application.  
+![](img/2022-01-21-17-50-01.png)
+Now the Target Group Monitoring shows MC healthy for 2 hours.
+It's pinged every 30 seconds - two failures causes a restart of MC and 5 successes are needed to go green. When the docker is restarted my initialization script is not re-run. I need to understand what is happening here.
+* The name of the MC is "RPA-2-LBlis-...." - it should be "Management Console".
+
+
+
+![](img/2022-01-21-17-45-59.png)
+last log messages
+```cat: '/usr/local/tomcat/logs/catalina*': No such file or directory
+SCRIPT_DIR=/usr/local/tomcat/bin
+Configuring users, groups and roles in Management Console...
+Spawning MC config to create users and groups
+```
+Possible Solution  
+  * [Deploy containers to Fargate with loadbalancer and healthchecks, cloudfront + https](https://www.gravitywell.co.uk/insights/deploying-applications-to-ecs-fargate-with-aws-cdk/)
+
   * it seems that the DNS name needs to be adding to the machine names in all of the URLS. I doubt this but lets see.
     * [Service Discovery](https://ecsworkshop.com/introduction/ecs_basics/servicediscovery/)
     * [Service Creation Tutorial](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service-discovery.html)
