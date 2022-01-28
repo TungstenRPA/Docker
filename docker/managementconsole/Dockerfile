@@ -4,7 +4,7 @@ FROM tomcat:8.5.66-jdk11-adoptopenjdk-hotspot
 ENV KAPOW_HOME=/kapow LANG=en_US.UTF-8 TERM=xterm
 
 RUN apt-get update \
- && apt-get --assume-yes install --no-install-recommends dos2unix locales zip \
+ && apt-get --assume-yes install --no-install-recommends dos2unix locales zip jq vim \
  && rm -rf /var/lib/apt/lists/* \
  && locale-gen en_US.UTF-8 \
  && localedef en_US.UTF-8 -i en_US -f UTF-8

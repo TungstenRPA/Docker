@@ -54,6 +54,21 @@ MC_Restore()
     MC_REST POST "/secure/Restore" "-F fileField=@${Backupfile} -F restoreMode=Reset" || return 1
 }
 
+MC_Database_ChangeDomainName()
+{
+    # MC ignores domain name of database. These adds the domain name. 
+    # Get the first ClusterID. This uses jq for JSON
+    export CLUSTER_ID=$(curl -S -u ${USERNAME}:${PASSWORD} -X GET "${MC}/api/mc/cluster/clusters" | jq .data[0].id)
+    # Correct the cluster database domain name
+    curl -s -u ${USERNAME}:${PASSWORD} "${MC}/api/mc/cluster/${CLUSTER_ID}/getClusterSettings" > clusterSettings.json
+    jq -r '.databaseSettings[0].host |="postgres-service.DOMAINNAME"' clusterSettings.json > clusterSettings1.json
+    jq -r -S '.databaseSettings[0].fileContent |= ""' clusterSettings1.json > clusterSettings2.json
+    # upload the corrected database name back to MC
+    MC_REST PUT  "/api/mc/cluster/setClusterSettings" "-H Content-Type:application/json" "--data @clusterSettings2.json"
+    echo "{\"applyMode\":\"FINISH_SCHEDULES\",\"clusterId\":\"${CLUSTER_ID}\"}" > apply.json
+    MC_REST PUT  "/api/mc/cluster/applyClusterSettings" "-H Content-Type:application/json" "--data @apply.json"
+}
+
 # check that we have not run before
 echo Configuring users, groups and roles in Management Console...
 if test -f /usr/local/tomcat/bin/configured ; then 
@@ -110,6 +125,9 @@ echo Adding user roboserver
 MC_Add_User "\"${ROBOSERVER_MC_USERNAME}\"" "\"${ROBOSERVER_MC_PASSWORD}\"" "'Roboserver'" "roboserver@rpa.com" '"Roboservers"'
 echo Adding user synch
 MC_Add_User "\"${SYNCH_MC_USERNAME}\"" "\"${SYNCH_MC_PASSWORD}\"" "'Synchronizer'" "synch@rpa.com" '"Synchronizers"'
+
+# Change cluster database Host name to fully qualified version
+MC_Database_ChangeDomainName
 
 #Queue test robot to run it
 curl =u -u ${USERNAME}:${PASSWORD} -X POST "${MC}/api/mc/tasks/queueRobot" -H  "accept: */*" -H  "Accept-Language: en" -H  "Content-Type: application/json" -d "{  \"priority\": \"MEDIUM\",  \"robotInfo\": {    \"projectName\": \"Default project\",    \"robotName\": \"Tutorials/NewsMagazine.robot\"  },  \"robotInputConfig\":{  \"inputObjects\": []},  \"stopOnError\": true,  \"timeout\": 600}"
