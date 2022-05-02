@@ -86,7 +86,7 @@ export class CdkSampleStack extends cdk.Stack {
 ```cmd
 rem install dependencies
 npm install
-cdk deploy
+npm run build && cdk synth && cdk deploy --require-approval never
 REM view it at https://eu-central-1.console.aws.amazon.com/cloudformation/home
 cdk destroy
 ```
@@ -181,6 +181,7 @@ https://console.aws.amazon.com/support/home?#/case/?displayId=9424605201&languag
 * [ECS Port Mapping](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PortMapping.html)
 * [HTTPS for Load Balancer in FarGate](https://docs.aws.amazon.com/cdk/api/v1/docs/@aws-cdk_aws-ecs-patterns.ApplicationLoadBalancedFargateService.html#certificate)
 * **ApplicationLoadBalancedFargateService** is adequate for 3 containers with 1 port exposed.
+* [Healthcheck for the Roboserver](https://unix.stackexchange.com/questions/314550/how-to-set-a-script-to-execute-when-a-port-receives-a-message)
 
 ## Done
 * add 3 docker images. https://github.com/aws-samples/aws-cdk-examples/blob/08600cd2c0080994c9d4d478b259a8213a786272/typescript/ecs/ecs-service-with-task-placement/index.ts#L21
