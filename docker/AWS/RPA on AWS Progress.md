@@ -24,9 +24,10 @@
 * [x] create personal user and add to the Kapplet Users, developers and Admin groups. 
 * [x] Get MC+roboserverwait+restore running on AWS
 * [ ] Create Cloud Formation Template  (CFT) for Kofax RPA using typescript
-  * [ ] Add HTTPS
+* [ ] command line health check (https://github.com/aws/aws-cdk/issues/15636)
 * [ ] View CFT in CF Designer online
-* [ ] Add roboserver scaling to CFT
+* [ ] Add Cloudfront and HTTPS
+* [ ] Restrict ALB to traffic from CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/restrict-access-to-load-balancer.html)
 * [ ] Add to Amazon Market Place
 * [ ] Change Admin password 
 * [ ] ensure roboserver runs with new password
@@ -44,6 +45,7 @@ Content-Type: application/octet-stream
 *workaround: wait for MC to restore backup before launching roboserver, by curling if roboserver user can log in*
 
 # Phase 2 - Sharable with Community
+* [ ] Add roboserver scaling to CFT. (Too hard to shutdown Roboserver)
 * [ ] Check the [Amazon Aurora Postgres](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraPostgreSQL.html) is actually compatible with Kofax RPA. (i created a Free Tier, lowest level 20GB which is 0.019c/hour in Frankfurt. Serverless seems to be in beta...)
 * [ ] Add logs and data databases into postgres. [Postgres envars](https://www.postgresql.org/docs/current/libpq-envars.html) [Adding users/databases](https://hub.docker.com/_/postgres)
 * optimize CPU and RAM for MC & Roboserver
