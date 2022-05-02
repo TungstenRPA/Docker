@@ -100,10 +100,6 @@ We have included a file `ldap_ad_content.ldif` file for your testing pleasure. T
 An example featuring a Kapplets server. This is essentially the minimum basic configuration described above, but adds a Kapplets instance. 
 All comments from the basic example apply.
 
-### `docker-compose-jms.yml`
-
-An example of using an ActiveMQ message broker for communication. Please check the manual for details.
-
 
 ## Optimizing the Docker build context size
 
@@ -156,9 +152,22 @@ The recommended approach for using Kofax RPA, is to have Management Console conf
 repository data in its own containerized database instance, then adding external databases for data storage and (audit-)logs.
 
 However, in some cases you might want to store the Management Console internal configuration data in an external or corporate database, due to 
-corporate policies or governance.
+corporate policies or governance. Also, some database drivers can't be included in public container images due to licensing restrictions.
 
-To do so, you must modify the environment variables for the database context, and add the proper JDBC drivers to the container images.
+In case you want to change the database being used, or want to add additional database connections, you can specify additional JDBC drivers 
+to be downloaded at runtime. A set of environment variables can be used for this purpose: __JDBC_DRIVER_URL_1__ - __JDBC_DRIVER_URL_9__. The 
+environment variable will contain the URL to be used to download the driver to be included. You can specify more then one driver by incrementing 
+the numeral at the end. The download process will stop at the first missing or empty environment variable.
+
+To add a MySQL JDBC driver, for instance, you can specify
+```
+JDBC_DRIVER_URL_1=https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar
+``` 
+
+The environment variable needs to be specified when running the container, as part of the `docker run` command, in the kubernetes deployment or as 
+part of the `docker-compose` definition. 
+
+Alternatively, you can replace the default driver supplied with the container by editing the `Dockerfile` for that container and replacing the driver.
 
 In the `Dockerfile` for the Management Console (located `docker/managementconsole/Dockerfile`) the database driver is added by the line
 
@@ -171,7 +180,7 @@ You can change this line or add more drivers. __NOTE: JDBC drivers must be place
 After editing a `Dockerfile`, you must rebuild the image by typing
 
 ``` 
-docker build -f docker/managementconsole/Dockerfile -t managementconsole:11.2.0.4
+docker build -f docker/managementconsole/Dockerfile -t managementconsole:11.3.0.0
 ```
 
 Or simply
@@ -315,10 +324,6 @@ Password to use, when registering with the Management Console.
 The external host name at which the Management Console can reach this server.
 ### `ROBOSERVER_EXTERNAL_PORT`  (default: 0)
 The external port at which the Management Console can reach this server.
-### `ROBOSERVER_ENABLE_JMS`  (default: false)
-enable JMS for communication with the Management Console
-### `ROBOSERVER_JMS_BROKERURL`  (default: false)
-The JMS broker URL
 ### `ROBOSERVER_SERVER_NAME` (default: )
 The name of the server used to track statistics.
 ### `LOG4J_ROOTLOGGER`  (default: ERROR, file)
@@ -412,10 +417,6 @@ The alias for the key store
 Allow script execution.
 ### `CONFIG_SECURITY_JDBCDRIVERUPLOAD`  (default: LOCALHOST)
 Allow JDBC driver uploads to the ManagementConsole. Can be set to NONE, LOCALHOST, ANY_HOST.
-### `CONFIG_JMS_ENABLED`  (default: false)
-Enable JMS mode
-### `CONFIG_JMS_BROKERURI`  (default: failover://(tcp://127.0.0.1:61616)?startupMaxReconnectAttempts=3)
-The JMS broker URI to use if JMS is enabled.
 ### `CONFIG_PASSWORDSTORE`  (default: STANDARD)
 Selects password store type.
 ### `SETTINGS_ENTRY_COUNT`  (default: 0)
@@ -462,6 +463,10 @@ CyberArk Central Credentials Provider host's port.
 CyberArk Central Credentials Provider IIS application name.
 ### `SETTINGS_CYBERARK_CERTIFICATEPATH`  (default: )
 CyberArk Central Credentials Provider TLS server certificate.
+### `SERVICE_OAUTH_KAPPLETS_SECRET`  (default: )
+Initial Kapplets client secret in plaintext
+### `SERVICE_OAUTH_KAPPLETS_SECRET_FILE`  (default: )
+Path to file containing initial Kapplets client secret
 ### `SAML_LOGGER_LOGALL`  (default: false)
 Log all SAML messages.
 ### `SAML_LOGGER_LOGERRORS`  (default: false)
@@ -668,7 +673,7 @@ Disable strict SSH host-key checking
 To build Synchronizer Docker image use following command:
 
 ```
-docker build -f docker/synchronizer/Dockerfile -t synchronizer:11.2.0.4
+docker build -f docker/synchronizer/Dockerfile -t synchronizer:11.3.0.0
 ```
 
 NOTE: If you want to disable Docker JMX health check remove lines in `Dockerfile` between:
