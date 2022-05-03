@@ -180,7 +180,7 @@ You can change this line or add more drivers. __NOTE: JDBC drivers must be place
 After editing a `Dockerfile`, you must rebuild the image by typing
 
 ``` 
-docker build -f docker/managementconsole/Dockerfile -t managementconsole:11.3.0.0
+docker build -f docker/managementconsole/Dockerfile -t managementconsole:11.3.0.1
 ```
 
 Or simply
@@ -673,7 +673,7 @@ Disable strict SSH host-key checking
 To build Synchronizer Docker image use following command:
 
 ```
-docker build -f docker/synchronizer/Dockerfile -t synchronizer:11.3.0.0
+docker build -f docker/synchronizer/Dockerfile -t synchronizer:11.3.0.1
 ```
 
 NOTE: If you want to disable Docker JMX health check remove lines in `Dockerfile` between:

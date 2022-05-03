@@ -2,6 +2,24 @@
 
 if [ ! -f /usr/local/tomcat/conf/configured.lck ]; then
 
+   # Download JDBC drivers if specified
+   targetDir="/usr/local/tomcat/lib/jdbc"
+   for i in `seq 1 9`; do
+     envName="JDBC_DRIVER_URL_${i}"
+     if [[ -z "${!envName}" ]]; then
+       break
+     fi
+     fileName="${!envName##*/}"
+     fileName="${targetDir}/${fileName%%\?*}"
+     if [[ ! -f "$fileName"  ]]; then
+       curl "${!envName}" --output "${fileName}" --silent --fail
+       rc=$?; if [[ $rc != 0 ]]; then
+         echo "Driver download from ${!envName} failed: $rc"
+         exit $rc
+       fi
+     fi
+   done
+
    # generate a key store for Mysql Connector.
    # the ca.pem file exists in the "mysql" docker image.
    # The key store and the password will be passed then as a parameter to Mysql Connector URL,
@@ -24,21 +42,4 @@ if [ ! -f /usr/local/tomcat/conf/configured.lck ]; then
    fi
 fi
 
-
-echo Spawning MC config to create users and groups
-managementconsole_configure.sh &
-
-echo starting catalina
-# hand off to catalina
 catalina.sh $@
-echo started catalina
-
-while :
-    do
-      echo infinite loop...
-      sleep 2
-    done
-
-
-# the next command makes the container easier to kill because it will respond to SIGTERM https://aws.amazon.com/blogs/containers/graceful-shutdowns-with-ecs/
-#exec "$@"
