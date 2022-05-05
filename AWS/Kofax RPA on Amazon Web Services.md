@@ -13,10 +13,17 @@ How to get Kofax RPA running on Amazon Web Services for about 5 cents/hour while
 # Create Docker Image
 6. **copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml** 
 7. View Docker File in Visual Studio Code with **code docker\managementconsole\Dockerfile**
-8. Create Docker Image with **docker compose -p rpa_11.2.0.2 up -d**.   
+8. Create Docker Image with **docker compose -p rpa_11-3-0-0 up -d**.   
   * "-p" project name (default is directory name)
   * "up" create and dostart it
   * "-d" means to detatch it from the console to get the cursor back.
+```cmd
+copy docker\compose-examples\docker-compose-basic.yml docker-compose.yml
+# d= detach, p= project name
+docker compose -p rpa_11-3-kapplet up -d
+docker compose -p rpa_11-3-kapplet down
+```
+
 
 # Uploading Docker Image to Amazon Repository
 1. Download [https://aws.amazon.com/cli/](Amazon%20Web%20Services%20Command%20Line%20Interface)
