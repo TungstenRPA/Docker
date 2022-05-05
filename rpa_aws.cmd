@@ -4,7 +4,7 @@ set region=eu-central-1
 set registry=%asw_account_id%.dkr.ecr.%region%.amazonaws.com
 
 # Download Kofax RPA Linux and go to the folder on the command line
-set RPA_version=11.2.0.2
+set RPA_version=11.3.0.1
 # Unzip the installer
 tar -xf KofaxRPA-%RPA_version%.tar.gz
 # copy the docker-compose you require
