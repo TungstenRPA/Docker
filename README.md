@@ -30,7 +30,7 @@ This is just a Quick Start guide.
 * Kapplets 11.3 are not available yet for Docker. If you need Kapplets on Docker you will have to use Kapplets 1.2.
 
 
-## Quick Start Guide to installing Kofax RPA on Linux
+## Quick Start Guide to installing Kofax RPA on Docker on Linux
 ```bash
 sudo apt update
 sudo apt install docker
@@ -40,3 +40,5 @@ cd rpa
 curl -JLO https://raw.githubusercontent.com/KofaxRPA/Docker/master/docker-compose.yml
 docker compose -p RPA up
 ```
+open http://localhost:83
+
