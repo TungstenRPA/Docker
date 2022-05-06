@@ -34,7 +34,6 @@ services:
       - CONFIG_LICENSE_COMPANY=
       - CONFIG_LICENSE_PRODUCTIONKEY=
       - CONFIG_LICENSE_NONPRODUCTIONKEY=
-      - JDBC_DRIVER_URL_1=
     networks:
       - net
   roboserver-service:
