@@ -1,0 +1,55 @@
+#
+# Example of a basic docker-compose file.
+# It brings up a PostgreSQL instance, a Management Console and a RoboServer.
+# The RoboServer count can be scaled.
+#
+version: '3.8'
+networks:
+  net:
+
+services:
+  postgres-service:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=scheduler
+      - POSTGRES_PASSWORD=schedulerpassword
+      - POSTGRES_DB=scheduler
+    networks:
+      - net
+  managementconsole-service:
+    image: kofax/rpa-managementconsole:11.3.0.1.0.299
+    depends_on:
+      - postgres-service
+    ports:
+      - 83:8080
+    environment:
+      - CONTEXT_RESOURCE_VALIDATIONQUERY=SELECT 1
+      - CONTEXT_RESOURCE_USERNAME=scheduler
+      - CONTEXT_RESOURCE_PASSWORD=schedulerpassword
+      - CONTEXT_RESOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-service:5432/scheduler
+      # enter your license here, or type it through the GUI in first login
+      - CONFIG_LICENSE_NAME=
+      - CONFIG_LICENSE_EMAIL=
+      - CONFIG_LICENSE_COMPANY=!!!!!ADD YOUR COMPANY NAME HERE!!!!
+      - CONFIG_LICENSE_PRODUCTIONKEY=
+      - CONFIG_LICENSE_NONPRODUCTIONKEY=!!!!!ADD YOUR LICENSE HERE!!!!!
+      - JDBC_DRIVER_URL_1=
+    networks:
+      - net
+  roboserver-service:
+    image: kofax/rpa-roboserver:11.3.0.1.0.299
+    depends_on:
+      - managementconsole-service
+      - postgres-service
+    networks:
+      - net
+    environment:
+      - ROBOSERVER_ENABLE_MC_REGISTRATION=true
+      - ROBOSERVER_MC_URL=http://managementconsole-service:8080/
+      - ROBOSERVER_MC_CLUSTER=Non Production
+      - ROBOSERVER_MC_USERNAME=admin
+      - ROBOSERVER_MC_PASSWORD=admin
+      - ROBOSERVER_ENABLE_SOCKET_SERVICE=true
+      - ROBOSERVER_SERVER_NAME=roboserver
+      - WRAPPER_MAX_MEMORY=2048
