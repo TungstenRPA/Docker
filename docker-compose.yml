@@ -31,9 +31,9 @@ services:
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
-      - CONFIG_LICENSE_COMPANY=!!!!!ADD YOUR COMPANY NAME HERE!!!!
+      - CONFIG_LICENSE_COMPANY=
       - CONFIG_LICENSE_PRODUCTIONKEY=
-      - CONFIG_LICENSE_NONPRODUCTIONKEY=!!!!!ADD YOUR LICENSE HERE!!!!!
+      - CONFIG_LICENSE_NONPRODUCTIONKEY=
       - JDBC_DRIVER_URL_1=
     networks:
       - net
