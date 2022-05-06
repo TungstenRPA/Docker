@@ -28,3 +28,15 @@ This is just a Quick Start guide.
 * There is no secrecy on passwords.
 * https is not configured.
 * Kapplets 11.3 are not available yet for Docker. If you need Kapplets on Docker you will have to use Kapplets 1.2.
+
+
+## Quick Start Guide to installing Kofax RPA on Linux
+```bash
+sudo apt update
+sudo apt install docker
+sudo apt install curl
+mkdir rpa
+cd rpa
+curl -JLO https://raw.githubusercontent.com/KofaxRPA/Docker/master/docker-compose.yml
+docker compose -p RPA up
+```
