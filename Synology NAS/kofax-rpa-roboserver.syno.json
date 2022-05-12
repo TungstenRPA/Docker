@@ -1,0 +1,94 @@
+{
+   "CapAdd" : [],
+   "CapDrop" : [],
+   "cmd" : "/bin/bash -c \\${KAPOW_HOME}/bin/roboserver.sh",
+   "cpu_priority" : 50,
+   "enable_publish_all_ports" : false,
+   "enable_restart_policy" : false,
+   "enable_service_portal" : null,
+   "enabled" : false,
+   "env_variables" : [
+      {
+         "key" : "PATH",
+         "value" : "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      },
+      {
+         "key" : "KAPOW_HOME",
+         "value" : "/kapow"
+      },
+      {
+         "key" : "LANG",
+         "value" : "en_US.UTF-8"
+      },
+      {
+         "key" : "TERM",
+         "value" : "xterm"
+      },
+      {
+         "key" : "ROBOSERVER_ENABLE_MC_REGISTRATION",
+         "value" : "true"
+      },
+      {
+         "key" : "ROBOSERVER_MC_URL",
+         "value" : "http://kofax-rpa-managementconsole:8080/"
+      },
+      {
+         "key" : "ROBOSERVER_MC_CLUSTER",
+         "value" : "Non Production"
+      },
+      {
+         "key" : "ROBOSERVER_MC_USERNAME",
+         "value" : "admin"
+      },
+      {
+         "key" : "ROBOSERVER_MC_PASSWORD",
+         "value" : "admin"
+      },
+      {
+         "key" : "ROBOSERVER_ENABLE_SOCKET_SERVICE",
+         "value" : "true"
+      },
+      {
+         "key" : "ROBOSERVER_SERVER_NAME",
+         "value" : "roboserver"
+      },
+      {
+         "key" : "WRAPPER_MAX_MEMORY",
+         "value" : "2048"
+      }
+   ],
+   "exporting" : false,
+   "id" : "417feec6b580e3aa5f585fdad46bb02f44c05aff50e894eeac569fa2405ac3c2",
+   "image" : "kofax/rpa-roboserver:latest",
+   "is_ddsm" : false,
+   "is_package" : false,
+   "links" : [
+      {
+         "alias" : "postgres",
+         "link_container" : "postgres"
+      },
+      {
+         "alias" : "kofax-rpa-managementconsole",
+         "link_container" : "kofax-rpa-managementconsole"
+      }
+   ],
+   "memory_limit" : 0,
+   "name" : "kofax-rpa-roboserver",
+   "network" : [
+      {
+         "driver" : "bridge",
+         "name" : "bridge"
+      }
+   ],
+   "network_mode" : "bridge",
+   "port_bindings" : [],
+   "privileged" : false,
+   "shortcut" : {
+      "enable_shortcut" : false,
+      "enable_status_page" : false,
+      "enable_web_page" : false,
+      "web_page_url" : ""
+   },
+   "use_host_network" : false,
+   "volume_bindings" : []
+}
