@@ -3,9 +3,10 @@ Kofax RPA images are now published to [Docker Hub](https://hub.docker.com/u/kofa
 Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets currently does not work due to a log-in bug.  
 [Windows](#quickstart-guide-to-installing-kofax-rpa-on-windows-from-docker-hub) : [Linux](#quick-start-guide-to-installing-kofax-rpa-on-docker-on-linux) : [Synology NAS](Synology%20NAS)
 ## Quickstart Guide to installing Kofax RPA on Windows from Docker Hub 
-1. Download and install [Docker Desktop for Windows](https://docs.docker.com/desktop/windows/install/).
-2. Get a [free Kofax RPA license](https://www.kofax.com/products/rpa/rpa-free-trial). You will have your license within 2 minutes.  
-3. Download [docker-compose.yml](docker-compose.yml) from GitHub.  Click **Raw** and then Save the file.  
+1. Upgrade your Windows installation to the latest version, if you are using Windows 10. This will make the installation of Docker and Windows Subsystem for Linux (WSL2) easier.
+2.  Download and install [Docker Desktop for Windows](https://docs.docker.com/desktop/windows/install/).
+3. Get a [free Kofax RPA license](https://www.kofax.com/products/rpa/rpa-free-trial). You will have your license within 2 minutes.  
+4. Download [docker-compose.yml](docker-compose.yml) from GitHub.  Click **Raw** and then Save the file.  
 ![image](https://user-images.githubusercontent.com/47416964/167140029-442922d9-fa48-447f-8094-d866c4eb5fff.png)
 
 4. Create a folder on your computer and copy **docker-compose.yml** into it.  
