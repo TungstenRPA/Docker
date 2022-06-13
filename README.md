@@ -17,8 +17,9 @@ Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets current
 ![image](https://user-images.githubusercontent.com/47416964/167139416-fecbbed6-799b-43a7-a797-6cac9359a4ac.png)
 5. Open Windows **Command Prompt** and change to your directory.  
 ![image](https://user-images.githubusercontent.com/47416964/167145058-2fe71f61-b141-4c92-a575-2b3d8dd0f10d.png)
-6. Type  **docker compose -p kofaxrpa up**.  -p sets the project name. Since Docker 2.5 a project name **must** be lowercase.
-7. Wait until Roboserver has started.  
+6. Type  **docker compose -p kofaxrpa up**.  -p sets the project name. Since Docker 2.5 a project name **must** be lowercase.  
+*This will download KofaxRPA from [Docker Hub](https://hub.docker.com/u/kofax) and then start it running.*
+8. Wait until Roboserver has started.  
 ![image](https://user-images.githubusercontent.com/47416964/167142680-fe3b0bb5-3010-49d8-97d0-a7d99e0360fa.png)
 8. Open [Management Console](https://localhost:83) at https://localhost:83 and login with **admin/admin**.  
 ![image](https://user-images.githubusercontent.com/47416964/167141294-3fd220e5-f535-4e0a-98ee-ed013e360309.png)
