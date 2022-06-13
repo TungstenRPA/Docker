@@ -4,6 +4,7 @@ Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets current
 [Windows](#quickstart-guide-to-installing-kofax-rpa-on-windows-from-docker-hub) : [Linux](#quick-start-guide-to-installing-kofax-rpa-on-docker-on-linux) : [Synology NAS](Synology%20NAS)
 ## Quickstart Guide to installing Kofax RPA on Windows from Docker Hub 
 1. Upgrade your Windows installation to the latest version, if you are using Windows 10. This will make the installation of Docker and Windows Subsystem for Linux (WSL2) easier.
+2. Install **Windows Subsystem for Linux** by typing **wsl --install** at the command line. You may need to reboot afterwards. You do **not** need to install any Linux distribution like Ubuntu or Debian. You need no understanding of Linux to work with Kofax RPA on Docker on Windows.  
 2.  Download and install [Docker Desktop for Windows](https://docs.docker.com/desktop/windows/install/).
    - Select **Use WSL 2 instead of Hyper-V (recommended)**.
 4. Get a [free Kofax RPA license](https://www.kofax.com/products/rpa/rpa-free-trial). You will have your license within 2 minutes.  
@@ -14,7 +15,6 @@ Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets current
 ![image](https://user-images.githubusercontent.com/47416964/167139416-fecbbed6-799b-43a7-a797-6cac9359a4ac.png)
 5. Open Windows **Command Prompt** and change to your directory.  
 ![image](https://user-images.githubusercontent.com/47416964/167145058-2fe71f61-b141-4c92-a575-2b3d8dd0f10d.png)
-6. Install **Windows Subsystem for Linux** by typing **wsl --install**. You may need to reboot afterwards.
 6. Type  **docker compose -p KofaxRPA up**
 7. Wait until Roboserver has started.  
 ![image](https://user-images.githubusercontent.com/47416964/167142680-fe3b0bb5-3010-49d8-97d0-a7d99e0360fa.png)
