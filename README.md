@@ -26,7 +26,7 @@ Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets current
 ![image](https://user-images.githubusercontent.com/47416964/167141294-3fd220e5-f535-4e0a-98ee-ed013e360309.png)
 9. Add your **Company Name** and **Non Production key** into the license panel precisely as they are in the license email you received from Kofax.
 10. Download and install **Design Studio** from the download link in your license email from Kofax.
-11. Start **Design Studio** and connect to Management Console at https://localhost:83  with **admin/admin**.  
+11. Start **Design Studio** and connect to Management Console at http://localhost:83  with **admin/admin**.  
 
 
 This is just a Quick Start guide.
