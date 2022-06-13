@@ -22,7 +22,7 @@ Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets current
 *This will download PostgreSQL databsae, KofaxRPA Management Console and Kofax RPA Roboserver from [Docker Hub](https://hub.docker.com/u/kofax) and then start all three running.*
 8. Wait until Roboserver has started.  
 ![image](https://user-images.githubusercontent.com/47416964/167142680-fe3b0bb5-3010-49d8-97d0-a7d99e0360fa.png)
-8. Open [Management Console](https://localhost:83) at https://localhost:83 and login with **admin/admin**.  
+8. Open [Management Console](http://localhost:83) at http://localhost:83 and login with **admin/admin**.  
 ![image](https://user-images.githubusercontent.com/47416964/167141294-3fd220e5-f535-4e0a-98ee-ed013e360309.png)
 9. Add your **Company Name** and **Non Production key** into the license panel precisely as they are in the license email you received from Kofax.
 10. Download and install **Design Studio** from the download link in your license email from Kofax.
