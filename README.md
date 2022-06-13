@@ -20,7 +20,7 @@ Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets current
 6. Type  **docker compose -p kofaxrpa up**  
 *-p sets the project name. Since Docker 2.5 a project name **must** be lowercase.*  
 *This will download PostgreSQL databsae, KofaxRPA Management Console and Kofax RPA Roboserver from [Docker Hub](https://hub.docker.com/u/kofax) and then start all three running.*
-8. Wait until Roboserver has started.  
+8. Wait until Roboserver has started. *You will see further error messages from Management Console about a missing license. We will add that later.*   
 ![image](https://user-images.githubusercontent.com/47416964/167142680-fe3b0bb5-3010-49d8-97d0-a7d99e0360fa.png)
 8. Open [Management Console](http://localhost:83) at http://localhost:83 and login with **admin/admin**.  
 ![image](https://user-images.githubusercontent.com/47416964/167141294-3fd220e5-f535-4e0a-98ee-ed013e360309.png)
