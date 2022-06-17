@@ -1,7 +1,8 @@
 # Kofax RPA and Docker.
 Kofax RPA images are now published to [Docker Hub](https://hub.docker.com/u/kofax).  
 Kofax RPA 11.3.0.0 and Kofax RPA 11.3.0.1 are available. Docker Kapplets currently does not work due to a log-in bug.  
-[RPA on Docker on Linux](#quick-start-guide-to-installing-kofax-rpa-on-docker-on-linux) : [RPA on Docker on Synology NAS](Synology%20NAS)
+* Install [RPA on Docker on Linux](#quick-start-guide-to-installing-kofax-rpa-on-docker-on-linux)
+* Install [RPA on Docker on Synology NAS](Synology%20NAS)
 ## Quickstart Guide to installing Kofax RPA on Windows from Docker Hub 
 1. Upgrade your Windows installation to the latest version, if you are using Windows 10. This will make the installation of Docker and Windows Subsystem for Linux (WSL2) easier.
 2. Install **Windows Subsystem for Linux** by typing **wsl --install -d Ubuntu** at the command line. You may need to reboot afterwards. [Microsoft's Guide](https://docs.microsoft.com/en-us/windows/wsl/install).  
