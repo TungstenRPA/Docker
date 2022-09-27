@@ -1,4 +1,4 @@
-#
+# Installs Kofax RPA 11.3.0.1 from https://hub.docker.com/u/kofax
 # Example of a basic docker-compose file.
 # It brings up a PostgreSQL instance, a Management Console and a RoboServer.
 # The RoboServer count can be scaled.
