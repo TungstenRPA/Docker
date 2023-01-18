@@ -15,7 +15,7 @@ services:
     networks:
       - net
   managementconsole-service:
-    image: kofax/rpa-managementconsole:11.3.0.1.0.299
+    image: kofax/rpa-managementconsole:11.4.0.0.197
     depends_on:
       - postgres-service
     ports:
