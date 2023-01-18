@@ -1,12 +1,10 @@
 # Installs Kofax RPA 11.3.0.1 from https://hub.docker.com/u/kofax
-# Example of a basic docker-compose file.
-# It brings up a PostgreSQL instance, a Management Console and a RoboServer.
+# a Management Console, a RoboServer, a Synchronizer, a Robot Filesystem and Kapplets
 # The RoboServer count can be scaled.
 #
-version: '3.8'
+version: '2.1'
 networks:
   net:
-
 services:
   postgres-service:
     image: postgres:10
@@ -28,6 +26,7 @@ services:
       - CONTEXT_RESOURCE_PASSWORD=schedulerpassword
       - CONTEXT_RESOURCE_DRIVERCLASSNAME=org.postgresql.Driver
       - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-service:5432/scheduler
+      - CONTEXT_CHECK_DATABASE_TIMEOUT=600
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
@@ -37,7 +36,7 @@ services:
     networks:
       - net
   roboserver-service:
-    image: kofax/rpa-roboserver:11.3.0.1.0.299
+    image: kofax/rpa-roboserver:11.4.0.0.197
     depends_on:
       - managementconsole-service
       - postgres-service
@@ -52,3 +51,50 @@ services:
       - ROBOSERVER_ENABLE_SOCKET_SERVICE=true
       - ROBOSERVER_SERVER_NAME=roboserver
       - WRAPPER_MAX_MEMORY=2048
+  synchronizer-service:
+    image: kofax/rpa-synchronizer:11.4.0.0.197
+    depends_on:
+      - managementconsole-service
+    networks:
+      - net
+    environment:
+      - SYNCHRONIZER_MC_URL=http://managementconsole-service:8080/
+      - SYNCHRONIZER_USERNAME=admin
+      - SYNCHRONIZER_PASSWORD=admin
+      - SYNCHRONIZER_INTERVAL=3
+  robotfilesystem-service:
+    image: kofax/rpa-robotfilesystem:11.4.0.0.197
+    depends_on:
+      - managementconsole-service
+    ports:
+      - 81:8080
+    networks:
+      - net
+    environment:
+      - RFS_MC_URL=http://managementconsole-service:8080/
+      - RFS_MC_USERNAME=admin
+      - RFS_MC_PASSWORD=admin
+      - RFS_DATA_PATH=C:/data
+      - RFS_CREATE_FOLDERS=true
+      - RFS_ALLOW_ABSOLUTE_PATHS=true
+  kapplets-service:
+    image: kapplets:11.4.0.0.197
+    depends_on:
+      - managementconsole-service
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sqlserver-host:1433;database=kapplets;SelectMethod=cursor;encrypt=false
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=Scheduler1!
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.SQLServer2012Dialect
+      - KAPPLETS_SERVICES_MC_CONNECTION_URL=http://managementconsole-service:8080/
+      - KAPPLETS_SERVICES_MC_CONNECTION_USERNAME=admin
+      - KAPPLETS_SERVICES_MC_CONNECTION_PASSWORD=admin
+      - SLEEP_DELAY=30s
+      - KAPPLETS_SERVICES_MC_CONNECTION_OAUTH_KAPPLETSBASEURL=
+      - KAPPLETS_SERVICES_MC_CONNECTION_OAUTH_MCBASEURL=
+      - KAPPLETS_SERVICES_MC_CONNECTION_OAUTH_CLIENTSECRET=
+    networks:
+      - net
