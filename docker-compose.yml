@@ -78,7 +78,7 @@ services:
       - RFS_CREATE_FOLDERS=true
       - RFS_ALLOW_ABSOLUTE_PATHS=true
   kapplets-service:
-    image: kapplets:11.4.0.0.197
+    image: kofax/rpa-kapplets:11.4.0.0.197
     depends_on:
       - managementconsole-service
     ports:
