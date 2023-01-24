@@ -14,8 +14,11 @@ _WARNING: Make sure that your laptop supports "Hardware assisted virtualization 
    - Select **Use WSL 2 instead of Hyper-V (recommended)**.
 5. Get a [free Kofax RPA license](https://www.kofax.com/products/rpa/rpa-free-trial). You will have your license within 2 minutes.  
 6. Download [docker-compose.yml](docker-compose.yml) from GitHub.  Click **Raw** and then Save the file.  
-![image](https://user-images.githubusercontent.com/47416964/167140029-442922d9-fa48-447f-8094-d866c4eb5fff.png)
-
+![image](https://user-images.githubusercontent.com/47416964/167140029-442922d9-fa48-447f-8094-d866c4eb5fff.png)  
+*If you have [curl.exe](https://curl.se/download.html) installed, you can download with*
+```
+curl.exe -JLO https://raw.githubusercontent.com/KofaxRPA/Docker/master/docker-compose.yml
+```
 4. Create a folder on your computer and copy **docker-compose.yml** into it.  
 ![image](https://user-images.githubusercontent.com/47416964/167139416-fecbbed6-799b-43a7-a797-6cac9359a4ac.png)
 5. Open Windows **Command Prompt** and change to your directory.  
