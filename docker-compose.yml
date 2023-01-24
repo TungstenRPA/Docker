@@ -27,12 +27,21 @@ services:
       - CONTEXT_RESOURCE_DRIVERCLASSNAME=org.postgresql.Driver
       - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-service:5432/scheduler
       - CONTEXT_CHECK_DATABASE_TIMEOUT=600
+      # roboserver log database
+      - USE_LOGDB=true
+      - LOGDB_SCHEMA=logging
+      - LOGDB_HOST=logging-service:5432
+      - LOGDB_TYPE=postgres
+      - LOGDB_USERNAME=logging
+      - LOGDB_PASSWORD=loggingpassword
+      - The password to use for the log database
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
       - CONFIG_LICENSE_COMPANY=${LICENSE_COMPANY}
       - CONFIG_LICENSE_PRODUCTIONKEY=
       - CONFIG_LICENSE_NONPRODUCTIONKEY=${LICENSE_NONPRODUCTIONKEY}
+      # OAuth secrets
       - SERVICE_OAUTH_KAPPLETS_SECRET=
       - SERVICE_OAUTH_SYNCHRONIZER_SECRET=
     networks:
@@ -106,6 +115,14 @@ services:
       - POSTGRES_USER=kapplets
       - POSTGRES_PASSWORD=kappletspassword
       - POSTGRES_DB=kapplets
+    networks:
+      - net
+  logging-database-service:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=logging
+      - POSTGRES_PASSWORD=loggingpassword
+      - POSTGRES_DB=logging
     networks:
       - net
 
