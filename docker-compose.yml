@@ -30,11 +30,10 @@ services:
       # roboserver log database
       - USE_LOGDB=true
       - LOGDB_SCHEMA=logdb
-      - LOGDB_HOST=logdb-service:5432
+      - LOGDB_HOST=logdb-database-service:5432
       - LOGDB_TYPE=PostgreSQL
       - LOGDB_USERNAME=logdb
       - LOGDB_PASSWORD=logdbpassword
-      - The password to use for the log database
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
