@@ -30,9 +30,9 @@ services:
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
-      - CONFIG_LICENSE_COMPANY=
+      - CONFIG_LICENSE_COMPANY=${LICENSE_COMPANY}
       - CONFIG_LICENSE_PRODUCTIONKEY=
-      - CONFIG_LICENSE_NONPRODUCTIONKEY=
+      - CONFIG_LICENSE_NONPRODUCTIONKEY=${LICENSE_NONPRODUCTIONKEY}
     networks:
       - net
   roboserver-service:
@@ -82,13 +82,13 @@ services:
     depends_on:
       - managementconsole-service
     ports:
-      - 8080:8080
+      - 84:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sqlserver-host:1433;database=kapplets;SelectMethod=cursor;encrypt=false
-      - SPRING_DATASOURCE_DRIVERCLASSNAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
-      - SPRING_DATASOURCE_USERNAME=sa
-      - SPRING_DATASOURCE_PASSWORD=Scheduler1!
-      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.SQLServer2012Dialect
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://kapplets-database-service:5432/kapplets
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=kapplets
+      - SPRING_DATASOURCE_PASSWORD=kappletspassword
+#      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.SQLServer2012Dialect
       - KAPPLETS_SERVICES_MC_CONNECTION_URL=http://managementconsole-service:8080/
       - KAPPLETS_SERVICES_MC_CONNECTION_USERNAME=admin
       - KAPPLETS_SERVICES_MC_CONNECTION_PASSWORD=admin
@@ -98,3 +98,12 @@ services:
       - KAPPLETS_SERVICES_MC_CONNECTION_OAUTH_CLIENTSECRET=
     networks:
       - net
+  kapplets-database-service:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=kapplets
+      - POSTGRES_PASSWORD=kappletspassword
+      - POSTGRES_DB=kapplets
+    networks:
+      - net
+
