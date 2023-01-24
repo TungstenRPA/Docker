@@ -30,7 +30,7 @@ services:
       # roboserver log database
       - USE_LOGDB=true
       - LOGDB_SCHEMA=logdb
-      - LOGDB_HOST=logging-service:5432
+      - LOGDB_HOST=logdb-service:5432
       - LOGDB_TYPE=PostgreSQL
       - LOGDB_USERNAME=logdb
       - LOGDB_PASSWORD=logdbpassword
