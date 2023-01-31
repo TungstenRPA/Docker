@@ -2,7 +2,7 @@
 # a Management Console, a RoboServer, a Synchronizer, a Robot Filesystem and Kapplets
 # The RoboServer count can be scaled.
 #
-version: '2.1'
+version: '3.0'
 networks:
   net:
 services:
@@ -40,8 +40,9 @@ services:
       - CONFIG_LICENSE_COMPANY=${LICENSE_COMPANY}
       - CONFIG_LICENSE_PRODUCTIONKEY=
       - CONFIG_LICENSE_NONPRODUCTIONKEY=${LICENSE_NONPRODUCTIONKEY}
-      # OAuth secrets
+      # OAuth secrets. if these are empty then MC will automatically generate them.
       - SERVICE_OAUTH_KAPPLETS_SECRET=
+      - SERVICE_OAUTH_DAS_SECRET=
       - SERVICE_OAUTH_SYNCHRONIZER_SECRET=abc
     networks:
       - net
@@ -67,10 +68,12 @@ services:
       - managementconsole-service
     networks:
       - net
+    secrets: # the synchronizer is allowed to see this secret. Secrets are in files in folder /run/secrets
+      - synch_ssh_private_key    
     environment:
+      - SYNCHRONIZER_PRIVATE_KEY=/run/secrets/synch_ssh_private_key
       - SYNCHRONIZER_MC_URL=http://managementconsole-service:8080/
       - SYNCHRONIZER_OAUTH_CLIENT_SECRET=abc
-      - SYNCHRONIZER_PRIVATE_KEY=
         # Path to a file containing the private SSH key to connect to a remote repository. 
         # When connecting to a local repository, this attribute is ignored, but any value must be specified.
       - SYNCHRONIZER_USERNAME=admin
@@ -128,4 +131,7 @@ services:
       - POSTGRES_DB=logdb
     networks:
       - net
+secrets:
+  synch_ssh_private_key:
+    file: C:/users/${USERNAME}/.ssh/id_rsa
 
