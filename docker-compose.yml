@@ -28,12 +28,19 @@ services:
       - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-service:5432/scheduler
       - CONTEXT_CHECK_DATABASE_TIMEOUT=600
       # roboserver log database
-      - USE_LOGDB=true
-      - LOGDB_SCHEMA=logdb
-      - LOGDB_HOST=logdb-database-service:5432
-      - LOGDB_TYPE=PostgreSQL
-      - LOGDB_USERNAME=logdb
-      - LOGDB_PASSWORD=logdbpassword
+      - SETTINGS_ENTRY_COUNT=6
+      - SETTINGS_ENTRY_KEY_1=USE_LOGDB
+      - SETTINGS_ENTRY_VALUE_1=true
+      - SETTINGS_ENTRY_KEY_2=LOGDB_SCHEMA
+      - SETTINGS_ENTRY_VALUE_2=logdb
+      - SETTINGS_ENTRY_KEY_3=LOGDB_HOST
+      - SETTINGS_ENTRY_VALUE_3=logdb-database-service:5432
+      - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
+      - SETTINGS_ENTRY_VALUE_4=PostgreSQL
+      - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
+      - SETTINGS_ENTRY_VALUE_5=logdb
+      - SETTINGS_ENTRY_KEY_6=LOGDB_PASSWORD
+      - SETTINGS_ENTRY_VALUE_6=logdbpassword
       # enter your license here, or type it through the GUI in first login
       - CONFIG_LICENSE_NAME=
       - CONFIG_LICENSE_EMAIL=
