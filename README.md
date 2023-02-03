@@ -2,6 +2,10 @@
 Kofax RPA 11.3 & 11.4 images are now published to [Docker Hub](https://hub.docker.com/u/kofax).  
 * Install [RPA on Docker on Linux](#quick-start-guide-to-installing-kofax-rpa-on-docker-on-linux)
 * Install [RPA on Docker on Synology NAS](Synology%20NAS)
+* 11.4 now supports 
+   * Kapplets
+   * Synchronizer (RSA key not quite working yet 3 Feb 2023)
+   * 3 databases: MC database, log database, robot data database.
 ## Quickstart Guide to installing Kofax RPA on Windows from Docker Hub 
 _WARNING: Do not install Docker if your laptop is running VMWare or other Virtualization Software._  
 _WARNING: Make sure that your laptop supports "Hardware assisted virtualization and data execution protection" in the BIOS and that it is **enabled**._ 
