@@ -69,11 +69,13 @@ This is just a Quick Start guide.
 ![Alt text](img/LinuxFolders.png)
 * Download **docker-compose.yml** from https://github.com/KofaxRPA/Docker/.
 * move it into the folder containing the installation files.
-* Create a file called **.env** and save it in the root folder. Add your license information.
+* Create a file called **.env** and save it in the root folder. Add your license information. The Roboserver will fail to start if it has no shared secret.
 ```txt
 LICENSE_COMPANY=My Company Name...
 LICENSE_PRODUCTIONKEY=
 LICENSE_NONPRODUCTIONKEY=uyqy...
+ROBOSERVER_SHAREDSECRET=ywkJFe...
+KAPPLETS_SHAREDSECRET=NKZaY...
 ```
 * Build the Docker images from the command line. You will need to be in the folder where the compose file is. **-p** sets the project name that you will see in Docker Desktop. *This **build** step is optional, because the next step **up** will run **build** if needed.*
 ```cmd
