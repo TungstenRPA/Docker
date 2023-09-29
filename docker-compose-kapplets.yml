@@ -41,6 +41,14 @@ services:
       - CONTEXT_RESOURCE_PASSWORD=schedulerpassword
       - CONTEXT_RESOURCE_DRIVERCLASSNAME=org.postgresql.Driver
       - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-mcconfig-service:5432/scheduler
+      # Create a Non Production Cluster
+      - SETTINGS_CLUSTER_COUNT=1
+      - SETTINGS_CLUSTER_NAME_1=Non Production
+      - SETTINGS_CLUSTER_PRODUCTION_1=false
+      - SETTINGS_CLUSTER_CONNECTION_TYPE_1=AS_SERVICE
+      - SETTINGS_CLUSTER_DYNAMIC_LICENSE_1=true
+      # 0=automatic
+      - SETTINGS_CLUSTER_LICENSEUNITS_1=0
       # roboserver log database
       - SETTINGS_ENTRY_COUNT=6
       - SETTINGS_ENTRY_KEY_1=USE_LOGDB
