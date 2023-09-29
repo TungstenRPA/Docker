@@ -17,3 +17,4 @@ helm/*
 !*.md
 helm/README.md
 docker/README.md
+docker-compose-11.4.0.0.yml
