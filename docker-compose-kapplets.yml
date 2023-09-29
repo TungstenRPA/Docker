@@ -87,7 +87,7 @@ services:
     environment:
       - ROBOSERVER_ENABLE_MC_REGISTRATION=true
       - ROBOSERVER_MC_URL=http://managementconsole-service:8080/
-      - ROBOSERVER_MC_CLUSTER=Production
+      - ROBOSERVER_MC_CLUSTER=Non Production
       # change to use your own, match with the Management Console setting SERVICE_AUTHENTICATION_ROBOSERVER_SECRET
       - ROBOSERVER_MC_SHARED_SECRET=${ROBOSERVER_SHAREDSECRET}
       - ROBOSERVER_CONNECTION_TYPE=SocketConnectionType
