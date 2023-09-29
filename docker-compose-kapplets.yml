@@ -7,7 +7,7 @@ networks:
   net:
 
 services:
-  postgres-service:
+  postgres-mcconfig-service:
     image: postgres:10
     environment:
       - POSTGRES_USER=scheduler
@@ -15,7 +15,7 @@ services:
       - POSTGRES_DB=scheduler
     networks:
       - net
-  postgres-service-kapplets:
+  postgres-kapplets-service:
     image: postgres:10
     environment:
       - POSTGRES_USER=kapplets
@@ -29,7 +29,7 @@ services:
       dockerfile: docker/managementconsole/Dockerfile
     image: managementconsole:11.5.0.0
     depends_on:
-      - postgres-service
+      - postgres-mcconfig-service
     ports:
       - 87:8080
     environment:
@@ -37,7 +37,7 @@ services:
       - CONTEXT_RESOURCE_USERNAME=scheduler
       - CONTEXT_RESOURCE_PASSWORD=schedulerpassword
       - CONTEXT_RESOURCE_DRIVERCLASSNAME=org.postgresql.Driver
-      - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-service:5432/scheduler
+      - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-mcconfig-service:5432/scheduler
       # roboserver log database
       - SETTINGS_ENTRY_COUNT=6
       - SETTINGS_ENTRY_KEY_1=USE_LOGDB
@@ -96,13 +96,13 @@ services:
     image: kapplets:11.5.0.0
     depends_on:
       - managementconsole-service
-      - postgres-service-kapplets
+      - postgres-kapplets-service
     networks:
       - net
     ports:
       - 8081:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-service-kapplets:5432/kapplets
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-kapplets-service:5432/kapplets
       - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
       - SPRING_DATASOURCE_USERNAME=kapplets
       - SPRING_DATASOURCE_PASSWORD=kapplets
@@ -112,4 +112,4 @@ services:
       - SLEEP_DELAY=30s
       - KAPPLETS_SERVICES_MC_CONNECTION_SERVICE_KAPPLETSBASEURL=
       - KAPPLETS_SERVICES_MC_CONNECTION_SERVICE_MCBASEURL=
-      - KAPPLETS_SERVICES_MC_CONNECTION_SERVICE_SHAREDSECRET=@kappletsClientSecret@
+      - KAPPLETS_SERVICES_MC_CONNECTION_SERVICE_SHAREDSECRET=${KAPPLETS_SHAREDSECRET}
