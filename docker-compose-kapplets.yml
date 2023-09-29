@@ -1,0 +1,107 @@
+#
+# An example docker-compose file featuring a kapplets server.
+# It deploys a PostgreSQL instance, a Management Console, a RoboServer and a Kapplets instance.
+#
+version: '3.8'
+networks:
+  net:
+
+services:
+  postgres-service:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=scheduler
+      - POSTGRES_PASSWORD=schedulerpassword
+      - POSTGRES_DB=scheduler
+    networks:
+      - net
+  postgres-service-kapplets:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=kapplets
+      - POSTGRES_PASSWORD=kapplets
+      - POSTGRES_DB=kapplets
+    networks:
+      - net
+  managementconsole-service:
+    build:
+      context: .
+      dockerfile: docker/managementconsole/Dockerfile
+    image: managementconsole:11.5.0.0
+    depends_on:
+      - postgres-service
+    ports:
+      - 87:8080
+    environment:
+      - CONTEXT_RESOURCE_VALIDATIONQUERY=SELECT 1
+      - CONTEXT_RESOURCE_USERNAME=scheduler
+      - CONTEXT_RESOURCE_PASSWORD=schedulerpassword
+      - CONTEXT_RESOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - CONTEXT_RESOURCE_URL=jdbc:postgresql://postgres-service:5432/scheduler
+      # roboserver log database
+      - SETTINGS_ENTRY_COUNT=6
+      - SETTINGS_ENTRY_KEY_1=USE_LOGDB
+      - SETTINGS_ENTRY_VALUE_1=true
+      - SETTINGS_ENTRY_KEY_2=LOGDB_SCHEMA
+      - SETTINGS_ENTRY_VALUE_2=logdb
+      - SETTINGS_ENTRY_KEY_3=LOGDB_HOST
+      - SETTINGS_ENTRY_VALUE_3=logdb-database-service:5432
+      - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
+      - SETTINGS_ENTRY_VALUE_4=PostgreSQL
+      - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
+      - SETTINGS_ENTRY_VALUE_5=logdb
+      - SETTINGS_ENTRY_KEY_6=LOGDB_PASSWORD
+      - SETTINGS_ENTRY_VALUE_6=logdbpassword
+      # enter your license here, or type it through the GUI in first login
+      - CONFIG_LICENSE_NAME=
+      - CONFIG_LICENSE_EMAIL=
+      - CONFIG_LICENSE_COMPANY=${LICENSE_COMPANY}
+      - CONFIG_LICENSE_PRODUCTIONKEY=${LICENSE_PRODUCTIONKEY}
+      - CONFIG_LICENSE_NONPRODUCTIONKEY=${LICENSE_NONPRODUCTIONKEY}
+      # change to use your own, match with the Roboserver setting ROBOSERVER_MC_SHARED_SECRET
+      - SERVICE_AUTHENTICATION_ROBOSERVER_SHARED_SECRET=
+      - SERVICE_AUTHENTICATION_KAPPLETS_SHARED_SECRET=
+    networks:
+      - net
+  roboserver-service:
+    build:
+      context: .
+      dockerfile: docker/roboserver/Dockerfile
+    image: roboserver:11.5.0.0
+    depends_on:
+      - managementconsole-service
+      - postgres-service
+    networks:
+      - net
+    environment:
+      - ROBOSERVER_ENABLE_MC_REGISTRATION=true
+      - ROBOSERVER_MC_URL=http://managementconsole-service:8080/
+      - ROBOSERVER_MC_CLUSTER=Non Production
+      # change to use your own, match with the Management Console setting SERVICE_AUTHENTICATION_ROBOSERVER_SECRET
+      - ROBOSERVER_MC_SHARED_SECRET=
+      - ROBOSERVER_CONNECTION_TYPE=SocketConnectionType
+      - WRAPPER_MAX_MEMORY=2048
+  kapplets-service:
+    build:
+      context: .
+      dockerfile: docker/kapplets/Dockerfile
+    image: kapplets:11.5.0.0
+    depends_on:
+      - managementconsole-service
+      - postgres-service-kapplets
+    networks:
+      - net
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-service-kapplets:5432/kapplets
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=kapplets
+      - SPRING_DATASOURCE_PASSWORD=kapplets
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQL10Dialect
+      - KAPPLETS_SERVICES_MC_CONNECTION_URL=http://managementconsole-service:8080/
+      - spring.quartz.properties.org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+      - SLEEP_DELAY=30s
+      - KAPPLETS_SERVICES_MC_CONNECTION_SERVICE_KAPPLETSBASEURL=
+      - KAPPLETS_SERVICES_MC_CONNECTION_SERVICE_MCBASEURL=
+      - KAPPLETS_SERVICES_MC_CONNECTION_SERVICE_SHAREDSECRET=@kappletsClientSecret@
