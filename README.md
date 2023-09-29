@@ -1,11 +1,17 @@
 # Kofax RPA and Docker.
-Kofax RPA 11.3 & 11.4 images are now published to [Docker Hub](https://hub.docker.com/u/kofax).  
+Kofax RPA 11.3, 11.4 and 11.5 (available 4 Oct 2023) images are now published to [Docker Hub](https://hub.docker.com/u/kofax).  
 * Install [RPA on Docker on Linux](#quick-start-guide-to-installing-kofax-rpa-on-docker-on-linux)
-* Install [RPA on Docker on Synology NAS](Synology%20NAS)
+* QuickStart Guides
+  * RPA on Docker on Windows.
+  * RPA on Docker on Ubuntu Linux.
+  * [RPA on Docker on Synology NAS](Synology%20NAS).
 * 11.4 now supports 
    * Kapplets
    * Synchronizer (RSA key not quite working yet 3 Feb 2023)
    * 3 databases: MC database, log database, robot data database.
+* 11.5 now supports
+   * authentication tokens for Roboserver, Synchronizer and RFS. You no longer need user accounts and groups for these roles.
+   * remote Roboservers.
 ## Quickstart Guide to installing Kofax RPA on Windows from Docker Hub 
 _WARNING: Do not install Docker if your laptop is running VMWare or other Virtualization Software._  
 _WARNING: Make sure that your laptop supports "Hardware assisted virtualization and data execution protection" in the BIOS and that it is **enabled**._ 
@@ -55,6 +61,31 @@ This is just a Quick Start guide.
 * There is no secrecy on passwords.
 * https is not configured.
 
+
+## Quick Start Guide to installing Kofax RPA on Docker on Windows from Installation Files.
+* Install and configure Docker for Windows as above.
+* Download **Kofax RPA 11.5 for Linux** from https://delivery.kofax.com.
+* Unzip repeatedly until you have all of the installation files.  
+![Alt text](img/LinuxFolders.png)
+* Download **docker-compose.yml** from https://github.com/KofaxRPA/Docker/.
+* move it into the folder containing the installation files.
+* Create a file called **.env** and save it in the root folder. Add your license information.
+```txt
+LICENSE_COMPANY=My Company Name...
+LICENSE_PRODUCTIONKEY=
+LICENSE_NONPRODUCTIONKEY=uyqy...
+```
+* Build the Docker images from the command line. You will need to be in the folder where the compose file is. **-p** sets the project name that you will see in Docker Desktop. *This **build** step is optional, because the next step **up** will run **build** if needed.*
+```cmd
+docker compose -p rpa11-5 -f docker-compose-kapplets.yml build
+```
+* When building is finished you will see the images in Docker Desktop on the **Images** Tab.  
+![Alt text](img/Docker%20Images.png)
+* To start RPA in Docker Desktop type the following command.
+```cmd
+docker compose -p rpa11-5 -f docker-compose-kapplets.yml up
+```
+* Configure MC and Kapplets as described above.
 ## Quick Start Guide to installing Kofax RPA on Docker on Linux
 ```bash
 sudo apt update
