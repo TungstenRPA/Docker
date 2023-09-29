@@ -70,7 +70,7 @@ services:
     image: roboserver:11.5.0.0
     depends_on:
       - managementconsole-service
-      - postgres-service
+      - postgres-mcconfig-service
     networks:
       - net
     environment:
