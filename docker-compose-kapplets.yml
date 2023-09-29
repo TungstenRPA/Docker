@@ -45,7 +45,7 @@ services:
       - SETTINGS_ENTRY_KEY_2=LOGDB_SCHEMA
       - SETTINGS_ENTRY_VALUE_2=logdb
       - SETTINGS_ENTRY_KEY_3=LOGDB_HOST
-      - SETTINGS_ENTRY_VALUE_3=logdb-database-service:5432
+      - SETTINGS_ENTRY_VALUE_3=postgres-robotlogs-service:5432
       - SETTINGS_ENTRY_KEY_4=LOGDB_TYPE
       - SETTINGS_ENTRY_VALUE_4=PostgreSQL
       - SETTINGS_ENTRY_KEY_5=LOGDB_USERNAME
@@ -81,6 +81,14 @@ services:
       - ROBOSERVER_MC_SHARED_SECRET=${ROBOSERVER_SHAREDSECRET}
       - ROBOSERVER_CONNECTION_TYPE=SocketConnectionType
       - WRAPPER_MAX_MEMORY=2048
+  postgres-robotlogs-service:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=logdb
+      - POSTGRES_PASSWORD=logdbpassword
+      - POSTGRES_DB=logdb
+    networks:
+      - net
   kapplets-service:
     build:
       context: .
@@ -92,7 +100,7 @@ services:
     networks:
       - net
     ports:
-      - 8080:8080
+      - 8080:8081
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-service-kapplets:5432/kapplets
       - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
