@@ -2,6 +2,12 @@
 # An example docker-compose file featuring a kapplets server.
 # It deploys a PostgreSQL instance, a Management Console, a RoboServer and a Kapplets instance.
 #
+# run (or update existing containers) with 
+# docker compose -p rpa11-5-0 -f docker-compose-kapplets.yml up -d
+# -p projectname
+# -f filename
+# -d detach (ie go back to commandline after success)
+
 version: '3.8'
 networks:
   net:
@@ -15,6 +21,8 @@ services:
       - POSTGRES_DB=scheduler
     networks:
       - net
+    ports:
+      - 5433:5432
   postgres-kapplets-service:
     image: postgres:10
     environment:
@@ -100,6 +108,16 @@ services:
       - POSTGRES_DB=logdb
     networks:
       - net
+  postgres-robotdata:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=robotdata
+      - POSTGRES_PASSWORD=robotdatapassword
+      - POSTGRES_DB=robotdata
+    networks:
+      - net
+    ports:
+      - 5434:5432
   kapplets-service:
     build:
       context: .
