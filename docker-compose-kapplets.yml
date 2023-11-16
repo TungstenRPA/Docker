@@ -12,6 +12,7 @@ version: '3.8'
 networks:
   net:
 
+
 services:
   postgres-mcconfig-service:
     image: postgres:10
@@ -55,6 +56,10 @@ services:
       - SETTINGS_CLUSTER_PRODUCTION_1=false
       - SETTINGS_CLUSTER_CONNECTION_TYPE_1=AS_SERVICE
       - SETTINGS_CLUSTER_DYNAMIC_LICENSE_1=true
+      #      - CONFIG_SECURITY_JDBCDRIVERUPLOAD=ANY_HOST
+      # installs JDBC drivers into /usr/local/tomcat/lib/jdbc
+      - JDBC_DRIVER_URL_1=https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar
+      - JDBC_DRIVER_URL_2=https://github.com/microsoft/mssql-jdbc/releases/download/v12.4.2/mssql-jdbc-12.4.2.jre8.jar
       # 0=automatic
       - SETTINGS_CLUSTER_LICENSEUNITS_1=0
       # roboserver log database
@@ -100,6 +105,7 @@ services:
       - ROBOSERVER_MC_SHARED_SECRET=${ROBOSERVER_SHAREDSECRET}
       - ROBOSERVER_CONNECTION_TYPE=SocketConnectionType
       - WRAPPER_MAX_MEMORY=2048
+      - ROBOSERVER_SEC_ACCEPT_JDBC_DRIVERS=true
   postgres-robotlogs-service:
     image: postgres:10
     environment:
