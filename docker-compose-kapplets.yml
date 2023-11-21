@@ -36,7 +36,7 @@ services:
     build:
       context: .
       dockerfile: docker/managementconsole/Dockerfile
-    image: managementconsole:11.5.0.0
+    image: managementconsole:${Version:-11.5.0.0}
     depends_on:
       - postgres-mcconfig-service
     ports:
@@ -91,7 +91,7 @@ services:
     build:
       context: .
       dockerfile: docker/roboserver/Dockerfile
-    image: roboserver:11.5.0.0
+    image: roboserver:${Version:-11.5.0.0}
     depends_on:
       - managementconsole-service
       - postgres-mcconfig-service
@@ -128,7 +128,7 @@ services:
     build:
       context: .
       dockerfile: docker/kapplets/Dockerfile
-    image: kapplets:11.5.0.0
+    image: kapplets:${Version:-11.5.0.0}
     depends_on:
       - managementconsole-service
       - postgres-kapplets-service
