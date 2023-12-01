@@ -3,7 +3,7 @@
 # It deploys a PostgreSQL instance, a Management Console, a RoboServer and a Kapplets instance.
 #
 # run (or update existing containers) with 
-# docker compose -p rpa11-5-0 -f docker-compose-kapplets.yml up -d
+# docker compose -p rpa11-5-1 -f docker-compose-kapplets.yml up -d
 # -p projectname
 # -f filename
 # -d detach (ie go back to commandline after success)
@@ -36,7 +36,7 @@ services:
     build:
       context: .
       dockerfile: docker/managementconsole/Dockerfile
-    image: managementconsole:${Version:-11.5.0.0}
+    image: managementconsole:${Version:-11.5.0.1.0.324}
     depends_on:
       - postgres-mcconfig-service
     ports:
@@ -91,7 +91,7 @@ services:
     build:
       context: .
       dockerfile: docker/roboserver/Dockerfile
-    image: roboserver:${Version:-11.5.0.0}
+    image: roboserver:${Version:-11.5.0.1.0.324}
     depends_on:
       - managementconsole-service
       - postgres-mcconfig-service
@@ -104,6 +104,7 @@ services:
       # change to use your own, match with the Management Console setting SERVICE_AUTHENTICATION_ROBOSERVER_SECRET
       - ROBOSERVER_MC_SHARED_SECRET=${ROBOSERVER_SHAREDSECRET}
       - ROBOSERVER_CONNECTION_TYPE=SocketConnectionType
+      # - ROBOSERVER_SOCKET_SERVICE_PORT=50000
       - WRAPPER_MAX_MEMORY=2048
       - ROBOSERVER_SEC_ACCEPT_JDBC_DRIVERS=true
   postgres-robotlogs-service:
@@ -128,7 +129,7 @@ services:
     build:
       context: .
       dockerfile: docker/kapplets/Dockerfile
-    image: kapplets:${Version:-11.5.0.0}
+    image: kapplets:${Version:-11.5.0.1.0.324}
     depends_on:
       - managementconsole-service
       - postgres-kapplets-service
