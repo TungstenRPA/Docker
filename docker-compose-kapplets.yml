@@ -36,7 +36,7 @@ services:
     build:
       context: .
       dockerfile: docker/managementconsole/Dockerfile
-    image: managementconsole:${Version:-11.5.0.1.0.324}
+    image: kofax/rpa-managementconsole:${Version:-11.5.0.1.0.324}
     depends_on:
       - postgres-mcconfig-service
     ports:
@@ -91,7 +91,7 @@ services:
     build:
       context: .
       dockerfile: docker/roboserver/Dockerfile
-    image: roboserver:${Version:-11.5.0.1.0.324}
+    image: kofax/rpa-roboserver:${Version:-11.5.0.1.0.324}
     depends_on:
       - managementconsole-service
       - postgres-mcconfig-service
@@ -129,7 +129,7 @@ services:
     build:
       context: .
       dockerfile: docker/kapplets/Dockerfile
-    image: kapplets:${Version:-11.5.0.1.0.324}
+    image: kofax/rpa-kapplets:${Version:-11.5.0.1.0.324}
     depends_on:
       - managementconsole-service
       - postgres-kapplets-service
